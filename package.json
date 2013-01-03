@@ -1,0 +1,10 @@
+{
+    "name": "Elias",
+    "description": "Sociable notes keeping.",
+    "version": "0.1.0",
+    "author": "Zhou Honglin",
+    "dependencies": {
+        "express":"*"
+    },
+    "devDependencies": {}
+}
