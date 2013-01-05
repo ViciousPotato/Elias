@@ -14,6 +14,8 @@
     secret: 'secret'
   }));
 
+  app.use(express["static"](__dirname + '/static'));
+
   app.set('views', 'views/');
 
   app.set('view engine', 'jade');
@@ -23,7 +25,14 @@
   });
 
   app.get('/', function(req, res) {
-    return res.send('Hello');
+    return res.render('main.jade');
+  });
+
+  app.post('/bit', function(req, res) {
+    var body, title, user;
+    title = req.param('title');
+    body = req.param('body');
+    return user = req.param('user');
   });
 
   app.listen(80);
