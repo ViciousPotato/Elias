@@ -8,14 +8,19 @@ The discussion and informations iteself could then be saved to personal knowledg
 It's more like social version of Evernote, or a more private and flexiable version of Goolge+.
 
 
-## User case
-1. 
+## Use cases
 
 
 ## Design
 
 1. timeline
+
 https://mixpanel.com/about/
 
 2. theming
-![From dribble](https://mixpanel.com/about/)
+
+![From dribble](design.png)
+
+3. Free bootstrap themes
+
+http://bootswatch.com/
