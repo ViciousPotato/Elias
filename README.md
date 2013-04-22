@@ -10,3 +10,12 @@ It's more like social version of Evernote, or a more private and flexiable versi
 
 ## User case
 1. 
+
+
+## Design
+
+1. timeline
+https://mixpanel.com/about/
+
+2. theming
+![From dribble](https://mixpanel.com/about/)
