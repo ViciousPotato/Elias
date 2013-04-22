@@ -14,13 +14,10 @@ It's more like social version of Evernote, or a more private and flexiable versi
 ## Design
 
 1. timeline
-
 https://mixpanel.com/about/
 
 2. theming
-
 ![From dribble](design.png)
 
 3. Free bootstrap themes
-
 http://bootswatch.com/
