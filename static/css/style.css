@@ -1,7 +1,12 @@
+@font-face {
+  font-family: 'Alegreya SC';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Alegreya SC'), local('AlegreyaSC-Regular'), url(/fonts/AlegreyaSC.woff) format('woff');}
+
 body {
-	/* background-color: #d4f2e8; */
-	background-color: #EDEDED: ;
-	font-family: Georgia;
+	background-color: rgb(237, 237, 235);
+	font-family: Alegreya SC;
 	color: #444;
 }
 
@@ -34,4 +39,32 @@ body {
 	border-top: 1px solid #d4f2e8;
 	margin-top: 1em;
 	font-size: 0.9em;
+}
+
+.innercircle-date {
+	width: 70px;
+	height: 70px;
+	border: none;
+	background-color: rgb(101, 101, 99);
+	border-radius: 35px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	color: white;
+	font-weight: bold;
+}
+
+span.day {
+	width: 100%;
+	display: block;
+	line-height: 32px;
+	font-size: 23px;
+}
+
+.outercircle-date {
+	width: 80px;
+	height: 80px;
+	border: 2px solid rgb(215, 215, 213);
+	border-radius: 40px;
 }
