@@ -11,14 +11,16 @@ body
   .containner#main
     .row
       .span3
+        each bit in bits
+          #{bit.title}
         .outercircle-date
           .innercircle-date
             span.day 13
             span.month Mar
       .span5
         .message-box.login-form
-          textarea.message-box-text(placeholder="Type text here", rows=3)
-          a.btn Save
+          textarea#content-txt.message-box-text(placeholder="Type text here", rows=3)
+          a#save-btn.btn Save
 
     script(src="/js/jquery-1.8.2.min.js")
     script(src="/js/jquery-ui-1.10.0.custom.min.js")

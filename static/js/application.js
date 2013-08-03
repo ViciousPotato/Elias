@@ -1,16 +1,25 @@
 // Some general UI pack related JS
 
+// I don't know what this is.
 $(function () {
     // Custom selects
     $("select").dropkick();
 });
 
-$(document).ready(function() {
-    // Todo list
-    $(".todo li").click(function() {
-        $(this).toggleClass("todo-done");
-    });
 
+function customInit() {
+    $('#save-btn').on('click', function() {
+        $.post(
+            '/bit', 
+            { title: "title", content: $('#content-txt').val() }, 
+            function(data) {
+                alert(data);
+            }
+        );
+    });
+}
+
+$(document).ready(function() {
     // Init tooltips
     $("[data-toggle=tooltip]").tooltip("show");
 
@@ -47,5 +56,6 @@ $(document).ready(function() {
         return false
     });
 
+    customInit();
 });
 
