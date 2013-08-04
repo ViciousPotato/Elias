@@ -7,6 +7,7 @@ The discussion and informations iteself could then be saved to personal knowledg
 
 It's more like social version of Evernote, or a more private and flexiable version of Goolge+.
 
+It will support publising notes to github pages. In ways of blog and wiki.
 
 ## Use cases
 
