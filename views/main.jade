@@ -11,12 +11,16 @@ body
   .containner#main
     .row
       .span3
-        each bit in bits
-          #{bit.title}
         .outercircle-date
           .innercircle-date
             span.day 13
             span.month Mar
+        each bit in bits
+          .timenode
+            .timenode-time
+              span #{bit.date}
+            .timenode-content
+              span #{bit.content}
       .span5
         .message-box.login-form
           textarea#content-txt.message-box-text(placeholder="Type text here", rows=3)

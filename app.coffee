@@ -14,7 +14,7 @@ app.use express.static __dirname + '/static'
 
 app.set 'views', 'views/'
 app.set 'view engine', 'jade'
-app.set 'view options', {layout : true}
+app.set 'view options', layout : true
 
 app.get '/', (req, res) ->
   Bit.find {}, (error, bits) ->
@@ -30,4 +30,4 @@ app.post '/bit', (req, res) ->
   bit.save (error, bit) ->
     res.send {status: 'ok'}
 
-app.listen process.env.VCAP_APP_PORT or 80
+app.listen process.env.VCAP_APP_PORT or 8080

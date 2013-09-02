@@ -88,3 +88,13 @@ span.day {
 #main {
 	margin-top: 50px;
 }
+
+.timenode {
+	margin-left: 42px;
+	border-left: 3px solid rgb(218, 218, 216);
+}
+
+.timenode-time {
+	position: relative;
+	left: -30px;
+}
