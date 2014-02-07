@@ -98,3 +98,13 @@ span.day {
 	position: relative;
 	left: -30px;
 }
+
+textarea.message-box-text {
+	clear: both;
+	height: 120px;
+}
+
+.timeline-column {
+	padding-left: 2px;
+	width: 100px;
+}

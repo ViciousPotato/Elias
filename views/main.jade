@@ -1,20 +1,21 @@
 !!! 5
 head
+  title Elias
   link(rel="stylesheet", href="/css/bootstrap.css")
   link(rel="stylesheet", href="/css/flat-ui.css")
   link(rel="stylesheet", href="/css/style.css")
 body
-  .navbar.navbar-fixed-top
+  .navbar
     .navbar-inner
       ul.nav
 
   .containner#main
     .row
-      .span3
+      .span3.timeline-column
         .outercircle-date
           .innercircle-date
-            span.day 13
-            span.month Mar
+            span.day#today-day= moment().format("DD")
+            span.month#today-month= moment().format("MMM")
         each bit in bits
           .timenode
             .timenode-time

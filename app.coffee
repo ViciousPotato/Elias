@@ -16,6 +16,8 @@ app.set 'views', 'views/'
 app.set 'view engine', 'jade'
 app.set 'view options', layout : true
 
+app.locals.moment = require('moment')
+
 app.get '/', (req, res) ->
   Bit.find {}, (error, bits) ->
     res.render 'main.jade', bits: bits
@@ -30,4 +32,4 @@ app.post '/bit', (req, res) ->
   bit.save (error, bit) ->
     res.send {status: 'ok'}
 
-app.listen process.env.VCAP_APP_PORT or 8080
+app.listen process.env.VCAP_APP_PORT or 3000
