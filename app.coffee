@@ -1,5 +1,6 @@
 express  = require 'express'
 mongoose = require 'mongoose'
+pagedown = require 'pagedown'
 
 Bit      = require './models/bit'
 
@@ -16,7 +17,8 @@ app.set 'views', 'views/'
 app.set 'view engine', 'jade'
 app.set 'view options', layout : true
 
-app.locals.moment = require('moment')
+app.locals.moment    = require('moment')
+app.locals.converter = new pagedown.Converter
 
 app.get '/', (req, res) ->
   Bit.find {}, (error, bits) ->

@@ -7,7 +7,8 @@
         "express": "3.0.5",
         "mongoose": "3.5.3",
         "jade": "0.27.7",
-        "moment": "1.7.2"
+        "moment": "1.7.2",
+        "pagedown": "1.1.0"
     },
     "devDependencies": {}
 }

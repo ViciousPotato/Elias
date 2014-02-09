@@ -18,8 +18,7 @@ It will support publising notes to github pages. In ways of blog and wiki.
 https://mixpanel.com/about/
 
 2. theming (from dribble)
-
-![From dribble](design.png)
+  ![From dribble](design.png)
 
 3. Free bootstrap themes
 http://bootswatch.com/

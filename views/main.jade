@@ -32,7 +32,7 @@ body
                 span.month= moment(bit.date).format("MMM")
         .span5
           .message-box
-            | #{bit.content}
+            != converter.makeHtml(bit.content)
 
 
     script(src="/js/jquery-1.8.2.min.js")
