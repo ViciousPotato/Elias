@@ -10,19 +10,20 @@ $(function () {
 function customInit() {
 	$('#save-btn').on('click', function() {
     // Show working
-    $('#save-btn').
+    /*
     $('#save-btn').css({
       'background-image':  'url(/img/loading.gif)',
       'background-repeat': 'no-repeat',
       'background-position': 'center'
     });
+    */
 		$.post(
 			'/bit', 
 			{ title: "title", content: $('#content-txt').val() }, 
 			function(data) {
-				$('#save-btn').css({
+				/*$('#save-btn').css({
           'background-image': 'none'
-        });
+        });*/
 			}
 		);
 	});
