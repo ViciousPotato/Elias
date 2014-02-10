@@ -20,19 +20,20 @@ body
         .message-box.login-form
           textarea#content-txt.message-box-text(placeholder="Type text here", rows=3)
           a#save-btn.btn Save
-    each bit in bits
+    each bits, groupname in groups
       .row.bit-entry
-        .span3.timeline-column 
-          if moment().format("YYMMDD") == moment(bit.date).format("YYMMDD")
-            .span.timeline-hour #{moment(bit.date).format("HH:MM a")}
-          else
-            .outercircle-date
-              .innercircle-date
-                span.day= moment(bit.date).format("DD")
-                span.month= moment(bit.date).format("MMM")
-        .span5
-          .message-box
-            != converter.makeHtml(bit.content)
+        .span3.timeline-column
+          .outercircle-date
+            .innercircle-date
+              span.day= groupname.split("|")[0]
+              span.month= groupname.split("|")[1]
+      each bit in bits
+        .row.bit-entry
+          .span3.timeline-column
+              .span.timeline-hour #{moment(bit.date).format("HH:MM a")}
+          .span5
+            .message-box
+              != converter.makeHtml(bit.content)
 
 
     script(src="/js/jquery-1.8.2.min.js")

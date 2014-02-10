@@ -1,6 +1,8 @@
 express  = require 'express'
 mongoose = require 'mongoose'
 pagedown = require 'pagedown'
+_        = require 'underscore'
+moment   = require 'moment'
 
 Bit      = require './models/bit'
 
@@ -17,12 +19,14 @@ app.set 'views', 'views/'
 app.set 'view engine', 'jade'
 app.set 'view options', layout : true
 
-app.locals.moment    = require('moment')
+app.locals.moment    = moment
 app.locals.converter = new pagedown.Converter
 
 app.get '/', (req, res) ->
-  Bit.find {}, (error, bits) ->
-    res.render 'main.jade', bits: bits
+  Bit.find {}, null, {sort: {date: -1}}, (error, bits) ->
+    groups = _.groupBy bits, (bit) ->
+      moment(bit.date).format("MMM|DD")
+    res.render 'main.jade', groups: groups
 
 app.post '/bit', (req, res) ->
   title   = req.param 'title'
