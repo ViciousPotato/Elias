@@ -19,6 +19,10 @@ app.set 'views', 'views/'
 app.set 'view engine', 'jade'
 app.set 'view options', layout : true
 
+marked.setOptions
+  highlight: (code) ->
+    require('highlight.js').highlightAuto(code).value
+
 app.locals.moment = moment
 app.locals.marked = marked
 
