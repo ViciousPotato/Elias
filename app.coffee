@@ -29,13 +29,13 @@ app.get '/', (req, res) ->
     res.render 'main.jade', groups: groups
 
 app.post '/bit', (req, res) ->
-  title   = req.param 'title'
   content = req.param 'content'
   bit = new Bit
-    title:   title
     content: content
 
   bit.save (error, bit) ->
-    res.send {status: 'ok'}
+    res.send
+      date:    moment(bit.date).format("HH:MM a")
+      content: bit.content
 
 app.listen process.env.VCAP_APP_PORT or 3000

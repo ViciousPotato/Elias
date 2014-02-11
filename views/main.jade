@@ -10,23 +10,27 @@ body
       ul.nav
 
   .containner#main
-    .row.bit-entry
+    .timeline
+    .row.bit-entry-date-header
       .span3.timeline-column
         .outercircle-date
           .innercircle-date
-            span.day#today-day= moment().format("DD")
-            span.month#today-month= moment().format("MMM")
+            span.day#today-day= moment().format("MMM")
+            span.month#today-month= moment().format("DD")
+    .row.bit-entry
+      .span3.timeline-column
       .span5
         .message-box.login-form
           textarea#content-txt.message-box-text(placeholder="Type text here", rows=3)
           a#save-btn.btn Save
     each bits, groupname in groups
-      .row.bit-entry
-        .span3.timeline-column
-          .outercircle-date
-            .innercircle-date
-              span.day= groupname.split("|")[0]
-              span.month= groupname.split("|")[1]
+      if (moment().format("MMM|DD") != groupname)
+        .row.bit-entry-date-header
+          .span3.timeline-column
+            .outercircle-date
+              .innercircle-date
+                span.day= groupname.split("|")[0]
+                span.month= groupname.split("|")[1]
       each bit in bits
         .row.bit-entry
           .span3.timeline-column

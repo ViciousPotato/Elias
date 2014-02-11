@@ -9,6 +9,31 @@ body {
 	background-color: rgb(237, 237, 235);
 	font-family: Open Sans;
 	color: #444;
+	position: relative;
+}
+
+h1 {
+	font-size: 1.6em;
+}
+
+h2 {
+	font-size: 1.5 em;
+}
+
+h3 {
+	font-size: 1.4 em;
+}
+
+h4 {
+	font-size: 1.3 em;
+}
+
+h5 {
+	font-size: 1.2 em;
+}
+
+h6 {
+	font-size: 1.1 em;
 }
 
 .header {
@@ -56,11 +81,11 @@ body {
 	font-weight: bold;
 }
 
-span.day {
+.day {
 	width: 100%;
 	display: block;
-	line-height: 32px;
-	font-size: 23px;
+	line-height: 30px;
+	font-size: 18px;
 }
 
 .outercircle-date {
@@ -68,6 +93,7 @@ span.day {
 	height: 80px;
 	border: 2px solid rgb(215, 215, 213);
 	border-radius: 40px;
+	background-color: rgb(237, 237, 235); 
 }
 
 
@@ -90,6 +116,18 @@ span.day {
 .bit-entry {
 	margin-bottom: 10px;
 }
+
+.bit-entry-date-header {
+	padding-left: 60px;
+	margin-bottom: 15px;
+}
+
+/*
+.bit-entry-date-header.timeline-column {
+	background-color: rgb(237, 237, 235);
+	padding-top: 2px;
+}
+*/
 
 #main {
 	margin-top: 50px;
@@ -115,6 +153,18 @@ textarea.message-box-text {
 	width: 100px;
 }
 
+.bit-entry .timeline-column {
+}
+
+.timeline {
+	position: absolute;
+	left: 100px;
+	z-index: -1;
+	width: 3px;
+	background-color: rgb(209, 209, 207);
+	height: 100%;
+}
+
 .timeline-hour {
 	width: 100;
 	text-align: center;
@@ -122,3 +172,13 @@ textarea.message-box-text {
 	color: rgb(130, 130, 130);
 }
 
+.processing {
+	display: none;
+}
+
+.processing .message-box {
+	background-image: url(../img/loading.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 100px;
+}

@@ -17,13 +17,23 @@ function customInit() {
       'background-position': 'center'
     });
     */
+    $(
+      '<div class="row bit-entry processing">' +
+      '<div class="span3 timeline-column">' +
+      '<div class="timeline-hour"></div>' +
+      '</div>' +
+      '<div class="span5"><div class="message-box"></div></div>' + 
+      '</div>'
+    ).insertAfter('.bit-entry:first');
+    $('.processing').show('slow');
+
 		$.post(
 			'/bit', 
-			{ title: "title", content: $('#content-txt').val() }, 
+			{ content: $('#content-txt').val() }, 
 			function(data) {
-				/*$('#save-btn').css({
-          'background-image': 'none'
-        });*/
+        $('.processing .timeline-hour').text(data.date);
+        $('.processing .message-box').text(data.content);
+        $('.processing').removeClass('processing');
 			}
 		);
 	});
