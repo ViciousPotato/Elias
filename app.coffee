@@ -1,8 +1,8 @@
 express  = require 'express'
 mongoose = require 'mongoose'
-pagedown = require 'pagedown'
 _        = require 'underscore'
 moment   = require 'moment'
+marked   = require 'marked'
 
 Bit      = require './models/bit'
 
@@ -19,8 +19,8 @@ app.set 'views', 'views/'
 app.set 'view engine', 'jade'
 app.set 'view options', layout : true
 
-app.locals.moment    = moment
-app.locals.converter = new pagedown.Converter
+app.locals.moment = moment
+app.locals.marked = marked
 
 app.get '/', (req, res) ->
   Bit.find {}, null, {sort: {date: -1}}, (error, bits) ->
@@ -36,6 +36,6 @@ app.post '/bit', (req, res) ->
   bit.save (error, bit) ->
     res.send
       date:    moment(bit.date).format("HH:MM a")
-      content: bit.content
+      content: marked(bit.content)
 
 app.listen process.env.VCAP_APP_PORT or 3000
