@@ -31,9 +31,10 @@ function customInit() {
 			'/bit', 
 			{ content: $('#content-txt').val() }, 
 			function(data) {
-        $('.processing .timeline-hour').text(data.date);
-        $('.processing .message-box').text(data.content);
+        $('.processing .timeline-hour').html(data.date);
+        $('.processing .message-box').html(data.content);
         $('.processing').removeClass('processing');
+        $('#content-txt').val('');
 			}
 		);
 	});
