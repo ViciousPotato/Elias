@@ -107,6 +107,7 @@ h6 {
 	box-shadow: 2px 2px 4px rgb(209, 209, 207);
 	min-height: 100px;
 	padding: 16px;
+	position: relative;
 }
 
 .message-box-text {
@@ -181,4 +182,11 @@ textarea.message-box-text {
 	background-repeat: no-repeat;
 	background-position: center;
 	height: 100px;
+}
+
+.bit-entry-toolbar {
+	position: absolute;
+	left: 2px;
+	bottom: 2px;
+	display: none;
 }
