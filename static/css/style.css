@@ -150,7 +150,6 @@ textarea.message-box-text {
 }
 
 .timeline-column {
-	padding-left: 2px;
 	width: 100px;
 }
 
@@ -188,5 +187,37 @@ textarea.message-box-text {
 	position: absolute;
 	left: 2px;
 	bottom: 2px;
-	display: none;
+}
+
+.bit-entry-toolbar-btn {
+	font-size: 12px;
+	padding: 2px 5px 2px;
+}
+
+.message-box > .bit-entry-toolbar {
+	opacity: 0;
+	transition: opacity 0.5s linear;
+}
+
+.message-box:hover > .bit-entry-toolbar {
+	opacity: 1;
+}
+
+
+.sidebar {
+	height: 100%;
+	overflow-y: scroll;
+	width: 600px;
+	float: left;
+	position: relative;
+}
+
+.content {
+	margin-left: 600px;
+	padding: 10px;
+}
+
+.content-editor {
+	margin-top: 90px;
+	width: 100%;
 }
