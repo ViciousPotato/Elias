@@ -5,11 +5,18 @@
   src: local('Open Sans'), local('OpenSans'), url(/fonts/OpenSansNormal400.woff) format('woff');
 }
 
+html {
+	min-height: 100%;
+	_height: 100%;
+}
+
 body {
 	background-color: rgb(237, 237, 235);
 	font-family: Open Sans;
 	color: #444;
 	position: relative;
+	min-height: 100%;
+	_height: 100%;
 }
 
 h1 {
@@ -207,17 +214,38 @@ textarea.message-box-text {
 .sidebar {
 	height: 100%;
 	overflow-y: scroll;
-	width: 600px;
+	width: 500px;
 	float: left;
 	position: relative;
 }
 
 .content {
-	margin-left: 600px;
+	/*margin-left: 500px;*/
+	padding: 15px;
+	/* position: fixed; */
+	width: 100%;
+}
+
+.content-group {
+	min-height: 100%;
+	background-color: #f9f9f9;
+	border: 1px solid #e4e4e4;
+	border-radius: 5px;
 	padding: 10px;
 }
 
 .content-editor {
-	margin-top: 90px;
-	width: 100%;
+	margin-right: 15px;
+	width: 98%;
+	min-height: 700px;
+}
+
+.content-editor-title {
+	display: block !important;
+	width: 60%;
+}
+
+.content-editor-toolbar {
+	margin-bottom: 5px;
+
 }

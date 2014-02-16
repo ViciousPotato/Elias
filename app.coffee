@@ -26,6 +26,8 @@ marked.setOptions
 app.locals.moment = moment
 app.locals.marked = marked
 
+ObjectId = mongoose.Types.ObjectId
+
 app.get '/', (req, res) ->
   Bit.find {}, null, {sort: {date: -1}}, (error, bits) ->
     groups = _.groupBy bits, (bit) ->
@@ -41,5 +43,13 @@ app.post '/bit', (req, res) ->
     res.send
       date:    moment(bit.date).format("HH:MM a")
       content: marked(bit.content)
+
+app.get '/edit/:id', (req, res) ->
+  Bit.findOne _id: req.params.id, (error, bit) ->
+    res.render 'edit.jade', bit: bit
+
+app.post '/edit/:id', (req, res) ->
+  Bit.update {_id: req.params.id}, {content: req.body.content}, (err, bit) ->
+    res.redirect "/edit/#{req.params.id}"
 
 app.listen process.env.VCAP_APP_PORT or 3000
