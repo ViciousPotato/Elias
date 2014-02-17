@@ -213,8 +213,7 @@ textarea.message-box-text {
 
 .sidebar {
 	height: 100%;
-	overflow-y: scroll;
-	width: 500px;
+	width: 550px;
 	float: left;
 	position: relative;
 }
