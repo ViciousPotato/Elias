@@ -113,7 +113,7 @@ h6 {
 
 	box-shadow: 2px 2px 4px rgb(209, 209, 207);
 	min-height: 100px;
-	padding: 16px;
+	padding: 16px 10px 40px 10px;
 	position: relative;
 	word-wrap: break-word;
 }
@@ -193,13 +193,13 @@ textarea.message-box-text {
 
 .bit-entry-toolbar {
 	position: absolute;
-	left: 2px;
+	left: 10px;
 	bottom: 2px;
 }
 
 .bit-entry-toolbar-btn {
 	font-size: 12px;
-	padding: 2px 5px 2px;
+	padding: 5px 10px 5px 10px !important;
 }
 
 .message-box > .bit-entry-toolbar {
