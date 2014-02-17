@@ -115,6 +115,7 @@ h6 {
 	min-height: 100px;
 	padding: 16px;
 	position: relative;
+	word-wrap: break-word;
 }
 
 .message-box-text {
