@@ -28,6 +28,10 @@ app.locals.marked = marked
 
 ObjectId = mongoose.Types.ObjectId
 
+app.use express.bodyParser
+  keepExtensions: true,
+  uploadDir:      __dirname + '/staic/uploads'
+
 app.get '/', (req, res) ->
   Bit.find {}, null, {sort: {date: -1}}, (error, bits) ->
     groups = _.groupBy bits, (bit) ->
@@ -51,5 +55,10 @@ app.get '/edit/:id', (req, res) ->
 app.post '/edit/:id', (req, res) ->
   Bit.update {_id: req.params.id}, {content: req.body.content}, (err, bit) ->
     res.redirect "/edit/#{req.params.id}"
+
+app.post '/upload', (req, res) ->
+  url = '/uploads/' + path.basename req.files.upload.path
+  res.send url
+
 
 app.listen process.env.VCAP_APP_PORT or 3000

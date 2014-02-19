@@ -6,8 +6,6 @@
 }
 
 html {
-	min-height: 100%;
-	_height: 100%;
 }
 
 body {
@@ -15,8 +13,6 @@ body {
 	font-family: Open Sans;
 	color: #444;
 	position: relative;
-	min-height: 100%;
-	_height: 100%;
 }
 
 h1 {

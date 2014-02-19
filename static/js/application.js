@@ -20,7 +20,7 @@ function customInit() {
     $(
       '<div class="row bit-entry processing">' +
       '<div class="span3 timeline-column">' +
-      '<div class="timeline-hour"></div>' +
+      '<div class="span timeline-hour"></div>' +
       '</div>' +
       '<div class="span5"><div class="message-box"></div></div>' + 
       '</div>'
