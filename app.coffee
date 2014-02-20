@@ -5,6 +5,7 @@ moment   = require 'moment'
 marked   = require 'marked'
 
 Bit      = require './models/bit'
+util     = require './util'
 
 # Connect to db
 mongoose.connect 'localhost', 'elias'
@@ -40,8 +41,11 @@ app.get '/', (req, res) ->
 
 app.post '/bit', (req, res) ->
   content = req.param 'content'
+  parsed  = util.parse_bit content
+
   bit = new Bit
-    content: content
+    content: parsed.content
+    topics:  parsed.topics
 
   bit.save (error, bit) ->
     res.send

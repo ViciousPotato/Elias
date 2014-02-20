@@ -12,6 +12,18 @@ describe 'Util', ()->
     it 'should return {} if content is null', () ->
       assert.equal null, util.parse_bit null
 
-    it 'should return topic for basic topic', () ->
+    it 'should return topic for one line topic', () ->
       bit = '[Book]'
-      {'topics': ['Book']}.should.eql util.parse_bit bit
+      {topics: ['Book'], content: ''}.should.eql util.parse_bit bit
+
+    it 'should return topic for one line topic with empty preceding lines', () ->
+      bit = '    \n    \n [Book]'
+      {topics: ['Book'], content: '    \n    '}.should.eql util.parse_bit bit
+
+    it 'should return topic and content', () ->
+      bit = 'Unix\n[Book]'
+      {topics: ['Book'], content: 'Unix'}.should.eql util.parse_bit bit
+
+    it 'should return content', () ->
+      bit = 'Unix\nLinux'
+      {topics: [], content: bit}.should.eql util.parse_bit bit

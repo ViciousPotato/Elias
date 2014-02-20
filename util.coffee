@@ -6,4 +6,9 @@ module.exports.parse_bit = (content) ->
   last_line = _.last lines
 
   if last_line and last_line.search(/\[.*\]+/) >= 0
-    topics: ['Book']
+    topic = last_line.match(/\[(.*)\]+/)[1]
+    content: lines[..-2].join '\n'
+    topics: [topic]
+  else
+    content: content
+    topics: []
