@@ -1,17 +1,19 @@
 {
-    "name": "Elias",
-    "description": "Sociable notes keeping.",
-    "version": "0.1.0",
-    "author": "Zhou Honglin",
-    "dependencies": {
-        "express": "3.0.5",
-        "mongoose": "3.5.3",
-        "jade": "0.27.7",
-        "moment": "1.7.2",
-        "pagedown": "1.1.0",
-        "underscore": "1.5.2",
-        "marked": "0.3.1",
-        "highlight.js": "8.0.0"
-    },
-    "devDependencies": {}
+  "name": "Elias",
+  "description": "Sociable notes keeping.",
+  "version": "0.1.0",
+  "author": "Zhou Honglin",
+  "dependencies": {
+    "express": "3.0.5",
+    "mongoose": "3.5.3",
+    "jade": "0.27.7",
+    "moment": "1.7.2",
+    "pagedown": "1.1.0",
+    "underscore": "1.5.2",
+    "marked": "0.3.1",
+    "highlight.js": "8.0.0",
+    "mocha": "1.17.1",
+    "chai": "~1.9.0"
+  },
+  "devDependencies": {}
 }
