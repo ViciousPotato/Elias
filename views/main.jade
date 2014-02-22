@@ -41,6 +41,9 @@ body
                   .bit-entry-toolbar-btn-group
                     a.btn.btn-primary.bit-entry-toolbar-btn(href="/edit/#{bit._id}")
                       span.fui-new-16
-                    a.btn.btn-primary.bit-entry-toolbar-btn
-                      span.fui-video-16
+                    a.btn.btn-primary.bit-entry-toolbar-btn(href='/delete/#{bit._id}')
+                      span.fui-cross-16
+                if bit.topics
+                  each topic in bit.topics
+                    .tag topic
     include script

@@ -60,9 +60,12 @@ app.post '/edit/:id', (req, res) ->
   Bit.update {_id: req.params.id}, {content: req.body.content}, (err, bit) ->
     res.redirect "/edit/#{req.params.id}"
 
+app.get '/delete/:id', (req, res) ->
+  Bit.remove _id: req.params.id, (err, bit) ->
+    res.redirect '/'
+
 app.post '/upload', (req, res) ->
   url = '/uploads/' + path.basename req.files.upload.path
   res.send url
-
 
 app.listen process.env.VCAP_APP_PORT or 3000
