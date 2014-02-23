@@ -37,13 +37,14 @@ body
             .span5
               .message-box
                 != marked(bit.content)
-                .btn-toolbar.bit-entry-toolbar
-                  .bit-entry-toolbar-btn-group
-                    a.btn.btn-primary.bit-entry-toolbar-btn(href="/edit/#{bit._id}")
-                      span.fui-new-16
-                    a.btn.btn-primary.bit-entry-toolbar-btn(href='/delete/#{bit._id}')
-                      span.fui-cross-16
-                if bit.topics
-                  each topic in bit.topics
-                    .tag topic
+                .bit-entry-toolbar
+                  .btn-toolbar
+                    .bit-entry-toolbar-btn-group
+                      a.btn.btn-primary.bit-entry-toolbar-btn(href="/edit/#{bit._id}")
+                        span.fui-new-16
+                      a.btn.btn-primary.bit-entry-toolbar-btn(href='/delete/#{bit._id}')
+                        span.fui-cross-16
+                  .bit-entry-topics.tagsinput
+                    each topic in bit.topics
+                      .bit-entry-topic.tag #{topic}
     include script

@@ -191,7 +191,32 @@ textarea.message-box-text {
 	position: absolute;
 	left: 10px;
 	bottom: 2px;
+	width: 100%;
 }
+
+.bit-entry-toolbar > .btn-toolbar {
+	display: inline-block;
+}
+
+.bit-entry-toolbar > .tagsinput {
+	height: 100%;
+	padding: none;
+	border: none;
+	background: none;
+}
+
+.bit-entry-topics {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+/*
+.bit-entry-topic {
+	border: 2px solid rgb(26, 188, 156);
+	border-radius: 2px;
+	padding: 4px 3px 4px;
+}
+*/
 
 .bit-entry-toolbar-btn {
 	font-size: 12px;
