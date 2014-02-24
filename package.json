@@ -3,6 +3,12 @@
   "description": "Sociable notes keeping.",
   "version": "0.1.0",
   "author": "Zhou Honglin",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.2"
+  },
   "dependencies": {
     "express": "3.0.5",
     "mongoose": "3.5.3",
