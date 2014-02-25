@@ -27,3 +27,7 @@ describe 'Util', ()->
     it 'should return content', () ->
       bit = 'Unix\nLinux'
       {topics: [], content: bit}.should.eql util.parse_bit bit
+      
+    it 'should be able to process Chinese character', () ->
+      bit = '[中文]'
+      topics: ['中文'] .should.eql util.parse_bit bit
