@@ -190,8 +190,12 @@ textarea.message-box-text {
 	width: 100%;
 }
 
+.bit-entry-controls {
+	float: left;
+}
+
 .bit-entry-toolbar > .btn-toolbar {
-	display: inline-block;
+	/* display: inline-block; */
 }
 
 .bit-entry-toolbar > .tagsinput {
@@ -202,8 +206,10 @@ textarea.message-box-text {
 }
 
 .bit-entry-topics {
-	display: inline-block;
+	float: left;
 	margin-left: 10px;
+	position: relative;
+	bottom: -5px; /* FIXME: why; */
 }
 
 /*
