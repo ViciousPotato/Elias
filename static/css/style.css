@@ -272,3 +272,9 @@ textarea.message-box-text {
 	margin-bottom: 5px;
 
 }
+
+.topic-list > .tagsinput {
+    background: none;
+    border: none;
+    padding: none;
+}

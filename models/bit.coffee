@@ -1,3 +1,4 @@
+_        = require 'underscore'
 mongoose = require 'mongoose'
 
 bitSchema = new mongoose.Schema
@@ -6,6 +7,14 @@ bitSchema = new mongoose.Schema
   date: 
     type:    Date
     default: Date.now
+
+bitSchema.statics.allTopics = (callback) ->
+  this.find {}, (err, bits) ->
+    callback _.chain(bits)
+      .map((bit) -> bit.topics)
+      .flatten()
+      .uniq()
+      .value()
 
 Bit = mongoose.model 'Bit', bitSchema
 module.exports = Bit

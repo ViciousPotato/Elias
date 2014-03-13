@@ -47,4 +47,13 @@ body
                   .bit-entry-topics.tagsinput
                     each topic in bit.topics
                       .bit-entry-topic.tag #{topic}
+    .topics
+      h2 Topics
+      .topic-list
+        .tagsinput
+          each topic in topics
+            span.tag
+              .span #{topic}
+              a.tagsinput-remove-link
+        
     include script

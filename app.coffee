@@ -37,7 +37,10 @@ app.get '/', (req, res) ->
   Bit.find {}, null, {sort: {date: -1}}, (error, bits) ->
     groups = _.groupBy bits, (bit) ->
       moment(bit.date).format("MMM|DD")
-    res.render 'main.jade', groups: groups
+    Bit.allTopics (topics) ->
+      res.render 'main.jade',
+        groups: groups
+        topics: topics
 
 app.post '/bit', (req, res) ->
   content = req.param 'content'
