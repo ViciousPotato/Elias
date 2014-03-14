@@ -10,11 +10,7 @@ bitSchema = new mongoose.Schema
 
 bitSchema.statics.allTopics = (callback) ->
   this.find {}, (err, bits) ->
-    callback _.chain(bits)
-      .map((bit) -> bit.topics)
-      .flatten()
-      .uniq()
-      .value()
+    callback _.chain(bits).map((bit) -> bit.topics).flatten().uniq().value()
 
 Bit = mongoose.model 'Bit', bitSchema
 module.exports = Bit
