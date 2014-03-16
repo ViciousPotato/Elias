@@ -30,4 +30,8 @@ describe 'Util', ()->
       
     it 'should be able to process Chinese character', () ->
       bit = '[中文]'
-      topics: ['中文'] .should.eql util.parse_bit bit
+      {topics: ['中文'], content: ""}.should.eql util.parse_bit bit
+
+    it 'should be able to parse multiple topics', () ->
+      bit = '[Topic1][Topic2]'
+      {topics: ['Topic1', 'Topic2'], content: ""}.should.eql util.parse_bit bit
