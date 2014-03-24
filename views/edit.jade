@@ -16,6 +16,7 @@ html
 
           textarea.content-editor(name="content")
             | #{bit.content}
+            | #{util.join_topics(bit.topics)}
 
           button.btn(type="submit") Save
 

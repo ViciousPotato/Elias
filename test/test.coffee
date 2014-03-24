@@ -45,4 +45,8 @@ describe 'Util', ()->
       bit = Array(201).join 'a'
       (bit+'abc').should.eql util.bit_summary bit+'abc\ndef'
 
+  describe '#join_topics', ()->
+    it 'should join topics', ()->
+      '[Topic][Topic]'.should.eql util.join_topics ['Topic', 'Topic']
+
 

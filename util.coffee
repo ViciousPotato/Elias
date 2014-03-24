@@ -15,4 +15,7 @@ module.exports.parse_bit = (content) ->
 
 module.exports.bit_summary = (content) ->
   return content if content.length <= 200
-  return content[0..200-1] + content[200..].split('\n')[0] + '\n......'
+  return content[0..200-1] + content[200..].split('\n')[0]
+
+module.exports.join_topics = (topics) ->
+  ("[#{topic}]" for topic in topics).join('')
