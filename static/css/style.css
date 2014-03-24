@@ -105,9 +105,14 @@ h6 {
 
 	box-shadow: 2px 2px 4px rgb(209, 209, 207);
 	min-height: 100px;
-	padding: 16px 10px 40px 10px;
+	padding: 16px 10px 55px 10px;
 	position: relative;
 	word-wrap: break-word;
+}
+
+.message-box-content {
+	max-height: 300px;
+	overflow: hidden;
 }
 
 .message-box-text {

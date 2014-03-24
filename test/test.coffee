@@ -35,3 +35,14 @@ describe 'Util', ()->
     it 'should be able to parse multiple topics', () ->
       bit = '[Topic1][Topic2]'
       {topics: ['Topic1', 'Topic2'], content: ""}.should.eql util.parse_bit bit
+
+  describe '#bit_summary', ()->
+    it 'should parse short content well', ()->
+      bit = 'This is short content'
+      bit.should.eql util.bit_summary bit
+
+    it 'should cut bit at end of line', ()->
+      bit = Array(201).join 'a'
+      (bit+'abc').should.eql util.bit_summary bit+'abc\ndef'
+
+

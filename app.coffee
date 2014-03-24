@@ -26,6 +26,7 @@ marked.setOptions
 
 app.locals.moment = moment
 app.locals.marked = marked
+app.locals.util   = util
 
 ObjectId = mongoose.Types.ObjectId
 

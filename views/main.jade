@@ -36,7 +36,8 @@ body
                 .span.timeline-hour #{moment(bit.date).format("HH:mm a")}
             .span5
               .message-box
-                != marked(bit.content)
+                .message-box-content
+                  != marked(bit.content)
                 .bit-entry-toolbar
                   .btn-toolbar.bit-entry-controls
                     .bit-entry-toolbar-btn-group
