@@ -1,5 +1,6 @@
 _        = require 'underscore'
 mongoose = require 'mongoose'
+util     = require '../util'
 
 bitSchema = new mongoose.Schema
   content: String,

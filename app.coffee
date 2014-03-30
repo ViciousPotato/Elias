@@ -63,7 +63,7 @@ app.get '/edit/:id', (req, res) ->
 app.post '/edit/:id', (req, res) ->
   parsed = util.parse_bit req.body.content
   Bit.update _id: req.params.id, {content: parsed.content, topics: parsed.topics}, (err, bit) ->
-    res.redirect "/edit/#{req.params.id}"
+    res.redirect "/##{req.params.id}"
 
 app.get '/delete/:id', (req, res) ->
   Bit.remove _id: req.params.id, (err, bit) ->
