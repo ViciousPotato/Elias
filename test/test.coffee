@@ -36,6 +36,10 @@ describe 'Util', ()->
       bit = '[Topic1][Topic2]'
       {topics: ['Topic1', 'Topic2'], content: ""}.should.eql util.parse_bit bit
 
+    it 'should should not parse [] in normal text', () ->
+      bit = 'abc[Topic][Topic]'
+      {topics: [], content: bit}.should.eql util.parse_bit bit
+
   describe '#bit_summary', ()->
     it 'should parse short content well', ()->
       bit = 'This is short content'
