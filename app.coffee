@@ -69,6 +69,10 @@ app.get '/delete/:id', (req, res) ->
   Bit.remove _id: req.params.id, (err, bit) ->
     res.redirect '/'
 
+app.get '/view/:id', (req, res) ->
+  Bit.findOne _id: req.params.id, (error, bit) ->
+    res.render 'view.jade', bit: bit
+
 app.post '/upload', (req, res) ->
   url = '/uploads/' + path.basename req.files.upload.path
   res.send url

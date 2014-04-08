@@ -40,9 +40,11 @@ body
                   != marked(bit.content)
                 .bit-entry-toolbar
                   .btn-toolbar.bit-entry-controls
-                    .bit-entry-toolbar-btn-group
+                    .bit-entry-toolbar-btn-group.btn-group
                       a.btn.btn-primary.bit-entry-toolbar-btn(href="/edit/#{bit._id}")
                         span.fui-new-16
+                      a.btn.btn-primary.bit-entry-toolbar-btn(href="/view/#{bit._id}")
+                        span.fui-eye-16
                       a.btn.btn-primary.bit-entry-toolbar-btn(href='/delete/#{bit._id}')
                         span.fui-cross-16
                   .bit-entry-topics.tagsinput
