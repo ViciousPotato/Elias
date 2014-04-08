@@ -9,3 +9,6 @@ apt-get install mongodb-10gen=2.2.3
 sudo add-apt-repository ppa:chris-lea/node.js
 sudo apt-get update
 sudo apt-get install python-software-properties python g++ make nodejs
+
+# Install coffee globally
+npm install -g coffee-script
