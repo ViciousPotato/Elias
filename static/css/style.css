@@ -1,5 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700,700italic);
+@import url(/css/lato.css);
+@import url(/css/opensans.css);
 
 html {
 }
