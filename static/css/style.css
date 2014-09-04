@@ -104,7 +104,7 @@ h6 {
 	border-bottom: 1px solid rgb(204, 204, 204);
 
 	box-shadow: 2px 2px 4px rgb(209, 209, 207);
-	min-height: 100px;
+	/*min-height: 100px;*/
 	padding: 16px 10px 55px 10px;
 	position: relative;
 	word-wrap: break-word;
