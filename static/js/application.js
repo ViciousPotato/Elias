@@ -78,5 +78,16 @@ $(document).ready(function() {
 		});
 
 		customInit();
+
+    //
+    $("#uploader-form").onsubmit = function(evt) {
+      evt.preventDefault();
+    };
+
+    $("#fileupload").fileupload({
+      done: function(e, data) {
+        
+      }
+    })
 });
 

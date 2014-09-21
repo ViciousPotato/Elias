@@ -19,9 +19,12 @@ body
       .row.bit-entry
         .span3.timeline-column
         .span5
-          .message-box.login-form
+          .message-box.new-bit-box
             textarea#content-txt.message-box-text(placeholder="Type text here", rows=3)
             a#save-btn.btn Save
+            a#attach.btn
+              .span.fui-link
+              input#fileupload(type="file", name="attach")
       each bits, groupname in groups
         if (moment().format("MMM|DD") != groupname)
           .row.bit-entry-date-header
@@ -59,4 +62,6 @@ body
               .span #{topic}
               a.tagsinput-remove-link
         
+    form#uploader-form(style="display:none;", action="/upload", method="POST")
+      input#uploader-file(type="file", name="file")
     include script
