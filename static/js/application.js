@@ -87,6 +87,19 @@ $(document).ready(function() {
     $("#fileupload").fileupload({
       done: function(e, data) {
         
+      },
+      progress: function(e, data) {
+        var progress = parseInt(data.progress().loaded / data.progress().total * 100, 10);
+        data.context.children('.upload-progress')
+          .css('width', progress + '%');
+      },
+      add: function(e, data) {
+        data.context = $('<div class="upload-status"><div class="upload-progress"></div></div>')
+          .appendTo($('.new-bit-box'));
+        data.submit();
+      },
+      done: function(e, data) {
+        // console.log('done');
       }
     })
 });

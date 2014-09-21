@@ -3,6 +3,7 @@ mongoose = require 'mongoose'
 _        = require 'underscore'
 moment   = require 'moment'
 marked   = require 'marked'
+path     = require 'path'
 
 Bit      = require './models/bit'
 util     = require './util'
@@ -11,7 +12,9 @@ util     = require './util'
 mongoose.connect 'localhost', 'elias'
 
 app = express()
-app.use express.bodyParser()
+app.use express.bodyParser
+  keepExtensions: true
+  uploadDir: './static/uploads'
 app.use express.cookieParser('secret')
 app.use express.session {secret: 'secret'}
 app.use express.static __dirname + '/static'
@@ -74,7 +77,9 @@ app.get '/view/:id', (req, res) ->
     res.render 'view.jade', bit: bit
 
 app.post '/upload', (req, res) ->
-  url = '/uploads/' + path.basename req.files.upload.path
-  res.send url
+  url = '/uploads/' + path.basename req.files.attach.path
+  res.send
+    'status': 'success'
+    'url': url
 
 app.listen process.env.VCAP_APP_PORT or 3000

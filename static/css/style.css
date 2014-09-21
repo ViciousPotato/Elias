@@ -303,3 +303,6 @@ textarea.message-box-text {
   left: 0;
   opacity: 0;
 }
+
+.upload-status { width: '100%'; }
+.upload-status .upload-progress { height: 15px; background-color: green; width: 0; }

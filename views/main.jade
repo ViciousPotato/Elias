@@ -24,7 +24,7 @@ body
             a#save-btn.btn Save
             a#attach.btn
               .span.fui-link
-              input#fileupload(type="file", name="attach")
+              input#fileupload(type="file", name="attach", data-url="/upload")
       each bits, groupname in groups
         if (moment().format("MMM|DD") != groupname)
           .row.bit-entry-date-header
