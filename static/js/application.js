@@ -99,6 +99,11 @@ $(document).ready(function() {
         data.submit();
       },
       done: function(e, data) {
+        var baseUrl = location.href;
+        var uploadUrl = baseUrl + data.result.url;
+        var fileName = data.files[0].name;
+        var mdTxt = '[' + fileName + '](' + uploadUrl + ')';
+        $('#content-txt').append(mdTxt)
         // console.log('done');
       }
     })

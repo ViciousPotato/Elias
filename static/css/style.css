@@ -304,5 +304,14 @@ textarea.message-box-text {
   opacity: 0;
 }
 
-.upload-status { width: '100%'; }
-.upload-status .upload-progress { height: 15px; background-color: green; width: 0; }
+.upload-status {
+  width: '100%';
+  border: 1px solid #1abc9c ;
+  margin-top: 3px;
+}
+
+.upload-status .upload-progress {
+  height: 15px;
+  background-color: #1abc9c;
+  width: 0;
+}
