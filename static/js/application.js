@@ -2,13 +2,13 @@
 
 // I don't know what this is.
 $(function () {
-	// Custom selects
-	$("select").dropkick();
+  // Custom selects
+  $("select").dropkick();
 });
 
 
 function customInit() {
-	$('#save-btn').on('click', function() {
+  $('#save-btn').on('click', function() {
     // Show working
     /*
     $('#save-btn').css({
@@ -27,57 +27,57 @@ function customInit() {
     ).insertAfter('.bit-entry:first');
     $('.processing').show('slow');
 
-		$.post(
-			'/bit', 
-			{ content: $('#content-txt').val() }, 
-			function(data) {
+    $.post(
+      '/bit', 
+      { content: $('#content-txt').val() }, 
+      function(data) {
         $('.processing .timeline-hour').html(data.date);
         $('.processing .message-box').html(data.content);
         $('.processing').removeClass('processing');
         $('#content-txt').val('');
-			}
-		);
-	});
+      }
+    );
+  });
 }
 
 $(document).ready(function() {
-		// Init tooltips
-		$("[data-toggle=tooltip]").tooltip("show");
+    // Init tooltips
+    $("[data-toggle=tooltip]").tooltip("show");
 
-		// Init tags input
-		$("#tagsinput").tagsInput();
+    // Init tags input
+    $("#tagsinput").tagsInput();
 
-		// Init jQuery UI slider
-		$("#slider").slider({
-				min: 1,
-				max: 5,
-				value: 2,
-				orientation: "horizontal",
-				range: "min",
-		});
+    // Init jQuery UI slider
+    $("#slider").slider({
+        min: 1,
+        max: 5,
+        value: 2,
+        orientation: "horizontal",
+        range: "min",
+    });
 
-		// JS input/textarea placeholder
-		$("input, textarea").placeholder();
+    // JS input/textarea placeholder
+    $("input, textarea").placeholder();
 
-		// Make pagination demo work
-		$(".pagination a").click(function() {
-				if (!$(this).parent().hasClass("previous") && !$(this).parent().hasClass("next")) {
-						$(this).parent().siblings("li").removeClass("active");
-						$(this).parent().addClass("active");
-				}
-		});
+    // Make pagination demo work
+    $(".pagination a").click(function() {
+        if (!$(this).parent().hasClass("previous") && !$(this).parent().hasClass("next")) {
+            $(this).parent().siblings("li").removeClass("active");
+            $(this).parent().addClass("active");
+        }
+    });
 
-		$(".btn-group a").click(function() {
-				$(this).siblings().removeClass("active");
-				$(this).addClass("active");
-		});
+    $(".btn-group a").click(function() {
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+    });
 
-		// Disable link click not scroll top
-		$("a[href='#']").click(function() {
-				return false
-		});
+    // Disable link click not scroll top
+    $("a[href='#']").click(function() {
+        return false
+    });
 
-		customInit();
+    customInit();
 
     //
     $("#uploader-form").onsubmit = function(evt) {
@@ -106,6 +106,14 @@ $(document).ready(function() {
         $('#content-txt').append(mdTxt)
         // console.log('done');
       }
-    })
+    });
+
+    // Infinite scroll
+    $(window).scroll(function() {
+      // Scrolled to end
+      if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+        
+      }
+    });
 });
 
