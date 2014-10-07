@@ -11,6 +11,8 @@ util     = require './util'
 # Connect to db
 mongoose.connect 'localhost', 'elias'
 
+# TODO add code to handle connection failure.
+
 app = express()
 app.use express.bodyParser
   keepExtensions: true
@@ -45,6 +47,12 @@ app.get '/', (req, res) ->
       res.render 'main.jade',
         groups: groups
         topics: topics
+
+app.get '/bit/:offset/:limit', (req, res) ->
+  Bit.bits req.params.offset, req.params.limit, (error, bits) ->
+    res.send
+      error: error,
+      bits:  bits
 
 app.post '/bit', (req, res) ->
   content = req.param 'content'

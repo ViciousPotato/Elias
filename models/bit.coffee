@@ -13,5 +13,9 @@ bitSchema.statics.allTopics = (callback) ->
   this.find {}, (err, bits) ->
     callback _.chain(bits).map((bit) -> bit.topics).flatten().uniq().value()
 
+bitSchema.statics.bits = (offset, limit, callback) ->
+  this.find({}).skip(offset * limit).limit(limit).exec (err, bits) ->
+    callback err, bits
+
 Bit = mongoose.model 'Bit', bitSchema
 module.exports = Bit
