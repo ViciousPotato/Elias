@@ -1,9 +1,11 @@
+fs       = require 'fs'
 express  = require 'express'
 mongoose = require 'mongoose'
 _        = require 'underscore'
 moment   = require 'moment'
 marked   = require 'marked'
 path     = require 'path'
+morgan   = require 'morgan'
 
 Bit      = require './models/bit'
 util     = require './util'
@@ -13,6 +15,8 @@ mongoose.connect 'localhost', 'elias'
 
 # TODO add code to handle connection failure.
 
+accessLogStream = fs.createWriteStream __dirname+'/log/access.log', flags: 'a'
+
 app = express()
 app.use express.bodyParser
   keepExtensions: true
@@ -20,6 +24,7 @@ app.use express.bodyParser
 app.use express.cookieParser('secret')
 app.use express.session {secret: 'secret'}
 app.use express.static __dirname + '/static'
+app.use morgan 'combined', stream: accessLogStream
 
 app.set 'views', 'views/'
 app.set 'view engine', 'jade'

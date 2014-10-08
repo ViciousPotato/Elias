@@ -108,11 +108,19 @@ $(document).ready(function() {
       }
     });
 
+    function updateBits(data) {
+
+    }
+
     // Infinite scroll
+    var gBitOffset = 0;
+    var gBitLimit = 10;
     $(window).scroll(function() {
       // Scrolled to end
       if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-        
+          $.ajax('/bit/'+gBitOffset+'/'+gBitLimit)
+              .done(function(data) { alert(data); })
+              .fail(function(error) { alert("Load bit failed: " + error); })
       }
     });
 });
