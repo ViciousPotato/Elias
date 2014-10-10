@@ -110,6 +110,12 @@ $(document).ready(function() {
 
     function updateBits(data) {
       _.each(data.bits, function(bits, groupname) {
+        if (groupname == gLastGroupName) {
+          return 0
+        } else {
+          gLastGroupName = groupname;
+        }
+
         var groupTmpl = _.template(
             '<div class="row bit-entry-date-header">' +
              '<div class="span3 timeline-column">' +
@@ -121,15 +127,48 @@ $(document).ready(function() {
               '</div>'+
              '</div>' +
             '</div>');
+
         var groupNode = $(groupTmpl({day: groupname.split("|")[0], month: groupname.split("|")[1]}));
         groupNode.appendTo('.sidebar');
-      });
-      // var bitNode = $(_.template('<div>')({}));
+
+        _.each(bits, function(bit) {
+         var bitTmpl = _.template(
+          '<div class="row bit-entry">' +
+            '<div class="span3 timeline-column">' +
+              '<div class="span timeline-hour">06:47 am</div>' +
+            '</div>' +
+            '<div id="<%=bit._id%>" class="span5">' +
+              '<div class="message-box">' +
+                '<div class="message-box-content">' +
+                  '<%=bit.content%>' +
+                '</div>' +
+                '<div class="bit-entry-toolbar">' +
+                  '<div class="btn-toolbar bit-entry-controls">' +
+                    '<div class="bit-entry-toolbar-btn-group btn-group">' +
+                      '<a href="/edit/<%=bit._id%>" class="btn btn-primary bit-entry-toolbar-btn">' +
+                        '<span class="fui-new-16"></span>' +
+                      '</a>' +
+                      '<a href="/view/<%=bit._id%>" class="btn btn-primary bit-entry-toolbar-btn">' +
+                        '<span class="fui-eye-16"></span></a>' +
+                      '<a href="/delete/<%=bit._id%>" class="btn btn-primary bit-entry-toolbar-btn">' +
+                        '<span class="fui-cross-16"></span>' +
+                      '</a>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="bit-entry-topics tagsinput"></div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>');
+          $(bitTmpl({bit: bit})).appendTo('.sidebar');
+        });
+    });
     }
 
     // Infinite scroll
     var gBitOffset = 0;
     var gBitLimit = 10;
+    var gLastGroupName = '';
     $(window).scroll(function() {
       // Scrolled to end
       if ($(window).scrollTop() == $(document).height() - $(window).height()) {
