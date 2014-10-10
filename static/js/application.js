@@ -109,7 +109,22 @@ $(document).ready(function() {
     });
 
     function updateBits(data) {
-
+      _.each(data.bits, function(bits, groupname) {
+        var groupTmpl = _.template(
+            '<div class="row bit-entry-date-header">' +
+             '<div class="span3 timeline-column">' +
+              '<div class="outercircle-date">' +
+               '<div class="innercircle-date">' +
+                '<span class="day"><%=day%></span>' +
+                '<span class="month"><%=month%></span>' +
+               '</div>'+
+              '</div>'+
+             '</div>' +
+            '</div>');
+        var groupNode = $(groupTmpl({day: groupname.split("|")[0], month: groupname.split("|")[1]}));
+        groupNode.appendTo('.sidebar');
+      });
+      // var bitNode = $(_.template('<div>')({}));
     }
 
     // Infinite scroll
@@ -119,7 +134,7 @@ $(document).ready(function() {
       // Scrolled to end
       if ($(window).scrollTop() == $(document).height() - $(window).height()) {
           $.ajax('/bit/'+gBitOffset+'/'+gBitLimit)
-              .done(function(data) { alert(data); })
+              .done(function(data) { updateBits(data); gBitOffset += gBitLimit; })
               .fail(function(error) { alert("Load bit failed: " + error); })
       }
     });
