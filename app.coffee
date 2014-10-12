@@ -44,6 +44,13 @@ app.use express.bodyParser
   keepExtensions: true,
   uploadDir:      __dirname + '/staic/uploads'
 
+app.use (req, res, next) ->
+  if '/robots.txt' == req.url
+    res.type 'text/plain'
+    res.send 'User-agent: *\nDisallow: /delete\nDisallow: /edit'
+  else
+    next()
+
 app.get '/', (req, res) ->
   Bit.find {}, null, {sort: {date: -1}}, (error, bits) ->
     groups = _.groupBy bits, (bit) ->
