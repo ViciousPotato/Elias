@@ -53,6 +53,14 @@ body
                   .bit-entry-topics.tagsinput
                     each topic in bit.topics
                       .bit-entry-topic.tag #{topic}
+      script#group-template(type="text/x-handlebars-template")
+        .row.bit-entry-date-header
+          .span3.timeline-column
+            .outercircle-date
+              .innercircle-date
+                span.day#today-day {{month}}
+                span.month#today-month {{day}}
+      script#bits-template(type="text/x-handlebars-template")
     .topics
       h2 Topics
       .topic-list

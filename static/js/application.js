@@ -110,26 +110,14 @@ $(document).ready(function() {
 
     function updateBits(data) {
       _.each(data.bits, function(bits, groupname) {
-        if (groupname == gLastGroupName) {
-          return 0
-        } else {
+        if (groupname != gLastGroupName) {
           gLastGroupName = groupname;
+
+          var groupTmpl = Handlebars.compile($('#group-template').html());
+          var namePair = groupname.split("|");
+          var groupNode = $(groupTmpl({day: namePair[0], month: namePair[1]}));
+          groupNode.appendTo('.sidebar');
         }
-
-        var groupTmpl = _.template(
-            '<div class="row bit-entry-date-header">' +
-             '<div class="span3 timeline-column">' +
-              '<div class="outercircle-date">' +
-               '<div class="innercircle-date">' +
-                '<span class="day"><%=day%></span>' +
-                '<span class="month"><%=month%></span>' +
-               '</div>'+
-              '</div>'+
-             '</div>' +
-            '</div>');
-
-        var groupNode = $(groupTmpl({day: groupname.split("|")[0], month: groupname.split("|")[1]}));
-        groupNode.appendTo('.sidebar');
 
         _.each(bits, function(bit) {
          var bitTmpl = _.template(
