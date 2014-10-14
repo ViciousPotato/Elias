@@ -25,34 +25,7 @@ body
             a#attach.btn
               .span.fui-link
               input#fileupload(type="file", name="attach", data-url="/upload")
-      each bits, groupname in groups
-        if (moment().format("MMM|DD") != groupname)
-          .row.bit-entry-date-header
-            .span3.timeline-column
-              .outercircle-date
-                .innercircle-date
-                  span.day= groupname.split("|")[0]
-                  span.month= groupname.split("|")[1]
-        each bit in bits
-          .row.bit-entry
-            .span3.timeline-column
-                .span.timeline-hour #{moment(bit.date).format("HH:mm a")}
-            .span5(id="#{bit._id}")
-              .message-box
-                .message-box-content
-                  != marked(bit.content)
-                .bit-entry-toolbar
-                  .btn-toolbar.bit-entry-controls
-                    .bit-entry-toolbar-btn-group.btn-group
-                      a.btn.btn-primary.bit-entry-toolbar-btn(href="/edit/#{bit._id}")
-                        span.fui-new-16
-                      a.btn.btn-primary.bit-entry-toolbar-btn(href="/view/#{bit._id}")
-                        span.fui-eye-16
-                      a.btn.btn-primary.bit-entry-toolbar-btn(href='/delete/#{bit._id}')
-                        span.fui-cross-16
-                  .bit-entry-topics.tagsinput
-                    each topic in bit.topics
-                      .bit-entry-topic.tag #{topic}
+
       script#group-template(type="text/x-handlebars-template")
         .row.bit-entry-date-header
           .span3.timeline-column

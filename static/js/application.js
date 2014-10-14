@@ -6,40 +6,6 @@ $(function () {
   $("select").dropkick();
 });
 
-
-function customInit() {
-  $('#save-btn').on('click', function() {
-    // Show working
-    /*
-    $('#save-btn').css({
-      'background-image':  'url(/img/loading.gif)',
-      'background-repeat': 'no-repeat',
-      'background-position': 'center'
-    });
-    */
-    $(
-      '<div class="row bit-entry processing">' +
-      '<div class="span3 timeline-column">' +
-      '<div class="span timeline-hour"></div>' +
-      '</div>' +
-      '<div class="span5"><div class="message-box"></div></div>' + 
-      '</div>'
-    ).insertAfter('.bit-entry:first');
-    $('.processing').show('slow');
-
-    $.post(
-      '/bit', 
-      { content: $('#content-txt').val() }, 
-      function(data) {
-        $('.processing .timeline-hour').html(data.date);
-        $('.processing .message-box').html(data.content);
-        $('.processing').removeClass('processing');
-        $('#content-txt').val('');
-      }
-    );
-  });
-}
-
 $(document).ready(function() {
     // Init tooltips
     $("[data-toggle=tooltip]").tooltip("show");
@@ -47,25 +13,9 @@ $(document).ready(function() {
     // Init tags input
     $("#tagsinput").tagsInput();
 
-    // Init jQuery UI slider
-    $("#slider").slider({
-        min: 1,
-        max: 5,
-        value: 2,
-        orientation: "horizontal",
-        range: "min",
-    });
-
     // JS input/textarea placeholder
     $("input, textarea").placeholder();
 
-    // Make pagination demo work
-    $(".pagination a").click(function() {
-        if (!$(this).parent().hasClass("previous") && !$(this).parent().hasClass("next")) {
-            $(this).parent().siblings("li").removeClass("active");
-            $(this).parent().addClass("active");
-        }
-    });
 
     $(".btn-group a").click(function() {
         $(this).siblings().removeClass("active");
@@ -77,7 +27,36 @@ $(document).ready(function() {
         return false
     });
 
-    customInit();
+    $('#save-btn').on('click', function() {
+      // Show working
+      /*
+       $('#save-btn').css({
+       'background-image':  'url(/img/loading.gif)',
+       'background-repeat': 'no-repeat',
+       'background-position': 'center'
+       });
+       */
+      $(
+          '<div class="row bit-entry processing">' +
+          '<div class="span3 timeline-column">' +
+          '<div class="span timeline-hour"></div>' +
+          '</div>' +
+          '<div class="span5"><div class="message-box"></div></div>' +
+          '</div>'
+      ).insertAfter('.bit-entry:first');
+      $('.processing').show('slow');
+
+      $.post(
+        '/bit',
+        { content: $('#content-txt').val() },
+        function(data) {
+          $('.processing .timeline-hour').html(data.date);
+          $('.processing .message-box').html(data.content);
+          $('.processing').removeClass('processing');
+          $('#content-txt').val('');
+        }
+      );
+    });
 
     Handlebars.registerHelper('formatBitTime', function(time) {
       return moment(time).format("HH:mm a");
@@ -89,9 +68,6 @@ $(document).ready(function() {
     };
 
     $("#fileupload").fileupload({
-      done: function(e, data) {
-        
-      },
       progress: function(e, data) {
         var progress = parseInt(data.progress().loaded / data.progress().total * 100, 10);
         data.context.children('.upload-progress')
@@ -129,6 +105,12 @@ $(document).ready(function() {
       });
     };
 
+    function loadBits() {
+      $.ajax('/bit/'+gBitOffset+'/'+gBitLimit)
+        .done(function(data) { updateBits(data); gBitOffset += gBitLimit; })
+        .fail(function(error) { alert("Load bit failed: " + error); })
+    }
+
     // Infinite scroll
     var gBitOffset = 0;
     var gBitLimit = 10;
@@ -136,10 +118,10 @@ $(document).ready(function() {
     $(window).scroll(function() {
       // Scrolled to end
       if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-          $.ajax('/bit/'+gBitOffset+'/'+gBitLimit)
-              .done(function(data) { updateBits(data); gBitOffset += gBitLimit; })
-              .fail(function(error) { alert("Load bit failed: " + error); })
+        loadBits();
       }
     });
+
+    loadBits();
 });
 

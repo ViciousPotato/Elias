@@ -14,7 +14,7 @@ bitSchema.statics.allTopics = (callback) ->
     callback _.chain(bits).map((bit) -> bit.topics).flatten().uniq().value()
 
 bitSchema.statics.bits = (offset, limit, callback) ->
-  this.find({}, null, {sort: {date: -1}}).skip(offset * limit).limit(limit).exec (err, bits) ->
+  this.find({}, null, {sort: {date: -1}}).skip(offset).limit(limit).exec (err, bits) ->
     callback err, bits
 
 Bit = mongoose.model 'Bit', bitSchema
