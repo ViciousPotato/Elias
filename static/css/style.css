@@ -181,10 +181,6 @@ textarea.message-box-text {
   color: rgb(130, 130, 130);
 }
 
-.processing {
-  display: none;
-}
-
 .processing .message-box {
   background-image: url(../img/loading.gif);
   background-repeat: no-repeat;

@@ -77,9 +77,7 @@ app.post '/bit', (req, res) ->
     topics:  parsed.topics
 
   bit.save (error, bit) ->
-    res.send
-      date:    moment(bit.date).format("HH:MM a")
-      content: marked(bit.content)
+    res.send bit
 
 app.get '/edit/:id', (req, res) ->
   Bit.findOne _id: req.params.id, (error, bit) ->
