@@ -63,7 +63,7 @@ app.get '/', (req, res) ->
 app.get '/bit/:offset/:limit', (req, res) ->
   Bit.bits req.params.offset, req.params.limit, (error, bits) ->
     groups = _.groupBy bits, (bit) ->
-      moment(bit.data).format("MMM|DD") # MMM means 3 char month name e.g. Oct
+      moment(bit.date).format("MMM|DD") # MMM means 3 char month name e.g. Oct
     res.send
       error: error,
       bits:  groups
