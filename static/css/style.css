@@ -181,11 +181,18 @@ textarea.message-box-text {
   color: rgb(130, 130, 130);
 }
 
-.processing .message-box {
+.processing .message-box, .bit-loading {
   background-image: url(../img/loading.gif);
   background-repeat: no-repeat;
   background-position: center;
   height: 100px;
+}
+
+.bit-loading {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 .bit-entry-toolbar {

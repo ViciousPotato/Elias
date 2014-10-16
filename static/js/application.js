@@ -83,7 +83,7 @@ $(document).ready(function() {
         // TODO: move template compile to app init.
         var groupTmpl = Handlebars.compile($('#group-template').html());
         var namePair = groupname.split("|");
-        var groupNode = $(groupTmpl({day: namePair[0], month: namePair[1]}));
+        var groupNode = $(({day: namePair[0], month: namePair[1]}));
         groupNode.appendTo('.sidebar');
       }
 
@@ -95,9 +95,19 @@ $(document).ready(function() {
   };
 
   function loadBits() {
-    $.ajax('/bit/'+gBitOffset+'/'+gBitLimit)
-      .done(function(data) { updateBits(data); gBitOffset += gBitLimit; })
-      .fail(function(error) { alert("Load bit failed: " + error); })
+    var loading = $('<div class="bit-loading"></div>');
+    loading.insertAfter('body');
+    $.ajax('/bit/' + gBitOffset + '/' + gBitLimit)
+      .done(function (data) {
+        updateBits(data);
+        gBitOffset += gBitLimit;
+      })
+      .fail(function (error) {
+        alert("Load bit failed: " + error);
+      })
+      .always(function () {
+        loading.remove();
+      });
   }
 
   // Infinite scroll
