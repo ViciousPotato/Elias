@@ -19,3 +19,12 @@ module.exports.bit_summary = (content) ->
 
 module.exports.join_topics = (topics) ->
   ("[#{topic}]" for topic in topics).join('')
+
+module.exports.shorten_text = (text, len) ->
+  switch
+    when len >= text.length then text
+    when len <= 3 then '...'
+    else
+      left = Math.ceil (len-3) / 2
+      right = len-3-left
+      text[0...left] + '...' + text[text.length-right...text.length]

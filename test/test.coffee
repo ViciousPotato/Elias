@@ -53,4 +53,17 @@ describe 'Util', ()->
     it 'should join topics', ()->
       '[Topic][Topic]'.should.eql util.join_topics ['Topic', 'Topic']
 
+  describe '#shorten_text', ()->
+    it 'should shorten <= 3', ()->
+      '...'.should.eql util.shorten_text 'slice', 2
+      '...'.should.eql util.shorten_text 'slice', 0
+      '...'.should.eql util.shorten_text 'slice', 3
+
+    it 'should shorten > 3', ()->
+      's...'.should.eql util.shorten_text 'slice', 4
+      'slice'.should.eql util.shorten_text 'slice', 5
+      'slice'.should.eql util.shorten_text 'slice', 6
+      'My ...ove'.should.eql util.shorten_text 'My dear love', 9
+
+
 
