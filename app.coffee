@@ -52,18 +52,14 @@ app.use (req, res, next) ->
     next()
 
 app.get '/', (req, res) ->
-  Bit.find {}, null, {sort: {date: -1}}, (error, bits) ->
-    groups = _.groupBy bits, (bit) ->
-      moment(bit.date).format("MMM|DD")
-    Bit.allTopics (topics) ->
-      res.render 'main.jade',
-        groups: groups
-        topics: topics
+  Bit.allTopics (topics) ->
+    res.render 'main.jade', topics: topics
 
 app.get '/bit/:offset/:limit', (req, res) ->
-  Bit.bits req.params.offset, req.params.limit, (error, bits) ->
+  Bit.bits req.params.offset, req.params.limit, marked, (error, bits) ->
     groups = _.groupBy bits, (bit) ->
       moment(bit.date).format("MMM|DD") # MMM means 3 char month name e.g. Oct
+
     res.send
       error: error,
       bits:  groups
@@ -77,6 +73,7 @@ app.post '/bit', (req, res) ->
     topics:  parsed.topics
 
   bit.save (error, bit) ->
+    bit.content = marked(content)
     res.send bit
 
 app.get '/edit/:id', (req, res) ->
