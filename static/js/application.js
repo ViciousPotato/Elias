@@ -83,7 +83,7 @@ $(document).ready(function() {
         // TODO: move template compile to app init.
         var groupTmpl = Handlebars.compile($('#group-template').html());
         var namePair = groupname.split("|");
-        var groupNode = $(({day: namePair[0], month: namePair[1]}));
+        var groupNode = $(groupTmpl({day: namePair[0], month: namePair[1]}));
         groupNode.appendTo('.sidebar');
       }
 
