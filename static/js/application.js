@@ -58,11 +58,13 @@ $(document).ready(function() {
   $("#fileupload").fileupload({
     progress: function(e, data) {
       var progress = parseInt(data.progress().loaded / data.progress().total * 100, 10);
-      data.context.children('.upload-progress')
+      data.context.find('.upload-progress')
         .css('width', progress + '%');
     },
     add: function(e, data) {
-      data.context = $('<div class="upload-status"><div class="upload-progress"></div></div>')
+      var fileName = data.files[0].name;
+      // TODO: put in template?
+      data.context = $('<div class="upload-status"><div class="upload-name">' + fileName + '</div><div class="upload-progress-wrapper"><div class="upload-progress"></div></div></div>')
         .appendTo($('.new-bit-box'));
       data.submit();
     },

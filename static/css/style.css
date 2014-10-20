@@ -308,9 +308,26 @@ textarea.message-box-text {
 }
 
 .upload-status {
-  width: '100%';
-  border: 1px solid #1abc9c ;
+  width: 100%;
   margin-top: 3px;
+  line-height: 1.0em;
+}
+
+.upload-name {
+  width: 20%;
+  height: 15px;
+  font-size: 1.0em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  display: inline-block;
+}
+
+.upload-status .upload-progress-wrapper {
+  width: 80%;
+  display: inline-block;
+  border: 1px solid #1abc9c ;
 }
 
 .upload-status .upload-progress {
