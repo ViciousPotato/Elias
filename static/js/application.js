@@ -63,9 +63,9 @@ $(document).ready(function() {
     },
     add: function(e, data) {
       var fileName = data.files[0].name;
-      // TODO: put in template?
-      data.context = $('<div class="upload-status"><div class="upload-name">' + fileName + '</div><div class="upload-progress-wrapper"><div class="upload-progress"></div></div></div>')
-        .appendTo($('.new-bit-box'));
+      var uploadTmpl = Handlebars.compile($('#upload-file-template').html());
+      data.context = $(uploadTmpl({file: fileName}))
+        .insertAfter($('.new-bit-box'));
       data.submit();
     },
     done: function(e, data) {

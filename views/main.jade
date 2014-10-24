@@ -26,6 +26,11 @@ body
               .span.fui-link
               input#fileupload(type="file", name="attach", data-url="/upload")
 
+      script#upload-file-template(type="text/x-handlebars-template")
+        .upload-status.message-box
+          .upload-name {{file}}
+          .upload-progress-wrapper
+            .upload-progress
       script#group-template(type="text/x-handlebars-template")
         .row.bit-entry-date-header
           .span3.timeline-column

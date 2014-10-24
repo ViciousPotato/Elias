@@ -288,7 +288,7 @@ textarea.message-box-text {
 .topic-list > .tagsinput {
   background: none;
   border: none;
-  padding: none;
+  padding: 0;
 }
 
 #attach {
@@ -308,13 +308,10 @@ textarea.message-box-text {
 }
 
 .upload-status {
-  width: 100%;
-  margin-top: 3px;
-  line-height: 1.0em;
+  padding: 16px 10px 16px 10px;
 }
 
 .upload-name {
-  width: 20%;
   height: 15px;
   font-size: 1.0em;
   white-space: nowrap;
@@ -325,8 +322,6 @@ textarea.message-box-text {
 }
 
 .upload-status .upload-progress-wrapper {
-  width: 80%;
-  display: inline-block;
   border: 1px solid #1abc9c ;
 }
 
