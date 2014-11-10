@@ -102,10 +102,10 @@ h6 {
   /*border: 2px solid rgb(209, 209, 207);*/
   border-radius: 3px;
   border-bottom: 1px solid rgb(204, 204, 204);
-
+  margin-bottom: 50px;
   box-shadow: 2px 2px 4px rgb(209, 209, 207);
   /*min-height: 100px;*/
-  padding: 16px 10px 55px 10px;
+  padding: 16px 10px 16px 10px;
   position: relative;
   word-wrap: break-word;
 }
@@ -195,9 +195,12 @@ textarea.message-box-text {
   width: 100%;
 }
 
+.bit-entry-content {
+  position: relative;
+}
+
 .bit-entry-toolbar {
   position: absolute;
-  left: 10px;
   bottom: 2px;
   width: 100%;
 }
@@ -237,12 +240,12 @@ textarea.message-box-text {
   padding: 5px 10px 5px 10px !important;
 }
 
-.message-box > .bit-entry-toolbar {
+.bit-entry-content > .bit-entry-toolbar {
   opacity: 0;
   transition: opacity 0.5s linear;
 }
 
-.message-box:hover > .bit-entry-toolbar {
+.bit-entry-content:hover > .bit-entry-toolbar {
   opacity: 1;
 }
 

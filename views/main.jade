@@ -42,23 +42,23 @@ body
         .row.bit-entry
           .span3.timeline-column
               .span.timeline-hour {{formatBitTime date}}
-          .span5(id="{{_id}}")
+          .span5.bit-entry-content(id="{{_id}}")
             .message-box
               .message-box-content
                 {{{content}}}
-              .bit-entry-toolbar
-                .btn-toolbar.bit-entry-controls
-                  .bit-entry-toolbar-btn-group.btn-group
-                    a.btn.btn-primary.bit-entry-toolbar-btn(href="/edit/{{_id}}")
-                      span.fui-new-16
-                    a.btn.btn-primary.bit-entry-toolbar-btn(href="/view/{{_id}}")
-                      span.fui-eye-16
-                    a.btn.btn-primary.bit-entry-toolbar-btn(href='/delete/{{_id}}')
-                      span.fui-cross-16
-                .bit-entry-topics.tagsinput
-                  {{#topics}}
-                  .bit-entry-topic.tag {{this}}
-                  {{/topics}}
+            .bit-entry-toolbar
+              .btn-toolbar.bit-entry-controls
+                .bit-entry-toolbar-btn-group.btn-group
+                  a.btn.btn-primary.bit-entry-toolbar-btn(href="/edit/{{_id}}")
+                    span.fui-new-16
+                  a.btn.btn-primary.bit-entry-toolbar-btn(href="/view/{{_id}}")
+                    span.fui-eye-16
+                  a.btn.btn-primary.bit-entry-toolbar-btn(href='/delete/{{_id}}')
+                    span.fui-cross-16
+              .bit-entry-topics.tagsinput
+                {{#topics}}
+                .bit-entry-topic.tag {{this}}
+                {{/topics}}
     .topics
       h2 Topics
       .topic-list
