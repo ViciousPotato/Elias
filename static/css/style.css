@@ -116,7 +116,7 @@ h6 {
 
 .message-box-content {
   max-height: 300px;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .message-box-text {

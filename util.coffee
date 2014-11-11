@@ -28,3 +28,20 @@ module.exports.shorten_text = (text, len) ->
       left = Math.ceil (len-3) / 2
       right = len-3-left
       text[0...left] + '...' + text[text.length-right...text.length]
+
+module.exports.shorten_bit = (chars, line_length=35, disp_lines=20) ->
+  showingLines = 0
+  lines = chars.split("\n")
+  res = []
+
+  for line in lines
+    showingLines += Math.ceil(line.length / line_length)
+    if showingLines > disp_lines
+      res.push("...")
+      break
+    else
+      res.push(line)
+
+  return res.join("\n")
+
+

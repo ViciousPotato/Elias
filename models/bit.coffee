@@ -15,7 +15,7 @@ bitSchema.statics.allTopics = (callback) ->
 
 bitSchema.statics.bits = (offset, limit, render, callback) ->
   this.find({}, null, {sort: {date: -1}}).skip(offset).limit(limit).exec (err, bits) ->
-    _.each bits, (bit) -> bit.content = render(bit.content)
+    _.each bits, (bit) -> bit.content = render(util.shorten_bit(bit.content))
     callback err, bits
 
 bitSchema.methods.render = (render) ->

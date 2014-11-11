@@ -65,5 +65,12 @@ describe 'Util', ()->
       'slice'.should.eql util.shorten_text 'slice', 6
       'My ...ove'.should.eql util.shorten_text 'My dear love', 9
 
+  describe "#shorten_bits", ()->
+    it 'should shorten long lines', ()->
+      'abc\ndef\n...'.should.eql util.shorten_bit 'abc\ndef\nghi', 3, 2
+
+    it 'should not shorten short lines', () ->
+      'ab\nc'.should.eql util.shorten_bit('ab\nc', 3, 2)
+
 
 
