@@ -59,14 +59,18 @@ body
                 {{#topics}}
                 .bit-entry-topic.tag {{this}}
                 {{/topics}}
-    .topics
-      h2 Topics
-      .topic-list
-        .tagsinput
-          each topic in topics
-            span.tag
-              .span #{topic}
-              a.tagsinput-remove-link
+    .right-content
+      .topics
+        h2.right-title TOPICS
+        .topic-list
+          .tagsinput
+            each topic in topics
+              span.tag
+                .span #{topic}
+                a.tagsinput-remove-link
+
+       .recents
+        h2.right-title RECENTS
         
     form#uploader-form(style="display:none;", action="/upload", method="POST")
       input#uploader-file(type="file", name="file")

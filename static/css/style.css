@@ -332,3 +332,37 @@ textarea.message-box-text {
   background-color: #1abc9c;
   width: 0;
 }
+
+.right-content {
+  margin-left: 600px;
+  position: relative;
+  top: 100px;
+}
+
+.right-title {
+  font-family: Arial;
+  color: rgb(68, 68, 68);
+  font-size: 1.4em;
+  margin: 0;
+}
+
+.topics {
+  background-color: rgb(251, 251, 251);
+  border-radius: 3px;
+  border-bottom: 1px solid rgb(204, 204, 204);
+  box-shadow: 2px 2px 4px rgb(209, 209, 207);
+  padding: 10px 10px 10px 10px;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.recents {
+  background-color: rgb(251, 251, 251);
+  border-radius: 3px;
+  border-bottom: 1px solid rgb(204, 204, 204);
+  box-shadow: 2px 2px 4px rgb(209, 209, 207);
+  padding: 10px 10px 10px 10px;
+  word-wrap: break-word;
+  margin-right: 10px;
+}
