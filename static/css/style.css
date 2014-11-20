@@ -347,7 +347,7 @@ textarea.message-box-text {
 }
 
 .topics {
-  background-color: rgb(251, 251, 251);
+  background-color: rgba(251, 251, 251, 0.8);
   border-radius: 3px;
   border-bottom: 1px solid rgb(204, 204, 204);
   box-shadow: 2px 2px 4px rgb(209, 209, 207);
@@ -358,7 +358,7 @@ textarea.message-box-text {
 }
 
 .recents {
-  background-color: rgb(251, 251, 251);
+  background-color: rgba(251, 251, 251, 0.8);
   border-radius: 3px;
   border-bottom: 1px solid rgb(204, 204, 204);
   box-shadow: 2px 2px 4px rgb(209, 209, 207);
