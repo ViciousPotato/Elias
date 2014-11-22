@@ -97,6 +97,36 @@ h6 { font-size: 1.1em; }
   word-wrap: break-word;
 }
 
+.message-box:before {
+  position: absolute;
+  top: 2px;
+  left: -12px;
+  right: 100%;
+  width: 0;
+  height: 0;
+  display: block;
+  content: " ";
+  border-color: transparent;
+  border-style: solid solid outset;
+  border-right-color: rgb(209, 209, 207);
+  border-width: 6px;
+}
+
+.message-box:after {
+  position: absolute;
+  top: 3px;
+  left: -10px;
+  right: 100%;
+  width: 0;
+  height: 0;
+  display: block;
+  content: " ";
+  border-color: transparent;
+  border-style: solid solid outset;
+  border-right-color: #fff;
+  border-width: 5px;
+}
+
 .message-box.new-bit-box {
   padding-bottom: 16px;
 }
@@ -149,6 +179,7 @@ textarea.message-box-text {
 }
 
 .bit-entry .timeline-column {
+  margin-left: 10px;
 }
 
 .timeline {
@@ -161,9 +192,8 @@ textarea.message-box-text {
 }
 
 .timeline-hour {
-  width: 100;
+  width: 100px;
   text-align: center;
-  font-weight: bold;
   color: rgb(130, 130, 130);
 }
 
@@ -183,6 +213,7 @@ textarea.message-box-text {
 
 .bit-entry-content {
   position: relative;
+  margin-left: 25px;
 }
 
 .bit-entry-toolbar {
