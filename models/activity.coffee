@@ -1,10 +1,11 @@
 mongoose = require "mongoose"
 
 activitySchema = new mongoose.Schema
-  content: String
+  action: String
+  detail: String
+  bitId: ObjectId
   date:
     type: Date
     default: Date.now
 
-Activity = mongoose.model 'Activity', activitySchema
-module.exports = Activity
+module.exports = mongoose.model 'Activity', activitySchema

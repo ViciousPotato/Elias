@@ -98,7 +98,7 @@ $(document).ready(function() {
 
   function loadBits() {
     var loading = $('<div class="bit-loading"></div>');
-    loading.insertAfter('body');
+    loading.appendTo($('body'));
     $.ajax('/bit/' + gBitOffset + '/' + gBitLimit)
       .done(function (data) {
         updateBits(data);

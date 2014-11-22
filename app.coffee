@@ -64,6 +64,7 @@ app.get '/bit/:offset/:limit', (req, res) ->
       error: error,
       bits:  groups
 
+# Create new bit
 app.post '/bit', (req, res) ->
   content = req.param 'content'
   parsed  = util.parse_bit content
@@ -80,6 +81,7 @@ app.get '/edit/:id', (req, res) ->
   Bit.findOne _id: req.params.id, (error, bit) ->
     res.render 'edit.jade', bit: bit
 
+# Save edit result
 app.post '/edit/:id', (req, res) ->
   parsed = util.parse_bit req.body.content
   Bit.update _id: req.params.id, {content: parsed.content, topics: parsed.topics}, (err, bit) ->

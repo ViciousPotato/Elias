@@ -15,11 +15,11 @@ bitSchema.statics.allTopics = (callback) ->
 
 bitSchema.statics.bits = (offset, limit, render, callback) ->
   this.find({}, null, {sort: {date: -1}}).skip(offset).limit(limit).exec (err, bits) ->
+    # Shorten bits text for display
     _.each bits, (bit) -> bit.content = render(util.shorten_bit(bit.content))
     callback err, bits
 
 bitSchema.methods.render = (render) ->
   this.content = render(content)
 
-Bit = mongoose.model 'Bit', bitSchema
-module.exports = Bit
+module.exports = mongoose.model 'Bit', bitSchema
