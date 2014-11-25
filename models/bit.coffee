@@ -1,6 +1,8 @@
 _        = require 'underscore'
 mongoose = require 'mongoose'
 util     = require '../util'
+async    = require 'async'
+Activity = require './activity'
 
 bitSchema = new mongoose.Schema
   content: String,
@@ -11,7 +13,14 @@ bitSchema = new mongoose.Schema
 
 bitSchema.statics.allTopics = (callback) ->
   this.find {}, (err, bits) ->
-    callback _.chain(bits).map((bit) -> bit.topics).flatten().uniq().value()
+    topics = _.chain(bits).map((bit) -> bit.topics).flatten().uniq().value()
+    # Get topic's activities
+    async.map topics, (topic, cb) ->
+      Activity.find topic: topic, (err, activities) ->
+        cb null, topic: topic, activities: activities
+    , (error, results) ->
+      console.log results
+      callback results
 
 bitSchema.statics.bits = (offset, limit, render, callback) ->
   this.find({}, null, {sort: {date: -1}}).skip(offset).limit(limit).exec (err, bits) ->

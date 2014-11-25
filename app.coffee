@@ -6,8 +6,10 @@ moment   = require 'moment'
 marked   = require 'marked'
 path     = require 'path'
 morgan   = require 'morgan'
+async    = require 'async'
 
 Bit      = require './models/bit'
+Activity = require './models/activity'
 util     = require './util'
 
 # Connect to db
@@ -69,13 +71,28 @@ app.post '/bit', (req, res) ->
   content = req.param 'content'
   parsed  = util.parse_bit content
 
+  rawContent = parsed.content
+  topics = parsed.topics # TODO: The case of empty topic
   bit = new Bit
-    content: parsed.content
-    topics:  parsed.topics
+    content: rawContent
+    topics:  topics
 
   bit.save (error, bit) ->
     bit.content = marked(content)
-    res.send bit
+
+    async.each topics, (topic, cb) ->
+        actitivity = new Activity
+          topic: topic
+          action: 'Add'
+          detail: 'Added bit: ' + util.shorten_text(rawContent, 10)
+          bitId:  bit._id
+
+        actitivity.save (error, act) ->
+          # FIXME ignore errors
+          cb()
+      , (error) ->
+        # FIXME ignore errors
+        res.send bit
 
 app.get '/edit/:id', (req, res) ->
   Bit.findOne _id: req.params.id, (error, bit) ->

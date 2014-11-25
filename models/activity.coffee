@@ -1,9 +1,10 @@
 mongoose = require "mongoose"
 
 activitySchema = new mongoose.Schema
-  action: String
+  topic: String
+  action: String # Add, delete, update...
   detail: String
-  bitId: ObjectId
+  bitId: mongoose.Schema.Types.ObjectId
   date:
     type: Date
     default: Date.now

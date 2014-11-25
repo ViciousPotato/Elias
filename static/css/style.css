@@ -375,6 +375,17 @@ textarea.message-box-text {
   margin-right: 10px;
 }
 
+.topics h2, h3 {
+  color: #e74c3c;
+}
+
+.topics h3 {
+  font-size: 1.3em;
+  line-height: 20px;
+  font-family: Lato;
+  font-weight: normal;
+}
+
 .recents {
   background-color: rgba(251, 251, 251, 0.8);
   border-radius: 3px;
@@ -383,4 +394,22 @@ textarea.message-box-text {
   padding: 10px 10px 10px 10px;
   word-wrap: break-word;
   margin-right: 10px;
+}
+
+.topic-activity {
+  margin-bottom: 2px;
+  font-size: 12px;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 3px;
+}
+
+.activity-Add {
+  /*
+  border-left: 5px solid #27ae60;
+  padding-left: 5px;
+  */
+}
+
+.topic-list {
+  visibility: hidden;
 }
