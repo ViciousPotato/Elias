@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  background-color: rgb(237, 237, 235);
+  /* background-color: rgb(237, 237, 235); */
   font-family: "Open Sans", Arial;
   color: #444;
 
@@ -156,7 +156,11 @@ h6 { font-size: 1.1em; }
 */
 
 #main {
-  margin-top: 50px;
+  /* margin-top: 50px; */
+}
+
+.navbar {
+  margin-bottom: 0px;
 }
 
 .timenode {
@@ -266,12 +270,15 @@ textarea.message-box-text {
   opacity: 1;
 }
 
-
 .sidebar {
   height: 100%;
   width: 550px;
   float: left;
   position: relative;
+  box-shadow: 2px 2px 4px rgb(209, 209, 207);
+  background-color: rgb(237, 237, 235);
+  padding-top: 50px;
+  z-index: -2;
 }
 
 .content {
@@ -353,8 +360,8 @@ textarea.message-box-text {
 
 .right-content {
   margin-left: 600px;
-  position: relative;
-  top: 100px;
+  background-color: #fff;
+  padding-top: 50px;
 }
 
 .right-title {
@@ -365,6 +372,7 @@ textarea.message-box-text {
 }
 
 .topics {
+  /*
   background-color: rgba(251, 251, 251, 0.8);
   border-radius: 3px;
   border-bottom: 1px solid rgb(204, 204, 204);
@@ -373,6 +381,7 @@ textarea.message-box-text {
   word-wrap: break-word;
   margin-bottom: 10px;
   margin-right: 10px;
+  */
 }
 
 .topics h2, h3 {
@@ -387,6 +396,7 @@ textarea.message-box-text {
 }
 
 .recents {
+  /*
   background-color: rgba(251, 251, 251, 0.8);
   border-radius: 3px;
   border-bottom: 1px solid rgb(204, 204, 204);
@@ -394,6 +404,7 @@ textarea.message-box-text {
   padding: 10px 10px 10px 10px;
   word-wrap: break-word;
   margin-right: 10px;
+  */
 }
 
 .topic-activity {
@@ -411,5 +422,4 @@ textarea.message-box-text {
 }
 
 .topic-list {
-  visibility: hidden;
 }
