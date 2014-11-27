@@ -7,6 +7,7 @@ marked   = require 'marked'
 path     = require 'path'
 morgan   = require 'morgan'
 async    = require 'async'
+gm       = require 'gm'
 
 Bit      = require './models/bit'
 Activity = require './models/activity'
@@ -114,8 +115,20 @@ app.get '/view/:id', (req, res) ->
 
 app.post '/upload', (req, res) ->
   url = '/uploads/' + path.basename req.files.attach.path
-  res.send
-    'status': 'success'
-    'url': url
+  fileExt = path.extname url
+  if fileExt in ['.jpg', '.png', '.bmp'] # TODO: case
+    # Scale down image
+    scaledUrl = "#{url}-resized#{fileExt}"
+    gm("./static/#{url}").resize(300).write "./static/#{scaledUrl}", (err) ->
+      res.send
+        'status': err
+        'url': url
+        'scaled': scaledUrl
+        'type': 'image'
+  else
+    res.send
+      'status': 'success'
+      'url': url
+      'type': 'normal'
 
 app.listen process.env.VCAP_APP_PORT or 3000

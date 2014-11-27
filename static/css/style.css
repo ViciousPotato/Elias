@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  /* background-color: rgb(237, 237, 235); */
+  background-color: rgb(237, 237, 235);
   font-family: "Open Sans", Arial;
   color: #444;
 
@@ -13,6 +13,7 @@ body {
   position: absolute;
   min-height: 100%;
   width: 100%;
+  z-index: -3;
 }
 
 h1 { font-size: 1.6em; }
@@ -31,7 +32,7 @@ h6 { font-size: 1.1em; }
 
 .item {
   width: 200px;
-/*  height: 200px;*/
+  /* height: 200px; */
   background-color: #d7ecf1; /*#a3e2c5;*/
   margin: 0.5em 1em 0.5em 1em;
   display: inline-block;
@@ -359,6 +360,7 @@ textarea.message-box-text {
 }
 
 .right-content {
+  display: none;
   margin-left: 600px;
   background-color: #fff;
   padding-top: 50px;

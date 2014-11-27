@@ -19,7 +19,6 @@ bitSchema.statics.allTopics = (callback) ->
       Activity.find topic: topic, (err, activities) ->
         cb null, topic: topic, activities: activities
     , (error, results) ->
-      console.log results
       callback results
 
 bitSchema.statics.bits = (offset, limit, render, callback) ->

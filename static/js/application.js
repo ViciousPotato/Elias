@@ -72,7 +72,15 @@ $(document).ready(function() {
       var baseUrl = location.href;
       var uploadUrl = baseUrl + data.result.url;
       var fileName = data.files[0].name;
-      var mdTxt = '[' + fileName + '](' + uploadUrl + ')';
+
+      var mdTxt = '';
+      if (data.result.type == 'image') {
+        var scaledUrl = baseUrl + data.result.scaled;
+        mdTxt = '[![' + fileName + '](' + scaledUrl + ')](' + uploadUrl + ')';
+      } else {
+        mdTxt = '[' + fileName + '](' + uploadUrl + ')';
+      }
+
       $('#content-txt').append(mdTxt)
       // console.log('done');
     }
