@@ -5,7 +5,8 @@ html {
 }
 
 body {
-  background-color: rgb(237, 237, 235);
+  /*background-color: rgba(142, 142, 142, 0.12);*/
+  background-color: rgb(205, 219, 232);
   font-family: "Open Sans", Arial;
   color: #444;
 
@@ -276,7 +277,7 @@ textarea.message-box-text {
   width: 550px;
   float: left;
   position: relative;
-  box-shadow: 2px 2px 4px rgb(209, 209, 207);
+  /* box-shadow: 2px 2px 4px rgb(209, 209, 207); */
   background-color: rgb(237, 237, 235);
   padding-top: 50px;
   z-index: -2;
@@ -424,4 +425,21 @@ textarea.message-box-text {
 }
 
 .topic-list {
+}
+
+.navheader {
+  width: 100%;
+  height: 40px;
+}
+
+.navheader-left {
+  width: 550px;
+  height: 100%;
+  float: left;
+  background-color: #1abc9c;
+}
+
+.navheader-right {
+  height: 40px;
+  background-color: #34495e;
 }
