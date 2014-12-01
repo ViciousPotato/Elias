@@ -439,6 +439,25 @@ textarea.message-box-text {
   background-color: #1abc9c;
 }
 
+.navheader-left .fui-search {
+  color: white;
+  font-size: 20px;
+  display: block;
+  margin-top: 10px;
+  margin-left: 85px;
+  float: left;
+}
+
+.navheader-left .search-input {
+  margin-top: 10px;
+  margin-left: 10px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid rgba(83, 211, 224, 0.5);
+  background-color: #1abc9c;
+}
+
 .navheader-right {
   height: 40px;
   background-color: #34495e;
