@@ -64,19 +64,7 @@ body
                 {{/topics}}
     .right-content
       .topics
-        h2.right-title Working Items
-        .topic-list
-          each topic in topics
-            h3 #{topic.topic}
-            each activity in topic.activities
-              .topic-activity
-                span(class=["activity-"+activity.action, "label", "label-info"]) #{activity.action}
-                span.activity-detail #{activity.detail} @
-                span.activity-date #{activity.date}
 
-       .recents
-        h2.right-title RECENTS
-        
     form#uploader-form(style="display:none;", action="/upload", method="POST")
       input#uploader-file(type="file", name="file")
     include script
