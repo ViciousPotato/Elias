@@ -440,12 +440,20 @@ textarea.message-box-text {
 }
 
 .navheader-left .fui-search {
+  margin-left: 85px;
+  float: left;
+}
+
+.navheader .nav-icon {
   color: white;
   font-size: 20px;
   display: block;
   margin-top: 10px;
-  margin-left: 85px;
-  float: left;
+}
+
+.navheader-right .nav-icon {
+  float: right;
+  margin-right: 30px;
 }
 
 .navheader-left .search-input {
