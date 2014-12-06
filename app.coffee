@@ -14,9 +14,10 @@ Activity = require './models/activity'
 util     = require './util'
 
 # Connect to db
-mongoose.connect 'localhost', 'elias'
-
-# TODO add code to handle connection failure.
+mongoose.connect 'localhost', 'elias', (err) ->
+  if err
+    console.log "Failed connecting to mongodb: " + err
+    process.exit -1
 
 accessLogStream = fs.createWriteStream __dirname+'/log/access.log', flags: 'a'
 
