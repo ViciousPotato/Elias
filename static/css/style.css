@@ -148,6 +148,8 @@ h6 { font-size: 1.1em; }
 .bit-entry-date-header {
   padding-left: 60px;
   margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
 }
 
 /*
@@ -191,7 +193,7 @@ textarea.message-box-text {
 .timeline {
   position: absolute;
   left: 100px;
-  z-index: -1;
+  z-index: 1;
   width: 3px;
   background-color: rgb(209, 209, 207);
   height: 100%;
@@ -280,7 +282,6 @@ textarea.message-box-text {
   /* box-shadow: 2px 2px 4px rgb(209, 209, 207); */
   background-color: rgb(237, 237, 235);
   padding-top: 50px;
-  z-index: -2;
 }
 
 .content {
@@ -361,10 +362,10 @@ textarea.message-box-text {
 }
 
 .right-content {
-  display: none;
-  margin-left: 600px;
-  background-color: #fff;
-  padding-top: 50px;
+  margin-left: 550px;
+  padding: 50px;
+  background-color: #edf2f8;
+  position: relative;
 }
 
 .right-title {
@@ -377,9 +378,6 @@ textarea.message-box-text {
 .topics {
   /*
   background-color: rgba(251, 251, 251, 0.8);
-  border-radius: 3px;
-  border-bottom: 1px solid rgb(204, 204, 204);
-  box-shadow: 2px 2px 4px rgb(209, 209, 207);
   padding: 10px 10px 10px 10px;
   word-wrap: break-word;
   margin-bottom: 10px;
@@ -388,7 +386,7 @@ textarea.message-box-text {
 }
 
 .topics h2, h3 {
-  color: #e74c3c;
+  color: #4bbac3;
 }
 
 .topics h3 {
@@ -396,6 +394,39 @@ textarea.message-box-text {
   line-height: 20px;
   font-family: Lato;
   font-weight: normal;
+}
+
+.topic {
+  width 80%;
+  border-radius: 1px;
+  border-bottom: 1px solid rgb(204, 204, 204);
+  box-shadow: 2px 2px 4px rgb(209, 209, 207);
+  background-color: white;
+  padding: 20px 20px 20px 20px;
+  margin-bottom: 15px;
+  position: relative;
+  min-height: 100px;
+}
+
+.topic h2 {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  line-height: 20px;
+  margin-top: 0px;
+}
+
+.topic .topic-toolbar {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  height: 20px;
+  font-size: 15px;
+}
+
+.topic .topic-toolbar span {
+  margin-right: 10px;
+  height: 20px;
 }
 
 .recents {

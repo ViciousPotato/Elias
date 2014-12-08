@@ -66,6 +66,12 @@ body
                 {{/topics}}
     .right-content
       .topics
+        each topic in topics
+          .topic
+            h2 #{topic.topic}
+            span.topic-toolbar
+              span.fui-export
+              span.fui-triangle-down
 
     form#uploader-form(style="display:none;", action="/upload", method="POST")
       input#uploader-file(type="file", name="file")
