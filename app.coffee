@@ -12,6 +12,7 @@ gm       = require 'gm'
 Bit      = require './models/bit'
 Activity = require './models/activity'
 util     = require './util'
+config   = require './config'
 
 # Connect to db
 mongoose.connect 'localhost', 'elias', (err) ->
@@ -120,7 +121,7 @@ app.post '/upload', (req, res) ->
   if fileExt in ['.jpg', '.png', '.bmp'] # TODO: case
     # Scale down image
     scaledUrl = "#{url}-resized#{fileExt}"
-    gm("./static/#{url}").resize(300).write "./static/#{scaledUrl}", (err) ->
+    gm("./static/#{url}").resize(config.image_width_scale).write "./static/#{scaledUrl}", (err) ->
       res.send
         'status': err
         'url': url
