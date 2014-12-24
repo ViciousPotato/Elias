@@ -42,6 +42,7 @@ $(document).ready(function() {
       function(data) {
         processingNode.replaceWith(gBitTmpl(data));
         $('#content-txt').val('');
+        $('.upload-status').remove();
       }
     );
   });
