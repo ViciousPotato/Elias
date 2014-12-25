@@ -350,8 +350,16 @@ textarea.message-box-text {
   display: inline-block;
 }
 
+a.delete-upload-file {
+  text-decoration: none;
+  font-size: 17px;
+  padding: 3px;
+}
+
 .upload-status .upload-progress-wrapper {
   border: 1px solid #1abc9c ;
+  width: 90%;
+  float: left;
 }
 
 .upload-status .upload-progress {

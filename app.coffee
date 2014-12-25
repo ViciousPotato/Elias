@@ -133,4 +133,7 @@ app.post '/upload', (req, res) ->
       'url': url
       'type': 'normal'
 
+app.get '/upload/delete/:file', (req, res) ->
+  res.send 'oh shoot'
+
 app.listen process.env.VCAP_APP_PORT or 3000
