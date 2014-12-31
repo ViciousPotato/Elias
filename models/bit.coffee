@@ -12,7 +12,16 @@ bitSchema = new mongoose.Schema
     default: Date.now
 
 bitSchema.statics.allTopics = (callback) ->
+  # Returns {'topic name': { 'bits': [], 'activities': [] } }
   this.find {}, (err, bits) ->
+    topics = {}
+    _.map bits, (bit) ->
+      _.map bit.topics, (topic) ->
+        if topics[topic]
+          topics[topic].push(bit)
+        else
+          topics[topic] = [bit]
+    return callback topics
     topics = _.chain(bits).map((bit) -> bit.topics).flatten().uniq().value()
     # Get topic's activities
     async.map topics, (topic, cb) ->

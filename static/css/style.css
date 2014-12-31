@@ -436,6 +436,10 @@ a.delete-upload-file {
   height: 20px;
 }
 
+.topic .topic-content {
+  margin-top: 30px;
+}
+
 .recents {
   /*
   background-color: rgba(251, 251, 251, 0.8);

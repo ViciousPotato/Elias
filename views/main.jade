@@ -69,12 +69,16 @@ body
                 {{/topics}}
     .right-content
       .topics
-        each topic in topics
+        each bits, topic in topics
           .topic
-            h2 #{topic.topic}
+            h2 #{topic}
             span.topic-toolbar
               span.fui-export
               span.fui-triangle-down
+            .topic-content
+              each bit in bits
+                span #{bit.content}
+              
 
     form#uploader-form(style="display:none;", action="/upload", method="POST")
       input#uploader-file(type="file", name="file")
