@@ -1,6 +1,7 @@
 _        = require 'underscore'
 mongoose = require 'mongoose'
 util     = require '../util'
+c        = require '../config'
 async    = require 'async'
 Activity = require './activity'
 
@@ -16,12 +17,16 @@ bitSchema.statics.allTopics = (callback) ->
   this.find {}, (err, bits) ->
     topics = {}
     _.map bits, (bit) ->
+      if not bit.topics?.length
+        bit.topics = [c.default_topic]
       _.map bit.topics, (topic) ->
         if topics[topic]
           topics[topic].push(bit)
         else
           topics[topic] = [bit]
+
     return callback topics
+
     topics = _.chain(bits).map((bit) -> bit.topics).flatten().uniq().value()
     # Get topic's activities
     async.map topics, (topic, cb) ->
