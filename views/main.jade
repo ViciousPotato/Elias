@@ -78,7 +78,7 @@ body
             .topic-content
               each bit in bits
                 .topic-bit-entry
-                  p #{bit.content}
+                  p #{util.beautify_md(bit.content)}
                   span.topic-bit-date #{bit.date}
               
 

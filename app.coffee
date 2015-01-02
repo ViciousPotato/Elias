@@ -58,7 +58,7 @@ app.use (req, res, next) ->
 
 app.get '/', (req, res) ->
   Bit.allTopics (topics) ->
-    res.render 'main.jade', topics: topics
+    res.render 'main.jade', { topics: topics, util: util }
 
 app.get '/bit/:offset/:limit', (req, res) ->
   Bit.bits req.params.offset, req.params.limit, marked, (error, bits) ->

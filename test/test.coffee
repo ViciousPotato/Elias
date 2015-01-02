@@ -72,5 +72,12 @@ describe 'Util', ()->
     it 'should not shorten short lines', () ->
       'ab\nc'.should.eql util.shorten_bit('ab\nc', 3, 2)
 
+  describe "#beautify markdown", ()->
+    it 'should strip titles', () ->
+      'h2\nh3\nh4'.should.eql util.beautify_md '##h2\n###h3\n####h4'
+
+    it 'should strip url/images', ()->
+      'img'.should.eql util.beautify_md '![img](url)'
+
 
 

@@ -44,4 +44,17 @@ module.exports.shorten_bit = (chars, line_length=35, disp_lines=20) ->
 
   return res.join("\n")
 
+module.exports.beautify_md = (s) ->
+  replace_s =
+    "```" : ""
+    "####": ""
+    "###" : ""
+    "##"  : ""
+    "!\\[(.+?)\\]\\(.+?\\)" : "$1"
+
+  for r, replace of replace_s
+    s = s.replace new RegExp(r, "g"), replace
+
+  return s
+
 
