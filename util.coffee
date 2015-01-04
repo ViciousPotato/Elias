@@ -50,6 +50,7 @@ module.exports.beautify_md = (s) ->
     "####": ""
     "###" : ""
     "##"  : ""
+    "#"   : ""
     "!\\[(.+?)\\]\\(.+?\\)" : "$1"
 
   for r, replace of replace_s

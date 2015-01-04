@@ -446,12 +446,16 @@ a.delete-upload-file {
   color: rgba(0, 0, 0, 0.8);
 }
 
+.topic .topic-bit-entry p {
+  margin-bottom: 2px;
+}
+
 .topic .topic-bit-date {
   color: rgba(0, 0, 0, 0.3);
   font-size: 10px;
 }
 
-.topic .topic-bit-entry:before {
+.topic .topic-bit-entry p:before {
   content: "■";
   color: #ed6b4d;
   margin-right: 5px;
