@@ -45,12 +45,15 @@ module.exports.shorten_bit = (chars, line_length=35, disp_lines=20) ->
   return res.join("\n")
 
 module.exports.beautify_md = (s) ->
+  # TODO: only replace specific location's character.
+  # e.g. only replaces # at start of string.
   replace_s =
     "```" : ""
     "####": ""
     "###" : ""
     "##"  : ""
     "#"   : ""
+    "^>"  : ""
     "!\\[(.+?)\\]\\(.+?\\)" : "$1"
 
   for r, replace of replace_s
