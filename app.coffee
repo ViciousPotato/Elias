@@ -58,7 +58,11 @@ app.use (req, res, next) ->
 
 app.get '/', (req, res) ->
   Bit.allTopics (topics) ->
-    res.render 'main.jade', { topics: topics, util: util }
+    res.render 'main.jade', { topics: topics, util: util, marked: marked }
+
+app.get '/bit/since/:timestamp', (req, res) ->
+  Bit.bits_since parseInt(req.param 'timestamp'), (err, bits) ->
+    res.send bits
 
 app.get '/bit/:offset/:limit', (req, res) ->
   Bit.bits req.params.offset, req.params.limit, marked, (error, bits) ->
@@ -75,7 +79,7 @@ app.post '/bit', (req, res) ->
   parsed  = util.parse_bit content
 
   rawContent = parsed.content
-  topics = parsed.topics # TODO: The case of empty topic
+  topics = parsed.topics
   bit = new Bit
     content: rawContent
     topics:  topics

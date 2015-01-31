@@ -415,7 +415,7 @@ a.delete-upload-file {
   min-height: 100px;
 }
 
-.topic h2 {
+.topic .topic-header {
   position: absolute;
   left: 20px;
   top: 20px;
@@ -532,4 +532,10 @@ a.delete-upload-file {
 .navheader-right {
   height: 40px;
   background-color: #34495e;
+}
+
+.topic-content {
+  font-size: 1.0em;
+  line-height: 1.8;
+  margin: 0 0 1.5em;
 }

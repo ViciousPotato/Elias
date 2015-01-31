@@ -13,7 +13,7 @@ bitSchema = new mongoose.Schema
     default: Date.now
 
 bitSchema.statics.allTopics = (callback) ->
-  # Returns {'topic name': { 'bits': [], 'activities': [] } }
+  # Returns {'topic name': [bit, ...], ... }
   this.find {}, (err, bits) ->
     topics = {}
     _.map bits, (bit) ->
@@ -43,5 +43,9 @@ bitSchema.statics.bits = (offset, limit, render, callback) ->
 
 bitSchema.methods.render = (render) ->
   this.content = render(content)
+
+bitSchema.statics.bits_since = (timestamp, callback) ->
+  t = new Date(timestamp*1000).toISOString()
+  this.find().where('date').gte(new Date(t)).exec callback
 
 module.exports = mongoose.model 'Bit', bitSchema

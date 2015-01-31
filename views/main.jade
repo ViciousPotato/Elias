@@ -76,15 +76,13 @@ body
       .topics
         each bits, topic in topics
           .topic
-            h2 #{topic}
+            h2.topic-header #{topic}
             span.topic-toolbar
               span.fui-export
               span.fui-triangle-down
             .topic-content
               each bit in bits
-                .topic-bit-entry
-                  p #{util.beautify_md(bit.content)}
-                  span.topic-bit-date #{bit.date}
+                | !{marked(bit.content)}
               
 
     form#uploader-form(style="display:none;", action="/upload", method="POST")
