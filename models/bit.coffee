@@ -14,7 +14,7 @@ bitSchema = new mongoose.Schema
 
 bitSchema.statics.allTopics = (callback) ->
   # Returns {'topic name': [bit, ...], ... }
-  this.find {}, (err, bits) ->
+  this.find {}, null, {sort: {date: -1}}, (err, bits) ->
     topics = {}
     _.map bits, (bit) ->
       if not bit.topics?.length
