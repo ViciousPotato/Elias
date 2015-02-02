@@ -8,14 +8,15 @@ html
       .form-group.content-group
         form(action="/edit/#{bit._id}", method="post")
           .content-editor-toolbar.btn-group
-            .btn h1
-            .btn h2
-            .btn h3
+            .btn#editor-h1 h1
+            .btn#editor-h2 h2
+            .btn#editor-h3 h3
 
-          textarea.content-editor(name="content")
+          textarea.content-editor#editor(name="content")
             | #{bit.content}
             | #{util.join_topics(bit.topics)}
 
           button.btn(type="submit") Save
 
     include script
+    script(src='/js/edit.js')
