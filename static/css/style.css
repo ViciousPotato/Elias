@@ -392,7 +392,7 @@ a.delete-upload-file {
   */
 }
 
-.topics h2, h3 {
+h2.topic-header {
   color: #4bbac3;
 }
 
