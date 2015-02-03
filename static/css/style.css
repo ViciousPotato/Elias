@@ -539,3 +539,9 @@ a.delete-upload-file {
   line-height: 1.8;
   margin: 0 0 1.5em;
 }
+
+.topic-content h1, .topic-content h2, .topic-content h3, .topic-content h4, .topic-content h5, .topic-content h6 {
+  color: black;
+  font-family: Arial;
+  font-weight: bold;
+}
