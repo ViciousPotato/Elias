@@ -540,8 +540,12 @@ h2.topic-header {
   margin: 0 0 1.5em;
 }
 
-.topic-content h1, .topic-content h2, .topic-content h3, .topic-content h4, .topic-content h5, .topic-content h6 {
-  color: black;
-  font-family: Arial;
+.topic-content h1, h1.topic-header,
+.topic-content h2, h2.topic-header,
+.topic-content h3, h3.topic-header,
+.topic-content h4, h4.topic-header,
+.topic-content h5, h5.topic-header,
+.topic-content h6, h6.topic-header {
+  font-family: 'Mate', serif;;
   font-weight: bold;
 }
