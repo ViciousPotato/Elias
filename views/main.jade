@@ -64,15 +64,18 @@ body
                       span.fui-eye-16
                     a.btn.btn-primary.bit-entry-toolbar-btn(href='/delete/{{_id}}')
                       span.fui-cross-16
-                .bit-entry-topics.btn-group
-                  button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button")
-                    | Topics
-                    span.caret
-                  ul.dropdown-menu(role="menu")
-                    {{#topics}}
-                    li
-                      a.bit-entry-topic(tabindex="-1", href="#") {{this}}
-                    {{/topics}}
+                .btn-toolbar.bit-entry-topics
+                  .btn-group
+                    .btn.btn-primary.bit-entry-toolbar-btn
+                      | Topics
+                      span.caret
+                    ul.dropdown-menu(role="menu")
+                      {{#topics}}
+                      li
+                        a.bit-entry-topic(tabindex="-1", href="#") {{this}}
+                      {{/topics}}
+                      
+
     .right-content-wrapper
       .right-content
         .topics

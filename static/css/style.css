@@ -249,8 +249,16 @@ textarea.message-box-text {
 .bit-entry-topics {
   float: left;
   margin-left: 10px;
-  position: relative;
-  bottom: -5px; /* FIXME: why; */
+}
+
+.btn-toolbar.bit-entry-topics .btn {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  font-size: 12px;
+}
+
+.bit-entry-topics span.caret {
+  margin-left: 5px;
 }
 
 /*
