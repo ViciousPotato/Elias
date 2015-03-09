@@ -138,9 +138,10 @@ $(document).ready(function() {
   var gBitOffset = 0;
   var gBitLimit = 10;
   var gLastGroupName = '';
-  $(window).scroll(function() {
+
+  $(".sidebar").scroll(function() {
     // Scrolled to end
-    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    if ($(".sidebar").scrollTop() >= $(".sidebar")[0].scrollHeight - $(".sidebar").height() - 100) {
       loadBits();
     }
   });
