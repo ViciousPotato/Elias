@@ -23,6 +23,8 @@
     "morgan": "1.3.x",
     "coffee-script": "1.8.x",
     "async": "0.9.x",
-    "gm": "1.17.x"
+    "gm": "1.17.x",
+    "pdc": "0.2.x",
+    "temp": "0.8.x"
   }
 }

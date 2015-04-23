@@ -25,6 +25,10 @@ h4 { font-size: 1.3em; }
 h5 { font-size: 1.2em; }
 h6 { font-size: 1.1em; }
 
+ul {
+  list-style-type: none;
+}
+
 .header {
   width: 100%;
   height: 100px;
@@ -460,6 +464,17 @@ h2.topic-header {
 .topic .topic-toolbar span {
   margin-right: 10px;
   height: 20px;
+}
+
+.topic-more-options {
+  position: absolute;
+  top: 20px;
+  right: 0px;
+  display: none;
+}
+
+.topic-more-options ul {
+  font-size: 0.8em;
 }
 
 .topic .topic-content {

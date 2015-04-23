@@ -60,6 +60,15 @@ $(document).ready(function() {
     );
   });
 
+  $(".topic-toolbar .fui-triangle-down").click(function() {
+    var menu = $(this).next(".topic-more-options");
+    menu.css({display: 'block'});
+
+    menu.one('mouseleave', function() {
+      $(this).css({display: 'none'});
+    });
+  });
+
   Handlebars.registerHelper('formatBitTime', function(time) {
     return moment(time).format("HH:mm a");
   });

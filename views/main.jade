@@ -85,6 +85,10 @@ body
               span.topic-toolbar
                 span.fui-export
                 span.fui-triangle-down
+                .topic-more-options
+                  ul
+                    li
+                      a Download as PDF
               .topic-content
                 each bit in bits
                   | !{marked(bit.content)}

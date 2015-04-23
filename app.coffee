@@ -8,11 +8,15 @@ path     = require 'path'
 morgan   = require 'morgan'
 async    = require 'async'
 gm       = require 'gm'
+pdc      = require 'pdc'
+temp     = require 'temp'
 
 Bit      = require './models/bit'
 Activity = require './models/activity'
 util     = require './util'
 config   = require './config'
+
+temp.track()
 
 # Connect to db
 mongoose.connect 'localhost', 'elias', (err) ->
@@ -63,6 +67,22 @@ app.get '/', (req, res) ->
 app.get '/bit/since/:timestamp', (req, res) ->
   Bit.bits_since parseInt(req.param 'timestamp'), (err, bits) ->
     res.send bits
+
+app.get '/bit/pdf/:id', (req, res) ->
+  i = req.params.id
+  Bit.findOne _id: i, (error, bit) ->
+    if not error
+      temp.open {"prefix": 'elias_gen_pdf_', "suffix": ".pdf"}, (error, info) ->
+        if not error
+          console.log info
+          pdc bit.content, 'markdown', 'latex', "-o#{info.path}", (error, result) ->
+            if error
+              throw error
+            res.sendfile(info.path)
+        else
+          res.send "Error, can not open temp file: #{error}"
+    else
+      res.send "Error, can not find this bit: #{error}"
 
 app.get '/bit/:offset/:limit', (req, res) ->
   Bit.bits req.params.offset, req.params.limit, marked, (error, bits) ->
@@ -120,6 +140,7 @@ app.get '/view/:id', (req, res) ->
     res.render 'view.jade', bit: bit
 
 app.post '/upload', (req, res) ->
+  # TODO: error handling here.
   url = '/uploads/' + path.basename req.files.attach.path
   fileExt = path.extname url
   if fileExt in ['.jpg', '.png', '.bmp'] # TODO: case
