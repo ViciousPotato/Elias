@@ -471,10 +471,18 @@ h2.topic-header {
   top: 20px;
   right: 0px;
   display: none;
+  background-color: rgb(237, 237, 235);
+  width: 85px;
+  font-size: 0.8em;
 }
 
 .topic-more-options ul {
   font-size: 0.8em;
+  margin: 2px;
+}
+
+.topic-more-options ul a:hover {
+  text-decoration: none;
 }
 
 .topic .topic-content {
