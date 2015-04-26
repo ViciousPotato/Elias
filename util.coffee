@@ -1,4 +1,7 @@
-_ = require 'underscore'
+_    = require 'underscore'
+temp = require 'temp'
+pdc  = require 'pdc'
+
 
 module.exports.parse_bit = (content) ->
   return null if not content
@@ -60,5 +63,13 @@ module.exports.beautify_md = (s) ->
     s = s.replace new RegExp(r, "g"), replace
 
   return s
+
+module.exports.bits_to_pdf = (bits, callback) ->
+  temp.open {"prefix": 'elias_gen_pdf_', "suffix": ".pdf"}, (error, info) ->
+    contents = _.map bits, (bit) -> bit.content
+    md = contents.join "\n"
+    console.log md
+    pdc md, 'markdown', 'latex', "-o#{info.path}", (error, result) ->
+      callback(error, info.path)
 
 

@@ -88,7 +88,7 @@ body
                 .topic-more-options
                   ul
                     li
-                      a Download as PDF
+                      a(href="/topic/pdf/#{topic}") Download as PDF
               .topic-content
                 each bit in bits
                   | !{marked(bit.content)}

@@ -84,6 +84,14 @@ app.get '/bit/pdf/:id', (req, res) ->
     else
       res.send "Error, can not find this bit: #{error}"
 
+app.get '/topic/pdf/:topicname', (req, res) ->
+  topic_name = req.param.topicname
+  Bit.bitsInTopic topic_name, (bits) ->
+    util.bits_to_pdf bits, (error, path) ->
+      if error
+        throw error # TODO error handling
+      res.sendfile path
+
 app.get '/bit/:offset/:limit', (req, res) ->
   Bit.bits req.params.offset, req.params.limit, marked, (error, bits) ->
     groups = _.groupBy bits, (bit) ->

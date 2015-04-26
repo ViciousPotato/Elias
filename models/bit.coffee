@@ -1,8 +1,9 @@
 _        = require 'underscore'
 mongoose = require 'mongoose'
+async    = require 'async'
+
 util     = require '../util'
 c        = require '../config'
-async    = require 'async'
 Activity = require './activity'
 
 bitSchema = new mongoose.Schema
@@ -11,6 +12,20 @@ bitSchema = new mongoose.Schema
   date: 
     type:    Date
     default: Date.now
+
+bitSchema.statics.bitsInTopic = (topic, callback) ->
+  if topic == c.default_topic
+    cond = {topics: []}
+  else
+    cond = {topics: {$elemMatch: {$eq: topic}}}
+
+  this.find cond, null, {sort: {date: -1}}, (err, bits) ->
+    normalizedBits = _.map bits, (bit) ->
+      # TODO: create default topic when bit is created.
+      if not bit.topics?.length
+        bit.topics = [c.default_topic]
+      return bit
+    return callback normalizedBits
 
 bitSchema.statics.allTopics = (callback) ->
   # Returns {'topic name': [bit, ...], ... }
