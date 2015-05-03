@@ -66,7 +66,10 @@ app.get '/', (req, res) ->
 
 app.get '/bit/since/:timestamp', (req, res) ->
   Bit.bits_since parseInt(req.param 'timestamp'), (err, bits) ->
-    res.send bits
+    transformedBits = _.map bits, (bit) ->
+      bit.content = marked bit.content
+      bit
+    res.send transformedBits
 
 app.get '/bit/pdf/:id', (req, res) ->
   i = req.params.id
