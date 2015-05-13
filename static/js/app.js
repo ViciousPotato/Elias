@@ -1,3 +1,7 @@
+Handlebars.registerHelper('parseMarkdown', function(m) {
+  return marked(m);
+});
+
 $(document).ready(function() {
   stackBlurImage('blur-img', 'blur-canvas', 180, false);
 
