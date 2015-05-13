@@ -87,8 +87,13 @@ app.get '/bit/pdf/:id', (req, res) ->
     else
       res.send "Error, can not find this bit: #{error}"
 
+app.get '/topic/:topicname', (req, res) ->
+  topic_name = req.params.topicname
+  Bit.bitsInTopic topic_name, (bits) ->
+    res.send 'bits': bits
+
 app.get '/topic/pdf/:topicname', (req, res) ->
-  topic_name = req.param.topicname
+  topic_name = req.params.topicname
   Bit.bitsInTopic topic_name, (bits) ->
     util.bits_to_pdf bits, (error, path) ->
       if error

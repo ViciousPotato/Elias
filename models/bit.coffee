@@ -14,6 +14,7 @@ bitSchema = new mongoose.Schema
     default: Date.now
 
 bitSchema.statics.bitsInTopic = (topic, callback) ->
+  console.log topic
   if topic == c.default_topic
     cond = {topics: []}
   else

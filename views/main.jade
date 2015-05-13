@@ -1,0 +1,23 @@
+!!! 5
+head
+  title Elias
+  link(rel="stylesheet", href="/css/style.css")
+
+body
+  .blur-wrapper
+    img#blur-img(src="/img/blur-bg.jpg")
+    canvas#blur-canvas
+  .header
+  .working-article
+  .article-stack
+
+  script#article-template(type="text/x-handlebars-template")
+    {{#bits}}
+    .article-section
+      {{this.content}}
+    {{/bits}}
+
+  script(src="/js/jquery-1.8.2.min.js")
+  script(src="/js/StackBlur.js")
+  script(src="/js/handlebars-v2.0.0.js")
+  script(src="/js/app.js")

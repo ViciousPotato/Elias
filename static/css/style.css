@@ -12,10 +12,26 @@ body {
   height: 100%;
 }
 
+.blur-wrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+#blur-img {
+  display: none;
+}
+
 .header {
   width: 100%;
-  height: 100px;
-  background-color: #e67e22;
+  height: 70px;
+  background-color: rgba(230, 126, 34, 1.0);
 }
 
 .working-article {
@@ -24,5 +40,8 @@ body {
   height: 100%;
   background-color: white;
   position: relative;
-  top: -50px;
+  top: -45px;
+  box-shadow: 1px 1px 2px #ecf0f1;
+  padding: 50px 30px 50px 30px;
+  word-wrap: break-word;
 }
