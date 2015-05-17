@@ -7,11 +7,19 @@ body
   .blur-wrapper
     img#blur-img(src="/img/blur-bg.jpg")
     canvas#blur-canvas
-  .header
   .working-article
+    .working-article-row
+      .article-left
+        .logo
+      .article-content
+      .article-right
   .article-stack
 
   script#article-template(type="text/x-handlebars-template")
+    .article-title
+      {{title}}
+    .article-status
+      {{created}}
     {{#bits}}
     .article-section
       {{{parseMarkdown this.content}}}

@@ -13,6 +13,7 @@ temp     = require 'temp'
 
 Bit      = require './models/bit'
 Activity = require './models/activity'
+Article  = require './models/article'
 util     = require './util'
 config   = require './config'
 
@@ -89,8 +90,10 @@ app.get '/bit/pdf/:id', (req, res) ->
 
 app.get '/topic/:topicname', (req, res) ->
   topic_name = req.params.topicname
-  Bit.bitsInTopic topic_name, (bits) ->
-    res.send 'bits': bits
+  Article.get topic_name, (error, article) ->
+    if error
+      return res.send 'error': error
+    res.send article
 
 app.get '/topic/pdf/:topicname', (req, res) ->
   topic_name = req.params.topicname
@@ -124,15 +127,15 @@ app.post '/bit', (req, res) ->
     bit.content = marked(content)
 
     async.each topics, (topic, cb) ->
-        actitivity = new Activity
-          topic: topic
-          action: 'Add'
-          detail: 'Added bit: ' + util.shorten_text(rawContent, 10)
-          bitId:  bit._id
+      actitivity = new Activity
+        topic: topic
+        action: 'Add'
+        detail: 'Added bit: ' + util.shorten_text(rawContent, 10)
+        bitId:  bit._id
 
-        actitivity.save (error, act) ->
-          # FIXME ignore errors
-          cb()
+      actitivity.save (error, act) ->
+        # FIXME ignore errors
+        cb()
       , (error) ->
         # FIXME ignore errors
         res.send bit

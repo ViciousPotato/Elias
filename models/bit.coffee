@@ -14,19 +14,31 @@ bitSchema = new mongoose.Schema
     default: Date.now
 
 bitSchema.statics.bitsInTopic = (topic, callback) ->
-  console.log topic
   if topic == c.default_topic
     cond = {topics: []}
   else
     cond = {topics: {$elemMatch: {$eq: topic}}}
 
   this.find cond, null, {sort: {date: -1}}, (err, bits) ->
+    if err
+      return callback err, null
     normalizedBits = _.map bits, (bit) ->
       # TODO: create default topic when bit is created.
       if not bit.topics?.length
         bit.topics = [c.default_topic]
       return bit
-    return callback normalizedBits
+    callback null, normalizedBits
+
+bitSchema.statics.create = (topics, content, callback) ->
+  async.each topics, (topic, cb) ->
+    Article.createIfNotExists topic, '', cb
+  , (error) ->
+    if error
+      return callback error, null
+    bit = new Bit
+      topics: topics
+      content: content
+    bit.save callback
 
 bitSchema.statics.allTopics = (callback) ->
   # Returns {'topic name': [bit, ...], ... }
@@ -64,4 +76,6 @@ bitSchema.statics.bits_since = (timestamp, callback) ->
   t = new Date(timestamp*1000).toISOString()
   this.find().where('date').gte(new Date(t)).exec callback
 
-module.exports = mongoose.model 'Bit', bitSchema
+Bit = mongoose.model 'Bit', bitSchema
+
+module.exports = Bit

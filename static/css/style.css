@@ -28,26 +28,62 @@ body {
   display: none;
 }
 
-.header {
-  width: 100%;
-  height: 70px;
-  background-color: rgba(230, 126, 34, 1.0);
-}
-
 .working-article {
-  width: 55%;
+  width: 90%;
   margin: 0 auto;
+  margin-top: 35px;
   background-color: white;
-  position: relative;
-  top: -45px;
   box-shadow: 1px 1px 2px #ecf0f1;
   padding: 50px 38px 50px 38px;
   word-wrap: break-word;
   font-family: "Helvetica Neue";
   font-size: 13px;
   line-height: 1.4em;
+  display: table;
+}
+
+.working-article-row {
+  display: table-row;
+}
+
+.article-left {
+  display: table-cell;
+  width: 120px;
+  position: relative;
+}
+
+.article-left .logo {
+  background: url(../img/Elias-logo.png);
+  background-size: 36px 36px;
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: 0;
+  left: 14px;
+}
+
+.article-content {
+  border-right: 1px dotted #999;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.article-right {
+  display: table-cell;
+  width: 350px;
 }
 
 .working-article a {
   text-decoration: none;
+  color: #666;
+}
+
+.article-title {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.article-status {
+  font-size: 1em;
+  color: #BEBEBE;
 }

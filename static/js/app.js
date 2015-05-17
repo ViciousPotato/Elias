@@ -8,7 +8,7 @@ $(document).ready(function() {
   var articleTemplate = Handlebars.compile($('#article-template').html());
 
   $.get('/topic/Random', function(res) {
-    var article = articleTemplate({bits: res.bits});
-    $(".working-article").html(article);
+    var article = articleTemplate(res);
+    $(".article-content").html(article);
   });
 });
