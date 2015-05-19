@@ -40,10 +40,7 @@ body {
   font-size: 13px;
   line-height: 1.4em;
   display: table;
-}
-
-.working-article-row {
-  display: table-row;
+  table-layout: fixed;
 }
 
 .article-left {
@@ -63,6 +60,7 @@ body {
 }
 
 .article-content {
+  display: table-cell;
   border-right: 1px dotted #999;
   padding-left: 5px;
   padding-right: 5px;
@@ -70,7 +68,20 @@ body {
 
 .article-right {
   display: table-cell;
-  width: 350px;
+  width: 250px;
+}
+
+.article-right .bit-list-entry {
+  width: 200px;
+  margin-left: 20px;
+}
+
+.article-right .bit-date {
+  width: 50px;
+}
+
+.article-right .bit-summary {
+  width: 150px;
 }
 
 .working-article a {
