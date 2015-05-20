@@ -1,5 +1,17 @@
-Handlebars.registerHelper('parseMarkdown', function(m) {
-  return marked(m);
+var handleBarHelpers = {
+  parseMarkdown: function(m) {
+    return marked(m);
+  },
+  getMonth: function(d) {
+    return moment(this.date).format("MMM");
+  },
+  getDay: function(d) {
+    return moment(this.date).format("DD");
+  }
+};
+
+_.each(handleBarHelpers, function(handler, name) {
+  Handlebars.registerHelper(name, handler);
 });
 
 $(document).ready(function() {

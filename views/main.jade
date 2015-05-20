@@ -27,7 +27,10 @@ body
     {{#bits}}
     .bit-list-entry
       .bit-date
-        {{this.date}}
+        .bit-date-month
+          {{getMonth this.date}}
+        .bit-date-day
+          {{getDay this.date}}
       .bit-summary
         {{this.content}}
     {{/bits}}
@@ -36,4 +39,6 @@ body
   script(src="/js/StackBlur.js")
   script(src="/js/handlebars-v2.0.0.js")
   script(src="/js/marked.js")
+  script(src="/js/moment.min.js")
+  script(src="/js/underscore-min.js")
   script(src="/js/app.js")
