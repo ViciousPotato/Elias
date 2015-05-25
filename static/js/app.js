@@ -25,6 +25,6 @@ $(document).ready(function() {
     $(".article-content").html(article);
 
     var bitList = bitListTemplate({bits: res.bits});
-    $(".article-right").html(bitList);
+    $(".article-right").append($(bitList));
   });
 });

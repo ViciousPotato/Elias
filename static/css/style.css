@@ -71,6 +71,16 @@ body {
   width: 250px;
 }
 
+.article-right .new-article, .new-bit {
+  width: 200px;
+  height: 26px;
+  margin-bottom: 8px;
+  margin-left: 20px;
+  background-color: #95a5a6;
+  color: white;
+  text-align: center;
+}
+
 .article-right .bit-list-entry {
   width: 200px;
   margin-left: 20px;
