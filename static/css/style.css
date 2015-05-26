@@ -74,11 +74,36 @@ body {
 .article-right .new-article, .new-bit {
   width: 200px;
   height: 26px;
+  line-height: 26px;
   margin-bottom: 8px;
   margin-left: 20px;
   background-color: #95a5a6;
   color: white;
   text-align: center;
+}
+
+.article-toolbar {
+  padding-left: 8px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.span.toolbar-add-doc {
+  background: url(/img/document.png);
+  background-size: 26px 26px;
+  width: 26px;
+  height: 26px;
+  float: left;
+  margin-right: 5px;
+  margin-left: 10px;
+}
+
+.span.toolbar-add-bit {
+  background: url(/img/document.png);
+  background-size: 26px 26px;
+  width: 26px;
+  height: 26px;
+  float: left;
 }
 
 .article-right .bit-list-entry {
