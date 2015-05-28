@@ -43,6 +43,8 @@ body {
   table-layout: fixed;
 }
 
+/* Left and toolbar */
+
 .article-left {
   display: table-cell;
   width: 120px;
@@ -57,6 +59,44 @@ body {
   position: absolute;
   top: 0;
   left: 14px;
+}
+
+.article-toolbar {
+  position: absolute;
+  top: 50px;
+  left: 18px;
+}
+
+.span.toolbar-add-doc {
+  background: url(/img/document.png) no-repeat;
+  background-size: 26px 26px;
+  width: 26px;
+  height: 26px;
+  margin-bottom: 6px;
+}
+
+.span.toolbar-add-bit {
+  background: url(/img/document.png) no-repeat;
+  background-size: 26px 26px;
+  width: 26px;
+  height: 26px;
+}
+
+.span.toolbar-add-doc a, .span.toolbar-add-bit a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* article right and content */
+
+.article-right .bit-list-entry {
+  width: 200px;
+  margin-left: 20px;
+  height: 45px;
+  margin-bottom: 5px;
+  display: table;
+  table-layout: fixed;
 }
 
 .article-content {
@@ -82,38 +122,6 @@ body {
   text-align: center;
 }
 
-.article-toolbar {
-  padding-left: 8px;
-  height: 30px;
-  margin-bottom: 10px;
-}
-
-.span.toolbar-add-doc {
-  background: url(/img/document.png);
-  background-size: 26px 26px;
-  width: 26px;
-  height: 26px;
-  float: left;
-  margin-right: 5px;
-  margin-left: 10px;
-}
-
-.span.toolbar-add-bit {
-  background: url(/img/document.png);
-  background-size: 26px 26px;
-  width: 26px;
-  height: 26px;
-  float: left;
-}
-
-.article-right .bit-list-entry {
-  width: 200px;
-  margin-left: 20px;
-  height: 45px;
-  margin-bottom: 5px;
-  display: table;
-  table-layout: fixed;
-}
 
 .article-right .bit-date {
   width: 30px;
