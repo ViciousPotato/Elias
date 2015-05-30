@@ -30,16 +30,17 @@ body
     {{/bits}}
 
   script#bit-list-template(type="text/x-handlebars-template")
-    {{#bits}}
-    .bit-list-entry
-      .bit-date
-        .bit-date-month
-          {{getMonth this.date}}
-        .bit-date-day
-          {{getDay this.date}}
-      .bit-summary
-        {{this.content}}
-    {{/bits}}
+    .bit-list
+      {{#bits}}
+      .bit-list-entry
+        .bit-date
+          .bit-date-month
+            {{getMonth this.date}}
+          .bit-date-day
+            {{getDay this.date}}
+        .bit-summary
+          {{this.content}}
+      {{/bits}}
 
   script(src="/js/jquery-1.8.2.min.js")
   script(src="/js/StackBlur.js")
