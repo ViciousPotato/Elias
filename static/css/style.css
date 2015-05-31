@@ -47,7 +47,7 @@ body {
 
 .article-left {
   display: table-cell;
-  width: 120px;
+  width: 100px;
   position: relative;
 }
 
@@ -119,6 +119,7 @@ body {
 
 .article-right .bit-list {
   position: relative;
+  margin-top: 32px;
 }
 
 .article-right .bit-list::before {
@@ -133,7 +134,7 @@ body {
 .article-right .bit-list-entry {
   width: 250px;
   margin-left: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   position: relative;
 }
 
@@ -148,20 +149,45 @@ body {
   color: white;
   text-align: center;
 }
+
+
+.article-right .bit-date-wrapper {
+  background-color: white;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  top: -10px;
+  margin-left: -40px;
+}
 */
 
+.article-right .bit-search {
+  background-image: url(../img/search-icon.png);
+  background-repeat: none;
+  background-position: left middle;
+}
+
+.article-right .bit-search input {
+  width: 215px;
+  height: 20px;
+  margin-left: 30px;
+}
+
 .article-right .bit-date {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   position: absolute;
   top: -15px;
-  margin-left: -42px;
+  margin-left: -38px;
   background-color: #2ecc71;
   color: white;
-  font-weight: bold;
   padding: 4px;
   text-align: center;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 13px;
 }
 
 .article-right .bit-summary {
@@ -170,13 +196,14 @@ body {
   padding: 10px;
   color: #484c4f;
   background-color: #EEE;
-  margin-left: 15px;
+  margin-left: 10px;
+  box-shadow: 1px 2px 4px #F0F0F0;
 }
 
 .article-right .bit-summary::before {
   position: absolute;
-  top: 2px;
-  left: 5px;
+  top: 0px;
+  left: 0px;
   right: 100%;
   width: 0;
   height: 0;
