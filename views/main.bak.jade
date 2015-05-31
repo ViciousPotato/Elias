@@ -1,0 +1,99 @@
+!!! 5
+head
+  title Elias
+  include css
+body
+  .navheader
+    .navheader-left
+      span.fui-search.nav-icon
+      .form-group
+        input.form-control.search-input
+    .navheader-right
+      span.fui-calendar.nav-icon
+      span.fui-mail.nav-icon
+
+  .containner#main
+    .sidebar-wrapper
+      .sidebar
+        .timeline
+        .row.bit-entry-date-header
+          .span3.timeline-column
+            .outercircle-date
+              .innercircle-date
+                span.day#today-day= moment().format("MMM")
+                span.month#today-month= moment().format("DD")
+        .row.bit-entry
+          .span3.timeline-column
+          .span5.bit-entry-content
+            .message-box.new-bit-box
+              textarea#content-txt.message-box-text(placeholder="Type text here", rows=3)
+              a#save-btn.btn Save
+              a#attach.btn
+                .span.fui-link
+                input#fileupload(type="file", name="attach", data-url="/upload")
+
+        script#upload-file-template(type="text/x-handlebars-template")
+          .upload-status.message-box
+            .upload-name {{file}}
+            .upload-progress-wrapper
+              .upload-progress
+            .upload-actions
+              a.delete-upload-file
+                span.fui-trash
+        script#group-template(type="text/x-handlebars-template")
+          .row.bit-entry-date-header
+            .span3.timeline-column
+              .outercircle-date
+                .innercircle-date
+                  span.day#today-day {{month}}
+                  span.month#today-month {{day}}
+        script#bit-template(type="text/x-handlebars-template")
+          .row.bit-entry
+            .span3.timeline-column
+                .span.timeline-hour {{formatBitTime date}}
+            .span5.bit-entry-content(id="{{_id}}")
+              .message-box
+                .message-box-content
+                  {{{content}}}
+              .bit-entry-toolbar
+                .btn-toolbar.bit-entry-controls
+                  .bit-entry-toolbar-btn-group.btn-group
+                    a.btn.btn-primary.bit-entry-toolbar-btn(href="/edit/{{_id}}")
+                      span.fui-new-16
+                    a.btn.btn-primary.bit-entry-toolbar-btn(href="/view/{{_id}}")
+                      span.fui-eye-16
+                    a.btn.btn-primary.bit-entry-toolbar-btn(href='/delete/{{_id}}')
+                      span.fui-cross-16
+                .btn-toolbar.bit-entry-topics
+                  .btn-group
+                    .btn.btn-primary.bit-entry-toolbar-btn
+                      | Topics
+                      span.caret
+                    ul.dropdown-menu(role="menu")
+                      {{#topics}}
+                      li
+                        a.bit-entry-topic(tabindex="-1", href="#") {{this}}
+                      {{/topics}}
+                      
+
+    .right-content-wrapper
+      .right-content
+        .topics
+          each bits, topic in topics
+            .topic
+              h2.topic-header #{topic}
+              span.topic-toolbar
+                span.fui-export
+                span.fui-triangle-down
+                .topic-more-options
+                  ul
+                    li
+                      a(href="/topic/pdf/#{topic}") Download as PDF
+              .topic-content
+                each bit in bits
+                  | !{marked(bit.content)}
+              
+
+    form#uploader-form(style="display:none;", action="/upload", method="POST")
+      input#uploader-file(type="file", name="file")
+    include script

@@ -13,6 +13,7 @@ temp     = require 'temp'
 
 Bit      = require './models/bit'
 Activity = require './models/activity'
+Article  = require './models/article'
 util     = require './util'
 config   = require './config'
 
@@ -66,7 +67,10 @@ app.get '/', (req, res) ->
 
 app.get '/bit/since/:timestamp', (req, res) ->
   Bit.bits_since parseInt(req.param 'timestamp'), (err, bits) ->
-    res.send bits
+    transformedBits = _.map bits, (bit) ->
+      bit.content = marked bit.content
+      bit
+    res.send transformedBits
 
 app.get '/bit/pdf/:id', (req, res) ->
   i = req.params.id
@@ -84,8 +88,15 @@ app.get '/bit/pdf/:id', (req, res) ->
     else
       res.send "Error, can not find this bit: #{error}"
 
+app.get '/topic/:topicname', (req, res) ->
+  topic_name = req.params.topicname
+  Article.get topic_name, (error, article) ->
+    if error
+      return res.send 'error': error
+    res.send article
+
 app.get '/topic/pdf/:topicname', (req, res) ->
-  topic_name = req.param.topicname
+  topic_name = req.params.topicname
   Bit.bitsInTopic topic_name, (bits) ->
     util.bits_to_pdf bits, (error, path) ->
       if error
@@ -116,15 +127,15 @@ app.post '/bit', (req, res) ->
     bit.content = marked(content)
 
     async.each topics, (topic, cb) ->
-        actitivity = new Activity
-          topic: topic
-          action: 'Add'
-          detail: 'Added bit: ' + util.shorten_text(rawContent, 10)
-          bitId:  bit._id
+      actitivity = new Activity
+        topic: topic
+        action: 'Add'
+        detail: 'Added bit: ' + util.shorten_text(rawContent, 10)
+        bitId:  bit._id
 
-        actitivity.save (error, act) ->
-          # FIXME ignore errors
-          cb()
+      actitivity.save (error, act) ->
+        # FIXME ignore errors
+        cb()
       , (error) ->
         # FIXME ignore errors
         res.send bit
