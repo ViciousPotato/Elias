@@ -67,12 +67,20 @@ body {
   left: 18px;
 }
 
+.span.toolbar-list-doc {
+  background: url(/img/list.png) no-repeat;
+  background-size: 26px 26px;
+  width: 26px;
+  height: 26px;
+  margin-bottom: 10px;
+}
+
 .span.toolbar-add-doc {
   background: url(/img/document.png) no-repeat;
   background-size: 26px 26px;
   width: 26px;
   height: 26px;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 
 .span.toolbar-add-bit {
