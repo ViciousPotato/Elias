@@ -166,6 +166,7 @@ body {
   background-image: url(../img/search-icon.png);
   background-repeat: no-repeat;
   background-position: left middle;
+  background-size: 24px 24px;
 }
 
 .article-right .bit-search input {
