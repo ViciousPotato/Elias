@@ -1,3 +1,5 @@
+var currentArticle;
+
 var handleBarHelpers = {
   parseMarkdown: function(m) {
     return marked(m);
@@ -21,10 +23,23 @@ $(document).ready(function() {
   var bitListTemplate = Handlebars.compile($('#bit-list-template').html());
 
   $.get('/topic/Random', function(res) {
+    // TODO: add error handling.
+    currentArticle = res;
+
     var article = articleTemplate(res);
-    $(".article-content").html(article);
+    $(".article-content-view").html(article);
 
     var bitList = bitListTemplate({bits: res.bits});
     $(".article-right").append($(bitList));
+  });
+
+  $('.toolbar-add-doc a').bind('click', function() {
+    $('.article-content').toggleClass('flipped');
+
+    var contents = _.map(currentArticle.bits, function(bit) {
+      return bit.content;
+    })
+    var joinedContent = contents.join('\n');
+    $('.article-content-edit textarea').text(joinedContent);
   });
 });
