@@ -42,4 +42,13 @@ $(document).ready(function() {
     var joinedContent = contents.join('\n');
     $('.article-content-edit textarea').text(joinedContent);
   });
+
+  $('.article-save').bind('click', function() {
+    $('.article-content').toggleClass('flipped');
+  });
+
+  $('.article-cancel').bind('click', function() {
+    $('.article-content').toggleClass('flipped');
+  })
+
 });
