@@ -3,7 +3,7 @@ _        = require 'underscore'
 Bit      = require './bit'
 
 articleSchema = new mongoose.Schema
-  title: String
+  topic: String
   content: String
   bits: []
   created: 
@@ -15,13 +15,13 @@ articleSchema = new mongoose.Schema
 
 articleSchema.statics.createIfNotExists = (name, content, cb) ->
   article = new Article
-    title:   name
+    topic:   name
     content: content
 
   article.save cb
 
 articleSchema.statics.get = (name, cb) ->
-  Article.findOne title: name, (error, article) ->
+  Article.findOne topic: name, (error, article) ->
     if error
       return cb error, null
     Bit.bitsInTopic name, (error, bits) ->

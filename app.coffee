@@ -95,6 +95,19 @@ app.get '/topic/:topicname', (req, res) ->
       return res.send 'error': error
     res.send article
 
+app.post '/article/:topicname', (req, res) ->
+  topic_name = req.params.topicname
+  content = req.param 'content'
+  # if we have content
+  if content
+    article = new Article
+      content: content
+
+  article.save (error, article) ->
+    if error
+      return res.send error: error
+    res.send 
+
 app.get '/topic/pdf/:topicname', (req, res) ->
   topic_name = req.params.topicname
   Bit.bitsInTopic topic_name, (bits) ->
