@@ -1,6 +1,7 @@
 mongoose = require 'mongoose'
 _        = require 'underscore'
 Bit      = require './bit'
+util     = require '../util'
 
 articleSchema = new mongoose.Schema
   topic: String
@@ -20,15 +21,20 @@ articleSchema.statics.createIfNotExists = (name, content, cb) ->
 
   article.save cb
 
-articleSchema.statics.get = (name, cb) ->
-  Article.findOne topic: name, (error, article) ->
-    if error
-      return cb error, null
-    Bit.bitsInTopic name, (error, bits) ->
+articleSchema.statics.get = (topic, cb) ->
+    Bit.bitsInTopic topic, (error, bits) ->
       if error
         return cb error
-      article.bits = bits
-      cb null, article
+      Article.findOne topic: topic, (error, article) ->
+        if error or not article
+          # If we don't have existing article, create a fake one.
+          # TODO: maybe we should create one immediately.
+          article = content: '', bits: bits, topic: topic, created: Date(), updated: Date()
+          cb null, article
+        else
+          console.log error, article
+          article.bits = bits
+          cb null, article
 
 Article = mongoose.model 'Article', articleSchema
 

@@ -38,18 +38,22 @@ body
             a(href="#") Save
           .article-cancel
             a(href="#") Cancel
-        textarea
+        textarea#article-editor
     .article-right
 
   script#article-template(type="text/x-handlebars-template")
     .article-title
-      {{title}}
+      {{topic}}
     .article-status
-      {{created}}
+      {{articleDate created}}
+    {{#if content}}
+    {{{parseMarkdown content}}}
+    {{else}}
     {{#bits}}
     .article-section
       {{{parseMarkdown this.content}}}
     {{/bits}}
+    {{/if}}
 
   script#bit-list-template(type="text/x-handlebars-template")
     .bit-search
