@@ -54,13 +54,14 @@ $(document).ready(function() {
     var contents = _.map(currentArticle.bits, function(bit) {
       return bit.content;
     })
-    var joinedContent = contents.join('\n');
+    // Double blank line means one line
+    var joinedContent = contents.join('\n\n');
     $('.article-content-edit textarea').text(joinedContent);
   });
 
   // Save article
   $('.article-save').bind('click', function() {
-    currentArticle.content = $('#article-editor').text();
+    currentArticle.content = $('#article-editor').val();
     $.post('/article/Random', {content: currentArticle.content}, function(res) {
       if (res['error']) {
         error(res['error']);

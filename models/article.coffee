@@ -32,7 +32,6 @@ articleSchema.statics.get = (topic, cb) ->
           article = content: '', bits: bits, topic: topic, created: Date(), updated: Date()
           cb null, article
         else
-          console.log error, article
           article.bits = bits
           cb null, article
 

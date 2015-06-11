@@ -100,18 +100,13 @@ app.post '/article/:topicname', (req, res) ->
   content = req.param 'content'
   # if we have content
   if content
-    Article.update topic: topic_name, content: content, upsert: true, (error, dbmsg) ->
+    Article.update {topic: topic_name}, {content: content}, {upsert: true}, (error, dbmsg) ->
       if error
         res.send 'error': error
       else
         res.send 'status': 'ok'
   else
     res.send 'status': 'ok although I don\'t know why you post empty content'
-
-  article.save (error, article) ->
-    if error
-      return res.send error: error
-    res.send 
 
 app.get '/topic/pdf/:topicname', (req, res) ->
   topic_name = req.params.topicname
