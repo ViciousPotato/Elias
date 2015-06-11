@@ -77,7 +77,7 @@ body {
   margin-bottom: 10px;
 }
 
-.span.toolbar-add-doc {
+.span.toolbar-edit-doc {
   background: url(/img/document.png) no-repeat;
   background-size: 26px 26px;
   width: 26px;
@@ -86,7 +86,7 @@ body {
 }
 
 .span.toolbar-add-bit {
-  background: url(/img/document.png) no-repeat;
+  background: url(/img/new.png) no-repeat;
   background-size: 26px 26px;
   width: 26px;
   height: 26px;
