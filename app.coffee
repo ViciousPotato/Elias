@@ -88,6 +88,11 @@ app.get '/bit/pdf/:id', (req, res) ->
     else
       res.send "Error, can not find this bit: #{error}"
 
+app.get '/topics', (req, res) ->
+  # Get a list of topics, order by last update time.
+  Bit.topics (topics) ->
+    res.send topics
+
 app.get '/topic/:topicname', (req, res) ->
   topic_name = req.params.topicname
   Article.get topic_name, (error, article) ->

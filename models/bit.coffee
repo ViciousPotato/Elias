@@ -63,6 +63,10 @@ bitSchema.statics.allTopics = (callback) ->
     , (error, results) ->
       callback results
 
+bitSchema.statics.topics = (callback) ->
+  this.allTopics (topics) ->
+    callback _.keys topics
+
 bitSchema.statics.bits = (offset, limit, render, callback) ->
   this.find({}, null, {sort: {date: -1}}).skip(offset).limit(limit).exec (err, bits) ->
     # Shorten bits text for display

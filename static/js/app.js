@@ -75,6 +75,10 @@ $(document).ready(function() {
 
   $('.article-cancel').bind('click', function() {
     $('.article-content').toggleClass('flipped');
-  })
+  });
+
+  $('.toolbar-list-doc a').bind('click', function() {
+    $('.article-right').velocity({width: "0px", opacity: 0});
+  });
 
 });
