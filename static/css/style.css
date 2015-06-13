@@ -64,7 +64,19 @@ body {
 }
 
 .article-list {
-  width: 0;
+  opacity: 0;
+  display: table-cell;
+}
+
+.article-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.article-list ul li {
+  line-height: 24px;
+  font-size: 15px;
+  margin-bottom: 5px;
 }
 
 .article-toolbar {

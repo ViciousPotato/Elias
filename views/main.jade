@@ -41,6 +41,13 @@ body
         textarea#article-editor
     .article-right
 
+  script#article-list-template(type="/text/x-handlebars-template")
+    ul
+      {{#topics}}
+      li
+        a(href="#") {{this}}
+      {{/topics}}
+
   script#article-template(type="text/x-handlebars-template")
     .article-title
       {{topic}}

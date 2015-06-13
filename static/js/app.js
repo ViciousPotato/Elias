@@ -1,5 +1,5 @@
 var currentArticle;
-var articleTemplate, bitListTemplate;
+var articleTemplate, bitListTemplate, articleListTemplate;
 
 var handleBarHelpers = {
   parseMarkdown: function(m) {
@@ -39,12 +39,33 @@ function loadArticle(topic) {
   });
 }
 
+function slideInArticleList() {
+  $.get('/topics', function(res) {
+    if (res.error) {
+      return alert(res.error);
+    }
+
+    $('.article-list').html(articleListTemplate(res));
+  });
+  $('.article-right').velocity({width: "0px", opacity: 0});
+  $('.article-list').velocity({width: "250px", opacity: 1}, {queue: false});
+}
+
+function slideOutArticleList() {
+  $('.article-right').velocity({width: "250px", opacity: 1});
+  $('.article-list').velocity({width: "0px", opacity: 0}, {queue: false});
+}
+
+function initTemplates() {
+  articleTemplate = Handlebars.compile($('#article-template').html());
+  bitListTemplate = Handlebars.compile($('#bit-list-template').html());
+  articleListTemplate = Handlebars.compile($('#article-list-template').html());
+}
+
 $(document).ready(function() {
   stackBlurImage('blur-img', 'blur-canvas', 180, false);
 
-  articleTemplate = Handlebars.compile($('#article-template').html());
-  bitListTemplate = Handlebars.compile($('#bit-list-template').html());
-
+  initTemplates();
   loadArticle('Random');
 
   // Create new article
@@ -78,7 +99,11 @@ $(document).ready(function() {
   });
 
   $('.toolbar-list-doc a').bind('click', function() {
-    $('.article-right').velocity({width: "0px", opacity: 0});
+    if ($('.article-list').width() == 0) {
+      slideInArticleList();
+    } else {
+      slideOutArticleList();
+    }
   });
 
 });
