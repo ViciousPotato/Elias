@@ -65,7 +65,15 @@ bitSchema.statics.allTopics = (callback) ->
 
 bitSchema.statics.topics = (callback) ->
   this.allTopics (topics) ->
-    callback _.keys topics
+    # JS default sort order is asc
+    _.map topics, (val, key) -> val.sort().reverse()
+    sorted_topics = _.map topics, (val, key) ->
+      if val
+        return [key, val[0].date]
+      else
+        return [key, null]
+    sorted_topics.sort (a, b) -> a < b
+    callback null, sorted_topics
 
 bitSchema.statics.bits = (offset, limit, render, callback) ->
   this.find({}, null, {sort: {date: -1}}).skip(offset).limit(limit).exec (err, bits) ->

@@ -74,9 +74,27 @@ body {
 }
 
 .article-list ul li {
-  line-height: 24px;
+  line-height: 20px;
   font-size: 15px;
   margin-bottom: 5px;
+}
+
+.article-list .topic-list a {
+  display: block;
+  width: 100%;
+  color: black;
+}
+
+.article-list .topic-list a:hover {
+  background-color: #666;
+  color: white;
+}
+
+.article-list .topic-update-time {
+  display: block;
+  width: 100%;
+  font-size: 9px;
+  color: #ddd;
 }
 
 .article-toolbar {

@@ -45,7 +45,9 @@ body
     ul
       {{#topics}}
       li
-        a(href="#") {{this}}
+        .topic-list
+          a(href="#") {{this.[0]}}
+          span.topic-update-time {{articleDate this.[1]}}
       {{/topics}}
 
   script#article-template(type="text/x-handlebars-template")

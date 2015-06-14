@@ -35,6 +35,13 @@ articleSchema.statics.get = (topic, cb) ->
           article.bits = bits
           cb null, article
 
+articleSchema.statics.topics = (callback) ->
+  Article.find {}, (error, articles) ->
+    if error
+      return callback error, null
+    topics = _.map articles, (article) -> [article.topic, article.updated]
+    callback null, topics
+
 Article = mongoose.model 'Article', articleSchema
 
 module.exports = Article

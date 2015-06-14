@@ -90,7 +90,9 @@ app.get '/bit/pdf/:id', (req, res) ->
 
 app.get '/topics', (req, res) ->
   # Get a list of topics, order by last update time.
-  Bit.topics (topics) ->
+  Bit.topics (error, topics) ->
+    if error
+      return res.send error: error
     res.send topics: topics
 
 app.get '/topic/:topicname', (req, res) ->
