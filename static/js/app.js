@@ -68,8 +68,8 @@ $(document).ready(function() {
   initTemplates();
   loadArticle('Random');
 
-  // Create new article
-  $('.toolbar-add-doc a').bind('click', function() {
+  // Edit article
+  $('.toolbar-edit-doc a').bind('click', function() {
     $('.article-content').toggleClass('flipped');
 
     var contents = _.map(currentArticle.bits, function(bit) {
