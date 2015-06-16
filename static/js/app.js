@@ -39,6 +39,7 @@ function loadArticle(topic) {
   });
 }
 
+// Show article list
 function slideInArticleList() {
   $.get('/topics', function(res) {
     if (res.error) {
@@ -46,6 +47,10 @@ function slideInArticleList() {
     }
 
     $('.article-list').html(articleListTemplate(res));
+    $('.article-list a').bind('click', function() {
+      var currentTopic = this.text;
+      loadArticle(currentTopic);
+    });
   });
   $('.article-right').velocity({width: "0px", opacity: 0});
   $('.article-list').velocity({width: "250px", opacity: 1}, {queue: false});
