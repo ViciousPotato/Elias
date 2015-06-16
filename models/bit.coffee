@@ -72,7 +72,7 @@ bitSchema.statics.topics = (callback) ->
         return [key, val[0].date]
       else
         return [key, null]
-    sorted_topics.sort (a, b) -> a < b
+    sorted_topics.sort (a, b) -> b[1]-a[1]
     callback null, sorted_topics
 
 bitSchema.statics.bits = (offset, limit, render, callback) ->
