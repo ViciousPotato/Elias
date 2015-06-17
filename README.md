@@ -12,13 +12,18 @@ It will support publising notes to github pages. In ways of blog and wiki.
 ## Use cases
 
 
+## Actual Look
+
+#[Current look](snapshot.png)
+
 ## Design
 
 1. timeline
 https://mixpanel.com/about/
 
 2. theming (from dribble)
-  ![From dribble](design.png)
+
+![From dribble](design.png)
 
 3. Free bootstrap themes
 http://bootswatch.com/
