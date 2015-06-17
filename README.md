@@ -14,7 +14,7 @@ It will support publising notes to github pages. In ways of blog and wiki.
 
 ## Actual Look
 
-#[Current look](snapshot.png)
+![Current look](snapshot.png)
 
 ## Design
 
