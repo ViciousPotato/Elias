@@ -12,7 +12,7 @@ var handleBarHelpers = {
     return moment(d).format("DD");
   },
   articleDate: function(d) {
-    return moment(d).format('MMMM Do YYYY, h:mm:ss a');
+    return moment(d).format('MMMM D YYYY, h:mm:ss a');
   }
 };
 
@@ -109,6 +109,10 @@ $(document).ready(function() {
     } else {
       slideOutArticleList();
     }
+  });
+
+  $('.toolbar-add-bit a').bind('click', function() {
+    $('.article-content-view').velocity({top: '600px', opacity: 0}, {duration: 900});
   });
 
 });
