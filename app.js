@@ -154,6 +154,19 @@
     });
   });
 
+  app.get('/topics', function(req, res) {
+    return Bit.topics(function(error, topics) {
+      if (error) {
+        return res.send({
+          error: error
+        });
+      }
+      return res.send({
+        topics: topics
+      });
+    });
+  });
+
   app.get('/topic/:topicname', function(req, res) {
     var topic_name;
     topic_name = req.params.topicname;
@@ -173,8 +186,10 @@
     content = req.param('content');
     if (content) {
       return Article.update({
-        topic: topic_name,
-        content: content,
+        topic: topic_name
+      }, {
+        content: content
+      }, {
         upsert: true
       }, function(error, dbmsg) {
         if (error) {
@@ -242,9 +257,15 @@
         });
         return actitivity.save(function(error, act) {
           return cb();
-        }, function(error) {
-          return res.send(bit);
         });
+      }, function(error) {
+        if (error) {
+          return res.send({
+            error: error
+          });
+        } else {
+          return res.send(bit);
+        }
       });
     });
   });

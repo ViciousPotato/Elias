@@ -34,8 +34,13 @@ function loadArticle(topic) {
     var article = articleTemplate(res);
     $(".article-content-view").html(article);
 
+    if ($('.article-content').hasClass('flipped')) {
+      // If it's in edit mode. Flip into view mode.
+      $('.article-content').toggleClass('flipped');
+    }
+
     var bitList = bitListTemplate({bits: res.bits});
-    $(".article-right").append($(bitList));
+    $(".article-right").html($(bitList));
   });
 }
 
@@ -87,16 +92,33 @@ $(document).ready(function() {
 
   // Save article
   $('.article-save').bind('click', function() {
-    currentArticle.content = $('#article-editor').val();
-    $.post('/article/Random', {content: currentArticle.content}, function(res) {
-      if (res['error']) {
-        error(res['error']);
-      } else {
-        // TODO: maybe we can return the edited article and update it, saving another request time.
-        loadArticle(currentArticle.topic);
-        $('.article-content').toggleClass('flipped');
-      }
-    })
+    if (currentArticle == null) {
+      // Save bit.
+      var bitContent = $('#article-editor').val();
+      $.post('/bit', {content: bitContent}, function(res) {
+        var topics = res.topics;
+        if (!topics || topics.length == 0) {
+          loadArticle('Random'); // TODO: remove hard code 'Random'.
+        } else {
+          loadArticle(topics[0]); // TODO: needs improvement too.
+          // Like we can highlight it on the right.
+        }
+      });
+      // TODO: What if save error and no article is defined now.
+    } else {
+      // Save article
+      currentArticle.content = $('#article-editor').val();
+      $.post('/article/' + currentArticle.topic, {content: currentArticle.content}, function(res) {
+        if (res['error']) {
+          error(res['error']);
+        } else {
+          // TODO: maybe we can return the edited article and update it, saving another request time.
+          loadArticle(currentArticle.topic);
+          $('.article-content').toggleClass('flipped');
+        }
+      });   
+    }
+
   });
 
   $('.article-cancel').bind('click', function() {
@@ -112,6 +134,7 @@ $(document).ready(function() {
   });
 
   $('.toolbar-add-bit a').bind('click', function() {
+    currentArticle = null;
     $('.article-content').toggleClass('flipped');
 
     // $('.bit-topic').css({display: 'block'});

@@ -153,11 +153,12 @@ app.post '/bit', (req, res) ->
         detail: 'Added bit: ' + util.shorten_text(rawContent, 10)
         bitId:  bit._id
 
-      actitivity.save (error, act) ->
-        # FIXME ignore errors
-        cb()
-      , (error) ->
-        # FIXME ignore errors
+      actitivity.save (error, act) -> cb()  
+    , (error) ->
+      # FIXME ignore errors
+      if error
+        res.send error: error
+      else
         res.send bit
 
 app.get '/edit/:id', (req, res) ->
