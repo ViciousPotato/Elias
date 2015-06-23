@@ -112,7 +112,17 @@ $(document).ready(function() {
   });
 
   $('.toolbar-add-bit a').bind('click', function() {
-    $('.article-content-view').velocity({top: '600px', opacity: 0}, {duration: 900});
+    $('.article-content').toggleClass('flipped');
+
+    // $('.bit-topic').css({display: 'block'});
+    $('.article-content-edit textarea').text('');
+    $('.article-content-edit textarea').focus();
+    /*
+    var newEditor = $('.article-content-edit').clone();
+    $('.article-content-view').velocity({top: '600px', opacity: 0}, {duration: 900, complete: function(e) {
+      $(e).css({display: 'none'});
+    }});
+   */
   });
 
 });

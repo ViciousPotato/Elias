@@ -159,6 +159,11 @@ body {
 
 }
 
+.bit-topic {
+  display: none;
+  margin-bottom: 2px;
+}
+
 /* Editor toolbar */
 .article-edit-toolbar {
   width: 400px;
