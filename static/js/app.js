@@ -79,7 +79,7 @@ $(document).ready(function() {
   loadArticle('Random');
 
   // Edit article
-  $('.toolbar-edit-doc a').bind('click', function() {
+  $('.article-content').on('click', '.article-view-toolbar-edit', function() {
     $('.article-content').toggleClass('flipped');
 
     var contents = _.map(currentArticle.bits, function(bit) {

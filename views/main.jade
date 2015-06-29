@@ -11,11 +11,11 @@ body
     .article-left
       .logo
       .article-toolbar
+        .span.toolbar-add-bit
+          a(href="#")
         .span.toolbar-list-doc
           a(href="#")
-        .span.toolbar-edit-doc
-          a(href="#")
-        .span.toolbar-add-bit
+        .span.toolbar-list-bit
           a(href="#")
     .article-list
     .article-content
@@ -57,7 +57,7 @@ body
     .article-title
       {{topic}}
     .article-view-toolbar
-      .article-view-toolbar-edit
+      a.article-view-toolbar-edit(href="#")
     .article-status
       {{articleDate created}}
     {{#if content}}
@@ -83,6 +83,8 @@ body
         .bit-summary
           {{this.content}}
       {{/bits}}
+
+  script#editor-template(type="text/x-handlebars-template")
 
   script(src="/js/jquery-1.8.2.min.js")
   script(src="/js/StackBlur.js")
