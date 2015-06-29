@@ -156,7 +156,30 @@ body {
 }
 
 .article-content-view {
+}
 
+.article-title {
+  float: left;
+}
+
+.article-content:hover .article-view-toolbar {
+  display: block;
+}
+
+.article-view-toolbar {
+  float: left;
+  height: 20px;
+  display: none;
+}
+
+.article-view-toolbar-edit {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+}
+
+.article-status {
+  clear: both;
 }
 
 .bit-topic {
