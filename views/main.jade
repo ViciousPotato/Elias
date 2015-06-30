@@ -85,6 +85,27 @@ body
       {{/bits}}
 
   script#editor-template(type="text/x-handlebars-template")
+    .bit-topic
+      span Topic
+      input#editor-bit-topic
+    .article-edit-toolbar
+      ul.article-editor-button
+        li
+          a(href="#") h1
+        li
+          a(href="#") h2
+        li
+          a(href="#") img
+        li
+          a(href="#") url
+        li
+          a(href="#") 
+    .article-editor-function-button
+      .article-save
+        a(href="#") Save
+      .article-cancel
+        a(href="#") Cancel
+    textarea#article-editor
 
   script(src="/js/jquery-1.8.2.min.js")
   script(src="/js/StackBlur.js")
