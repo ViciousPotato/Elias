@@ -88,6 +88,10 @@ bitSchema.statics.bits_since = (timestamp, callback) ->
   t = new Date(timestamp*1000).toISOString()
   this.find().where('date').gte(new Date(t)).exec callback
 
+bitSchema.statics.changeTopicName = (old, new, callback) ->
+  if old == new
+    callback null
+
 Bit = mongoose.model 'Bit', bitSchema
 
 module.exports = Bit

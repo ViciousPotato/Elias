@@ -95,19 +95,22 @@ app.get '/topics', (req, res) ->
       return res.send error: error
     res.send topics: topics
 
-app.get '/topic/:topicname', (req, res) ->
+app.get '/article/:topicname', (req, res) ->
   topic_name = req.params.topicname
   Article.get topic_name, (error, article) ->
     if error
       return res.send 'error': error
     res.send article
 
-app.post '/article/:topicname', (req, res) ->
-  topic_name = req.params.topicname
+app.post '/article/:id', (req, res) ->
+  id = req.params.id
   content = req.param 'content'
+  topic = req.param 'topic'
   # if we have content
   if content
-    Article.update {topic: topic_name}, {content: content}, {upsert: true}, (error, dbmsg) ->
+    if topic
+      # Update all topic name first
+    Article.update {_id: id}, {content: content, topic: topic}, {upsert: true}, (error, dbmsg) ->
       if error
         res.send 'error': error
       else
@@ -134,14 +137,15 @@ app.get '/bit/:offset/:limit', (req, res) ->
 
 # Create new bit
 app.post '/bit', (req, res) ->
+  topic = req.param 'topic'
   content = req.param 'content'
-  parsed  = util.parse_bit content
+  #parsed  = util.parse_bit content
 
-  rawContent = parsed.content
-  topics = parsed.topics
+  #rawContent = parsed.content
+  #topics = parsed.topics
   bit = new Bit
-    content: rawContent
-    topics:  topics
+    content: content
+    topics:  [topic]
 
   bit.save (error, bit) ->
     bit.content = marked(content)

@@ -190,8 +190,20 @@ body {
 }
 
 .bit-topic {
-  display: none;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+.bit-topic input {
+  height: 38px;
+  font-size: 28px;
+  border-bottom: 1px solid #EEE;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.bit-topic input:focus {
+  outline: none !important;
 }
 
 /* Editor toolbar */

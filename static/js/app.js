@@ -25,7 +25,7 @@ _.each(handleBarHelpers, function(handler, name) {
 });
 
 function loadArticle(topic) {
-  $.get('/topic/' + topic, function(res) {
+  $.get('/article/' + topic, function(res) {
     if (res.error) {
       return error(res.error);
     }
@@ -82,20 +82,28 @@ $(document).ready(function() {
   $('.article-content').on('click', '.article-view-toolbar-edit', function() {
     $('.article-content').toggleClass('flipped');
 
-    var contents = _.map(currentArticle.bits, function(bit) {
-      return bit.content;
-    })
-    // Double blank line means one line
-    var joinedContent = contents.join('\n\n');
-    $('.article-content-edit textarea').text(joinedContent);
+    var editContent = "";
+    if (currentArticle.content) {
+      // For article with content, we use content directly.
+      editContent = currentArticle.content;
+    } else {
+      var contents = _.map(currentArticle.bits, function(bit) {
+        return bit.content;
+      })
+      // Double blank line means one line
+      editContent = contents.join('\n\n');
+    }
+    $('.article-content-edit textarea').text(editContent);
+    $('.article-content-edit #editor-bit-topic').val(currentArticle.topic);
   });
 
   // Save article
   $('.article-save').bind('click', function() {
     if (currentArticle == null) {
-      // Save bit.
+      // Save bit. Bit mode.
       var bitContent = $('#article-editor').val();
-      $.post('/bit', {content: bitContent}, function(res) {
+      var bitTopic = $('#editor-bit-topic').val();
+      $.post('/bit', {content: bitContent, topic: bitTopic}, function(res) {
         var topics = res.topics;
         if (!topics || topics.length == 0) {
           loadArticle('Random'); // TODO: remove hard code 'Random'.
@@ -107,13 +115,23 @@ $(document).ready(function() {
       // TODO: What if save error and no article is defined now.
     } else {
       // Save article
-      currentArticle.content = $('#article-editor').val();
-      $.post('/article/' + currentArticle.topic, {content: currentArticle.content}, function(res) {
+      // currentArticle.content = $('#article-editor').val();
+      var updateData = {}
+
+      var updateData.content =  $('#article-editor').val();
+      var topic = $('#editor-bit-topic').val();
+
+      // topic not changed.
+      if (topic != currentArticle.topic) {
+        updateData.topic = topic;
+      }
+
+      $.post('/article/' + currentArticle._id, updateData, function(res) {
         if (res['error']) {
           error(res['error']);
         } else {
           // TODO: maybe we can return the edited article and update it, saving another request time.
-          loadArticle(currentArticle.topic);
+          loadArticle(topic);
           $('.article-content').toggleClass('flipped');
         }
       });   

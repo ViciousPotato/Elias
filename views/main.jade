@@ -22,7 +22,6 @@ body
       .article-content-view
       .article-content-edit
         .bit-topic
-          span Topic
           input#editor-bit-topic
         .article-edit-toolbar
           ul.article-editor-button
@@ -85,9 +84,6 @@ body
       {{/bits}}
 
   script#editor-template(type="text/x-handlebars-template")
-    .bit-topic
-      span Topic
-      input#editor-bit-topic
     .article-edit-toolbar
       ul.article-editor-button
         li
@@ -105,7 +101,12 @@ body
         a(href="#") Save
       .article-cancel
         a(href="#") Cancel
-    textarea#article-editor
+    textarea{{#if editorid}}{{editorid}}{{else}}#article-editor{{/if}}
+    {{#if isbit}}
+    .bit-topic
+      span Topic
+      input#editor-bit-topic
+    {{/if}}
 
   script(src="/js/jquery-1.8.2.min.js")
   script(src="/js/StackBlur.js")
