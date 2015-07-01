@@ -25,12 +25,20 @@ articleSchema.statics.get = (topic, cb) ->
     Bit.bitsInTopic topic, (error, bits) ->
       if error
         return cb error
+
       Article.findOne topic: topic, (error, article) ->
         if error or not article
-          # If we don't have existing article, create a fake one.
-          # TODO: maybe we should create one immediately.
-          article = content: '', bits: bits, topic: topic, created: Date(), updated: Date()
-          cb null, article
+          # If we don't have existing article, create one.
+          contents = _.map bits, (bit) -> bit.content
+          article = new Article
+            content: contents.join('\n\n')
+            topic: topic
+          article.save (error, article) ->
+            if error
+              return cb error
+            
+            article.bits = bits
+            cb null, article
         else
           article.bits = bits
           cb null, article

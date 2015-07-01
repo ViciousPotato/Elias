@@ -106,15 +106,24 @@ app.post '/article/:id', (req, res) ->
   id = req.params.id
   content = req.param 'content'
   topic = req.param 'topic'
-  # if we have content
-  if content
-    if topic
-      # Update all topic name first
+  old_topic = req.param 'oldTopic'
+
+  update_article = () ->
     Article.update {_id: id}, {content: content, topic: topic}, {upsert: true}, (error, dbmsg) ->
       if error
         res.send 'error': error
       else
         res.send 'status': 'ok'
+  # if we have content
+  if content
+    if topic and old_topic
+      # Update all topic name first
+      Bit.changeTopicName old_topic, topic, (error) ->
+        if error
+          return res.send error: error
+        update_article()
+    else
+      update_article()
   else
     res.send 'status': 'ok although I don\'t know why you post empty content'
 

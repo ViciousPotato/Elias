@@ -118,12 +118,13 @@ $(document).ready(function() {
       // currentArticle.content = $('#article-editor').val();
       var updateData = {}
 
-      var updateData.content =  $('#article-editor').val();
+      updateData.content =  $('#article-editor').val();
       var topic = $('#editor-bit-topic').val();
 
       // topic not changed.
       if (topic != currentArticle.topic) {
         updateData.topic = topic;
+        updateData.oldTopic = currentArticle.topic;
       }
 
       $.post('/article/' + currentArticle._id, updateData, function(res) {

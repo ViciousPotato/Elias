@@ -167,7 +167,7 @@
     });
   });
 
-  app.get('/topic/:topicname', function(req, res) {
+  app.get('/article/:topicname', function(req, res) {
     var topic_name;
     topic_name = req.params.topicname;
     return Article.get(topic_name, function(error, article) {
@@ -180,15 +180,18 @@
     });
   });
 
-  app.post('/article/:topicname', function(req, res) {
-    var content, topic_name;
-    topic_name = req.params.topicname;
+  app.post('/article/:id', function(req, res) {
+    var content, id, old_topic, topic, update_article;
+    id = req.params.id;
     content = req.param('content');
-    if (content) {
+    topic = req.param('topic');
+    old_topic = req.param('oldTopic');
+    update_article = function() {
       return Article.update({
-        topic: topic_name
+        _id: id
       }, {
-        content: content
+        content: content,
+        topic: topic
       }, {
         upsert: true
       }, function(error, dbmsg) {
@@ -202,6 +205,20 @@
           });
         }
       });
+    };
+    if (content) {
+      if (topic && old_topic) {
+        return Bit.changeTopicName(old_topic, topic, function(error) {
+          if (error) {
+            return res.send({
+              error: error
+            });
+          }
+          return update_article;
+        });
+      } else {
+        return update_article;
+      }
     } else {
       return res.send({
         'status': 'ok although I don\'t know why you post empty content'
@@ -236,14 +253,12 @@
   });
 
   app.post('/bit', function(req, res) {
-    var bit, content, parsed, rawContent, topics;
+    var bit, content, topic;
+    topic = req.param('topic');
     content = req.param('content');
-    parsed = util.parse_bit(content);
-    rawContent = parsed.content;
-    topics = parsed.topics;
     bit = new Bit({
-      content: rawContent,
-      topics: topics
+      content: content,
+      topics: [topic]
     });
     return bit.save(function(error, bit) {
       bit.content = marked(content);

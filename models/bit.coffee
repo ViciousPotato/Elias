@@ -88,9 +88,17 @@ bitSchema.statics.bits_since = (timestamp, callback) ->
   t = new Date(timestamp*1000).toISOString()
   this.find().where('date').gte(new Date(t)).exec callback
 
-bitSchema.statics.changeTopicName = (old, new, callback) ->
-  if old == new
-    callback null
+bitSchema.statics.changeTopicName = (oldTopic, newTopic, callback) ->
+  if oldTopic == newTopic
+    return callback null
+
+  console.log 'changing from ', oldTopic, 'to', newTopic
+
+  this.update {topics: oldTopic}, {"topics.$": newTopic}, (error, raw) ->
+    if error
+      callback raw
+    else
+      callback null
 
 Bit = mongoose.model 'Bit', bitSchema
 
