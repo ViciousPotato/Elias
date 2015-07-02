@@ -55,6 +55,7 @@ function slideInArticleList() {
     $('.article-list a').bind('click', function() {
       var currentTopic = this.text;
       loadArticle(currentTopic);
+      slideOutArticleList();
     });
   });
   $('.article-right').velocity({width: "0px", opacity: 0});

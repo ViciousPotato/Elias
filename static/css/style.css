@@ -43,6 +43,7 @@ body {
   display: table;
   table-layout: fixed;
   perspective: 2000px;
+  min-height: 100%;
 }
 
 /* Left and toolbar */
@@ -66,6 +67,7 @@ body {
 .article-list {
   opacity: 0;
   display: table-cell;
+  overflow: hidden;
 }
 
 .article-list ul {
@@ -77,6 +79,7 @@ body {
   line-height: 20px;
   font-size: 15px;
   margin-bottom: 5px;
+  width: 250px;
 }
 
 .article-list .topic-list a {
