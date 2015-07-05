@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "express": "3.0.5",
-    "mongoose": "3.5.3",
+    "mongoose": "3.8.x",
     "jade": "0.27.7",
     "moment": "1.7.2",
     "pagedown": "1.1.0",

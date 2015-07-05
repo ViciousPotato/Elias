@@ -94,7 +94,7 @@ bitSchema.statics.changeTopicName = (oldTopic, newTopic, callback) ->
 
   console.log 'changing from ', oldTopic, 'to', newTopic
 
-  this.update {topics: oldTopic}, {$set : {"topics.$": newTopic}}, (error, raw) ->
+  Bit.update {topics: oldTopic}, {$set : {"topics.$": newTopic}}, {multi: true}, (error, raw) ->
     if error
       callback raw
     else
