@@ -10,6 +10,7 @@ async    = require 'async'
 gm       = require 'gm'
 pdc      = require 'pdc'
 temp     = require 'temp'
+favicon  = require 'serve-favicon'
 
 Bit      = require './models/bit'
 Activity = require './models/activity'
@@ -35,6 +36,7 @@ app.use express.cookieParser('secret')
 app.use express.session {secret: 'secret'}
 app.use express.static __dirname + '/static'
 app.use morgan 'combined', stream: accessLogStream
+app.use favicon(__dirname + "/static/img/favicon.ico")
 
 app.set 'views', 'views/'
 app.set 'view engine', 'jade'

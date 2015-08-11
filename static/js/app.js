@@ -73,10 +73,17 @@ function initTemplates() {
   articleListTemplate = Handlebars.compile($('#article-list-template').html());
 }
 
-$(document).ready(function() {
-  stackBlurImage('blur-img', 'blur-canvas', 180, false);
+function blurBackground() {
+  $('#blur-img').on('load', function() {
+    stackBlurImage('blur-img', 'blur-canvas', 180, false);
+  });
+  $('#blur-img').attr('src', '/img/blur-bg.jpg');
+}
 
+$(document).ready(function() {
   initTemplates();
+
+  blurBackground();
   loadArticle('Random');
 
   // Edit article

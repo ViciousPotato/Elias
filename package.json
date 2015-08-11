@@ -25,6 +25,7 @@
     "async": "0.9.x",
     "gm": "1.17.x",
     "pdc": "0.2.x",
-    "temp": "0.8.x"
+    "temp": "0.8.x",
+    "serve-favicon": "2.3.x"
   }
 }
