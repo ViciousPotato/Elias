@@ -59,7 +59,6 @@
   };
 
   bitSchema.statics.create = function(topics, content, callback) {
-    console.log("topics: ", topics);
     return async.each(topics, function(topic, cb) {
       return Article.createIfNotExists(topic, '', cb);
     }, function(error) {
