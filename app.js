@@ -96,6 +96,15 @@ app.get('/', function(req, res) {
   });
 });
 
+app.get('/bits', function(req, res) {
+  return Bit.all(function(err, bits) {
+    res.send({
+      error: err,
+      bits: bits
+    });
+  });
+});
+
 app.get('/bit/since/:timestamp', function(req, res) {
   return Bit.bits_since(parseInt(req.param('timestamp')), function(err, bits) {
     var transformedBits;
@@ -163,12 +172,11 @@ app.get('/article/:topicname', function(req, res) {
 });
 
 app.post('/article/:id', function(req, res) {
-  var content, id, old_topic, topic, update_article;
-  id = req.params.id;
-  content = req.param('content');
-  topic = req.param('topic');
-  old_topic = req.param('oldTopic');
-  update_article = function() {
+  var id = req.params.id;
+  var content = req.param('content');
+  var topic = req.param('topic');
+  var old_topic = req.param('oldTopic');
+  var update_article = function() {
     return Article.update({
       _id: id
     }, {

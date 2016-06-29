@@ -409,3 +409,11 @@ body {
   border-right-color: #EEE;
   border-width: 6px;
 }
+
+.article-content .bit {
+  width: 150px;
+  height: 150xp;
+  overflow: ellipse;
+  margin:5px;
+  display: inline-block;
+}

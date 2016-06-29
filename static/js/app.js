@@ -125,9 +125,10 @@ $(document).ready(function() {
       // Save article
       // currentArticle.content = $('#article-editor').val();
       var updateData = {}
+      var topic = $('#editor-bit-topic').val();
 
       updateData.content =  $('#article-editor').val();
-      var topic = $('#editor-bit-topic').val();
+      updateData.topic = topic;
 
       // topic not changed.
       if (topic != currentArticle.topic) {
@@ -175,4 +176,21 @@ $(document).ready(function() {
    */
   });
 
+  $('.toolbar-list-bit').bind('click', function() {
+    // Load bits and put them into .article-content
+    $.get('/bits', function(data) {
+      d3.select(".article-content")
+        .html("")
+        .selectAll("div")
+        .data(data.bits)
+        .enter()
+        .append("div")
+        .attr("class", "bit")
+        .html(function(d) { return d.content });
+    });
+
+    if ($('.article-right').width() > 0) {
+      $('.article-right').velocity({width: "0px", opacity: 0});
+    }
+  });
 });

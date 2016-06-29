@@ -147,6 +147,10 @@
     });
   };
 
+  bitSchema.statics.all = function(callback) {
+    return this.find({}, null, { sort: {date: -1}}).exec(callback);
+  };
+
   bitSchema.methods.render = function(render) {
     return this.content = render(content);
   };
