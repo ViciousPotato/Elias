@@ -411,9 +411,58 @@ body {
 }
 
 .article-content .bit {
-  width: 150px;
-  height: 150xp;
-  overflow: ellipse;
-  margin:5px;
+  color: #444;
+  width: 215px;
+  max-height: 215px;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  margin: 5px 5px 10px 5px;
+  padding: 20px 20px 2px 20px;
   display: inline-block;
+  float: left;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(205,205,205,1);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(205,205,205,1);
+  box-shadow: 2px 2px 5px 0px rgba(205,205,205,1);
+}
+
+.article-content .bit .bit-content {
+  color: #333;
+  max-height: 150px;
+}
+
+.article-content .bit .bit-info {
+  height: 15px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.article-content .bit .bit-toolbar {
+  height: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.article-content .bit .bit-toolbar a {
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.article-content .bit .bit-toolbar a img {
+  transition: 1s ease;
+  opacity: 0.4;
+}
+
+.article-content .bit .bit-toolbar a img:hover {
+  opacity: 0.8;
+}
+
+
+.article-content .bit .bit-toolbar a.bit-toolbar-delete {
+  /* background: url(/img/bit-delete.png) no-repeat; */
+}
+
+.article-content .bit .bit-toolbar a.bit-toolbar-edit {
+  /* background: url(/img/bit-edit.png) no-repeat; */
 }

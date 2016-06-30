@@ -1,5 +1,5 @@
 var currentArticle;
-var articleTemplate, bitListTemplate, articleListTemplate;
+var articleTemplate, bitListTemplate, articleListTemplate, bitTemplate;
 
 var handleBarHelpers = {
   parseMarkdown: function(m) {
@@ -71,6 +71,7 @@ function initTemplates() {
   articleTemplate = Handlebars.compile($('#article-template').html());
   bitListTemplate = Handlebars.compile($('#bit-list-template').html());
   articleListTemplate = Handlebars.compile($('#article-list-template').html());
+  bitTemplate = Handlebars.compile($('#bit-template').html())
 }
 
 function blurBackground() {
@@ -144,7 +145,7 @@ $(document).ready(function() {
           loadArticle(topic);
           $('.article-content').toggleClass('flipped');
         }
-      });   
+      });
     }
 
   });
@@ -186,7 +187,16 @@ $(document).ready(function() {
         .enter()
         .append("div")
         .attr("class", "bit")
-        .html(function(d) { return d.content });
+        .html(function(d) {
+          return bitTemplate(
+            {
+              content: d.content,
+              date: moment(d.date).fromNow()
+            }
+          )
+         });
+
+      $("div.bit-content").dotdotdot();
     });
 
     if ($('.article-right').width() > 0) {
