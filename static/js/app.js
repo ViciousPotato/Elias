@@ -1,5 +1,11 @@
 var currentArticle;
-var articleTemplate, bitListTemplate, articleListTemplate, bitTemplate;
+
+// templates
+var articleTemplate
+  , bitListTemplate
+  , articleListTemplate
+  , bitTemplate
+  , articleEditorTemplate;
 
 var handleBarHelpers = {
   parseMarkdown: function(m) {
@@ -72,6 +78,7 @@ function initTemplates() {
   bitListTemplate = Handlebars.compile($('#bit-list-template').html());
   articleListTemplate = Handlebars.compile($('#article-list-template').html());
   bitTemplate = Handlebars.compile($('#bit-template').html())
+  articleEditorTemplate = Handlebars.compile($('#article-editor-template').html());
 }
 
 function blurBackground() {
@@ -81,11 +88,73 @@ function blurBackground() {
   $('#blur-img').attr('src', '/img/blur-bg.jpg');
 }
 
+function listBits() {
+  // Load bits and put them into .article-content
+  $.get('/bits', function(data) {
+    d3.select(".article-content")
+      .html("")
+      .selectAll("div")
+      .data(data.bits)
+      .enter()
+      .append("div")
+      .attr("class", "bit")
+      .html(function(d) {
+        return bitTemplate(
+          {
+            content: d.content,
+            date: moment(d.date).fromNow()
+          }
+        )
+       });
+
+    $("div.bit-content").dotdotdot();
+  });
+
+  if ($('.article-right').width() > 0) {
+    $('.article-right').velocity({width: "0px", opacity: 0});
+  }
+}
+
+// Append inElems to parent, and fadeout parent's existing elems.
+function fadeInOut(parent, inElems) {
+  var children = parent.children();
+
+  parent.append(inElems);
+
+  children.velocity({'margin-top': '-500px', opacity: 0}, function() {
+    this.forEach(function(d) {
+      d.remove();
+    });
+  })
+}
+
+function addBit() {
+  currentArticle = null;
+  // Fade out current view, fade in editor
+  var editor = articleEditorTemplate();
+  fadeInOut($('.article-content'), editor);
+
+  // $('.bit-topic').css({display: 'block'});
+  // $('.article-content-edit textarea').text('');
+  // $('.article-content-edit textarea').focus();
+  /*
+  var newEditor = $('.article-content-edit').clone();
+  $('.article-content-view').velocity({top: '600px', opacity: 0}, {duration: 900, complete: function(e) {
+    $(e).css({display: 'none'});
+  }});
+ */
+}
+
 $(document).ready(function() {
   initTemplates();
-
   blurBackground();
-  loadArticle('Random');
+  // loadArticle('Random');
+
+  var router = Router({
+    '/newbit': addBit,
+    '/': listBits
+  });
+  router.init();
 
   // Edit article
   $('.article-content').on('click', '.article-view-toolbar-edit', function() {
@@ -162,45 +231,22 @@ $(document).ready(function() {
     }
   });
 
-  $('.toolbar-add-bit a').bind('click', function() {
-    currentArticle = null;
-    $('.article-content').toggleClass('flipped');
+  // $('.toolbar-add-bit a').bind('click', function() {
+    // currentArticle = null;
+    // Fade out current view, fade in editor
+    // var editor = articleEditorTemplate();
+    // fadeInOut($('.article-content'), editor);
 
     // $('.bit-topic').css({display: 'block'});
-    $('.article-content-edit textarea').text('');
-    $('.article-content-edit textarea').focus();
+    // $('.article-content-edit textarea').text('');
+    // $('.article-content-edit textarea').focus();
     /*
     var newEditor = $('.article-content-edit').clone();
     $('.article-content-view').velocity({top: '600px', opacity: 0}, {duration: 900, complete: function(e) {
       $(e).css({display: 'none'});
     }});
    */
-  });
+  // });
 
-  $('.toolbar-list-bit').bind('click', function() {
-    // Load bits and put them into .article-content
-    $.get('/bits', function(data) {
-      d3.select(".article-content")
-        .html("")
-        .selectAll("div")
-        .data(data.bits)
-        .enter()
-        .append("div")
-        .attr("class", "bit")
-        .html(function(d) {
-          return bitTemplate(
-            {
-              content: d.content,
-              date: moment(d.date).fromNow()
-            }
-          )
-         });
-
-      $("div.bit-content").dotdotdot();
-    });
-
-    if ($('.article-right').width() > 0) {
-      $('.article-right').velocity({width: "0px", opacity: 0});
-    }
-  });
+  $('.toolbar-list-bit').bind('click', listBits);
 });

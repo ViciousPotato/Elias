@@ -12,7 +12,7 @@ body
       .logo
       .article-toolbar
         .span.toolbar-add-bit
-          a(href="#")
+          a(href="#/newbit")
         .span.toolbar-list-doc
           a(href="#")
         .span.toolbar-list-bit
@@ -20,30 +20,32 @@ body
     .article-list
     .article-content
       .article-content-view
-      .article-content-edit
-        .bit-topic
-          input#editor-bit-topic
-        .article-edit-toolbar
-          ul.article-editor-button
-            li
-              a(href="#") h1
-            li
-              a(href="#") h2
-            li
-              a(href="#") img
-            li
-              a(href="#") url
-            li
-              a(href="#")
-        .article-editor-function-button
-          .article-save
-            a(href="#") Save
-          .article-cancel
-            a(href="#") Cancel
-        textarea#article-editor
     .article-right
 
-  script#article-list-template(type="/text/x-handlebars-template")
+  script#article-editor-template(type="text/x-handlebars-template")
+    .article-content-edit
+      .bit-topic
+        input#editor-bit-topic
+      .article-edit-toolbar
+        ul.article-editor-button
+          li
+            a(href="#") h1
+          li
+            a(href="#") h2
+          li
+            a(href="#") img
+          li
+            a(href="#") url
+          li
+            a(href="#")
+      .article-editor-function-button
+        .article-save
+          a(href="#") Save
+        .article-cancel
+          a(href="#") Cancel
+      textarea#article-editor
+
+  script#article-list-template(type="text/x-handlebars-template")
     ul
       {{#topics}}
       li
@@ -128,4 +130,5 @@ body
   script(src="/js/velocity.min.js")
   script(src="/js/d3.v4.min.js")
   script(src="/js/jquery.dotdotdot.min.js")
+  script(src="/js/director.min.js")
   script(src="/js/app.js")
