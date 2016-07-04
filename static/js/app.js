@@ -117,15 +117,20 @@ function listBits() {
 
 // Append inElems to parent, and fadeout parent's existing elems.
 function fadeInOut(parent, inElems) {
-  var children = parent.children();
-
-  parent.append(inElems);
-
-  children.velocity({'margin-top': '-500px', opacity: 0}, function() {
-    this.forEach(function(d) {
-      d.remove();
-    });
-  })
+  d3.selectAll(".bit")
+    .transition()
+    .delay(function(d, i) { return i * 100; })
+    .duration(500)
+    .on("end", function(current, index, all) {
+      d3.select(this).remove();
+      if (index == all.length-1) {
+        parent.append(inElems);
+      }
+    })
+    .style("top", function() {
+        return (parseInt(d3.select(this).style("top")) - 200) + "px";
+    })
+    .style("opacity", 0);
 }
 
 function addBit() {
