@@ -122,9 +122,22 @@ function fadeInOut(parent, inElems) {
     .delay(function(d, i) { return i * 100; })
     .duration(500)
     .on("end", function(current, index, all) {
-      d3.select(this).remove();
       if (index == all.length-1) {
-        parent.append(inElems);
+        // Only start to remove things when animations are done.
+        // Or it will cause flickering animation.
+        parent.empty();
+        var editor = $(inElems);
+        parent.append(editor);
+
+        // TODO: add animation to new editor
+        d3.select(".article-content-edit")//editor.toArray())
+          .transition()
+          .duration(200)
+          .on("start", function() {
+            d3.select(this).style("opacity", 0).style("top", "200px");
+          })
+          .style("opacity", 1)
+          .style("top", "0px")
       }
     })
     .style("top", function() {

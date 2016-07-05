@@ -157,6 +157,7 @@ body {
 
 .article-content-edit {
   clear: both;
+  position: relative;
 }
 
 .article-content-view {
@@ -207,6 +208,10 @@ body {
 
 .bit-topic input:focus {
   outline: none !important;
+}
+
+.article-editor {
+  min-height: 600px;
 }
 
 /* Editor toolbar */
