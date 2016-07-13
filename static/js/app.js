@@ -1,11 +1,12 @@
 var currentArticle;
 
-// templates
+// === Templates ===
 var articleTemplate
   , bitListTemplate
   , articleListTemplate
   , bitTemplate
-  , articleEditorTemplate;
+  , articleEditorTemplate
+  , bitEditorTemplate;
 
 var handleBarHelpers = {
   parseMarkdown: function(m) {
@@ -22,16 +23,29 @@ var handleBarHelpers = {
   }
 };
 
-function error(msg) {
-  alert(msg);
-}
-
 _.each(handleBarHelpers, function(handler, name) {
   Handlebars.registerHelper(name, handler);
 });
 
-function loadArticle(topic) {
-  $.get('/article/' + topic, function(res) {
+function initTemplates() {
+  articleTemplate = Handlebars.compile($('#article-template').html());
+  bitListTemplate = Handlebars.compile($('#bit-list-template').html());
+  articleListTemplate = Handlebars.compile($('#article-list-template').html());
+  bitTemplate = Handlebars.compile($('#bit-template').html())
+  articleEditorTemplate = Handlebars.compile($('#article-editor-template').html());
+  bitEditorTemplate = Handlebars.compile($('#bit-editor-template').html());
+}
+
+function error(msg) {
+  alert(msg);
+}
+
+function redirect(url) {
+  location.hash = url;
+}
+
+function loadArticle(title) {
+  $.get('/article/' + title, function(res) {
     if (res.error) {
       return error(res.error);
     }
@@ -73,14 +87,6 @@ function slideOutArticleList() {
   $('.article-list').velocity({width: "0px", opacity: 0}, {queue: false});
 }
 
-function initTemplates() {
-  articleTemplate = Handlebars.compile($('#article-template').html());
-  bitListTemplate = Handlebars.compile($('#bit-list-template').html());
-  articleListTemplate = Handlebars.compile($('#article-list-template').html());
-  bitTemplate = Handlebars.compile($('#bit-template').html())
-  articleEditorTemplate = Handlebars.compile($('#article-editor-template').html());
-}
-
 function blurBackground() {
   $('#blur-img').on('load', function() {
     stackBlurImage('blur-img', 'blur-canvas', 180, false);
@@ -115,62 +121,86 @@ function listBits() {
   }
 }
 
-// Append inElems to parent, and fadeout parent's existing elems.
-function fadeInOut(parent, inElems) {
-  d3.selectAll(".bit")
-    .transition()
-    .delay(function(d, i) { return i * 100; })
-    .duration(500)
-    .on("end", function(current, index, all) {
-      if (index == all.length-1) {
-        // Only start to remove things when animations are done.
-        // Or it will cause flickering animation.
-        parent.empty();
-        var editor = $(inElems);
-        parent.append(editor);
+function saveBit() {
+  // Save bit. Bit mode.
+  var bitContent = $('.bit-editor').val();
+  var bitTopic = ''; // By default bit should have no topic
+  $.post('/bit', {content: bitContent, topic: bitTopic}, function(res) {
+    
+  });
+  // TODO: What if save error and no article is defined now.  
+}
 
-        // TODO: add animation to new editor
-        d3.select(".article-content-edit")//editor.toArray())
-          .transition()
-          .duration(200)
-          .on("start", function() {
-            d3.select(this).style("opacity", 0).style("top", "200px");
-          })
-          .style("opacity", 1)
-          .style("top", "0px")
-      }
-    })
-    .style("top", function() {
+// Append inElems to parent, and fadeout parent's existing elems.
+function fadeOutBitFadeInEditor(parent, editorTmpl) {
+  var fadeInEditor = function() {
+    parent.empty();
+    var editor = $(editorTmpl);
+    parent.append(editor);
+
+
+    $(".bit-save a").bind("click", saveBit);
+
+    d3.select(".article-content-edit")//TODO: editor.toArray())
+      .transition()
+      .duration(200)
+      .on("start", function() {
+        d3.select(this).style("opacity", 0).style("top", "200px");
+      })
+      .style("opacity", 1)
+      .style("top", "0px");
+  }
+
+  var fadeOutBitList = function() {
+    d3.select(".article-right")
+      .transition()
+      .duration(200)
+      .style("width", "0px");
+  }
+
+  fadeOutBitList();
+
+  var bits = d3.selectAll(".article-content .bit");
+
+  // If there are no content, just fade in editor.
+  if (bits.empty()) {
+    fadeInEditor();
+  }
+  else {
+    d3.selectAll(".bit")
+      .transition()
+      .delay(function(d, i) { return i * 100; })
+      .duration(500)
+      .on("end", function(current, index, all) {
+        if (index == all.length-1) {
+          // Only start to remove things when animations are done.
+          // Or it will cause flickering animation.
+          fadeInEditor();
+        }
+
+      })
+      .style("top", function() {
         return (parseInt(d3.select(this).style("top")) - 200) + "px";
-    })
-    .style("opacity", 0);
+      })
+      .style("opacity", 0);
+  }
+
 }
 
 function addBit() {
   currentArticle = null;
   // Fade out current view, fade in editor
-  var editor = articleEditorTemplate();
-  fadeInOut($('.article-content'), editor);
-
-  // $('.bit-topic').css({display: 'block'});
-  // $('.article-content-edit textarea').text('');
-  // $('.article-content-edit textarea').focus();
-  /*
-  var newEditor = $('.article-content-edit').clone();
-  $('.article-content-view').velocity({top: '600px', opacity: 0}, {duration: 900, complete: function(e) {
-    $(e).css({display: 'none'});
-  }});
- */
+  var editorTmpl = bitEditorTemplate();
+  fadeOutBitFadeInEditor($('.article-content'), editorTmpl);
 }
 
 $(document).ready(function() {
   initTemplates();
   blurBackground();
-  // loadArticle('Random');
 
   var router = Router({
     '/newbit': addBit,
-    '/': listBits
+    '/'      : listBits
   });
   router.init();
 
@@ -193,6 +223,24 @@ $(document).ready(function() {
     $('.article-content-edit #editor-bit-topic').val(currentArticle.topic);
   });
 
+
+  $(".bit-save a").bind("click", function() {
+    // Save bit. Bit mode.
+    var bitContent = $('.bit-editor').val();
+    var bitTopic = ''; // By default bit should have no topic
+    $.post('/bit', {content: bitContent, topic: bitTopic}, function(res) {
+      return;
+      var topics = res.topics;
+      if (!topics || topics.length == 0) {
+        loadArticle('Random'); // TODO: remove hard code 'Random'.
+      } else {
+        loadArticle(topics[0]); // TODO: needs improvement too.
+        // Like we can highlight it on the right.
+      }
+    });
+    // TODO: What if save error and no article is defined now.
+    
+  });
   // Save article
   $('.article-save').bind('click', function() {
     if (currentArticle == null) {

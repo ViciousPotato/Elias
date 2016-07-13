@@ -149,18 +149,15 @@ body {
   position: relative;
 }
 
-.article-content-view, .article-content-edit {
+.article-content-view, .article-content-edit, .bit-content-edit {
   width: 100%;
   height: 100%;
   padding-right: 25px;
 }
 
-.article-content-edit {
+.article-content-edit, .bit-content-edit {
   clear: both;
   position: relative;
-}
-
-.article-content-view {
 }
 
 .article-title {
@@ -210,29 +207,38 @@ body {
   outline: none !important;
 }
 
-.article-editor {
+.article-editor, .bit-editor {
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid #EEE;
+  border-bottom: 1px solid #EEE;
+  margin-top: 10px;
+  border-right: 0;
+  border-left: 0;
+  padding-top: 6px;
+  font-size: 12px;
   min-height: 600px;
 }
 
 /* Editor toolbar */
-.article-edit-toolbar {
+.article-edit-toolbar, .bit-edit-toolbar {
   width: 400px;
   height: 26px;
   background-color: #ecf0f1;
   margin-bottom: 2px;
   float: left;
 }
-.article-edit-toolbar ul {
+.article-edit-toolbar ul, .bit-edit-toolbar ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
   height: 26px;
 }
-.article-edit-toolbar li {
+.article-edit-toolbar li, .bit-edit-toolbar li {
   float: left;
   height: 100%;
 }
-.article-edit-toolbar li a {
+.article-edit-toolbar li a, .bit-edit-toolbar li a {
   display: block;
   width: 36px;
   height: 26px;
@@ -241,21 +247,21 @@ body {
   text-align: center;
   font-weight: bold;
 }
-.article-edit-toolbar li a:hover {
+.article-edit-toolbar li a:hover, .bit-edit-toolbar li a:hover {
   background-color: #4c4d4f;
   color: #ecf0f1;
 }
-.article-editor-function-button {
+.article-editor-function-button, .bit-editor-function-button {
   height: 26px;
   float: left;
   margin-left: 15px;
 }
-.article-save, .article-cancel {
+.article-save, .article-cancel, .bit-save, .bit-cancel {
   margin-right: 4px;
   float: left;
   text-align: center;
 }
-.article-save a, .article-cancel a {
+.article-save a, .article-cancel a, .bit-save a, .bit-cancel a {
   display: block;
   background-color: #27ae60;
   height: 26px;
@@ -266,21 +272,14 @@ body {
   border-radius: 4px;
   font-size: 11px;
 }
-.article-save a:hover, .article-cancel a:hover {
+.article-save a:hover, .article-cancel a:hover, .bit-save a:hover, .bit-cancel a:hover {
   background-color: #30cd72;
 }
 
-.article-content-edit textarea {
-  width: 100%;
-  height: 100%;
-  border-top: 1px solid #EEE;
-  margin-top: 10px;
-  border-right: 0;
-  border-left: 0;
-  padding-top: 6px;
-  font-size: 12px;
+.article-content-edit textarea, .bit-content-edit textarea {
 }
-.article-content-edit textarea:focus {
+
+.article-content-edit textarea:focus, .bit-content-edit textarea:focus {
   outline: none !important;
 }
 
@@ -304,6 +303,7 @@ body {
 .article-right {
   display: table-cell;
   width: 250px;
+  overflow: hidden;
 }
 
 .article-right .bit-list {
@@ -432,6 +432,7 @@ body {
   height: 15px;
   margin-top: 25px;
   margin-bottom: 10px;
+  color: #D8D8D8;
 }
 
 .article-content .bit .bit-toolbar {

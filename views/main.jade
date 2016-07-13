@@ -22,6 +22,27 @@ body
       .article-content-view
     .article-right
 
+  script#bit-editor-template(type="text/x-handlebars-template")
+    .bit-content-edit
+      .bit-edit-toolbar
+        ul.bit-editor-button
+          li
+            a(href="#") h1
+          li
+            a(href="#") h2
+          li
+            a(href="#") img
+          li
+            a(href="#") url
+          li
+            a(href="#")
+      .bit-editor-function-button
+        .bit-save
+          a(href="#") Save
+        .bit-cancel
+          a(href="#") Cancel
+      textarea.bit-editor
+
   script#article-editor-template(type="text/x-handlebars-template")
     .article-content-edit
       .bit-topic
@@ -43,7 +64,7 @@ body
           a(href="#") Save
         .article-cancel
           a(href="#") Cancel
-      textarea#article-editor
+      textarea.article-editor
 
   script#article-list-template(type="text/x-handlebars-template")
     ul

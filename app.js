@@ -145,6 +145,95 @@ app.get('/bit/pdf/:id', function(req, res) {
   });
 });
 
+
+app.get('/bit/paging/:offset/:limit', function(req, res) {
+  return Bit.bits(req.params.offset, req.params.limit, marked, function(error, bits) {
+    var groups;
+    groups = _.groupBy(bits, function(bit) {
+      return moment(bit.date).format("MMM|DD");
+    });
+    return res.send({
+      error: error,
+      bits: groups
+    });
+  });
+});
+
+app.post('/bit', function(req, res) {
+  var bit, content, topic;
+  topic = req.param('topic');
+  content = req.param('content');
+  bit = new Bit({
+    content: content,
+    topics: [topic]
+  });
+  return bit.save(function(error, bit) {
+    bit.content = marked(content);
+    return async.each([topic], function(topic, cb) {
+      var actitivity;
+      actitivity = new Activity({
+        topic: topic,
+        action: 'Add',
+        detail: 'Added bit: ' + util.shorten_text(content, 10),
+        bitId: bit._id
+      });
+      return actitivity.save(function(error, act) {
+        return cb();
+      });
+    }, function(error) {
+      if (error) {
+        return res.send({
+          error: error
+        });
+      } else {
+        return res.send(bit);
+      }
+    });
+  });
+});
+
+app.get('/bit/edit/:id', function(req, res) {
+  return Bit.findOne({
+    _id: req.params.id
+  }, function(error, bit) {
+    return res.render('edit.jade', {
+      bit: bit
+    });
+  });
+});
+
+app.post('/bit/edit/:id', function(req, res) {
+  var parsed;
+  parsed = util.parse_bit(req.body.content);
+  return Bit.update({
+    _id: req.params.id
+  }, {
+    content: parsed.content,
+    topics: parsed.topics
+  }, function(err, bit) {
+    return res.redirect("/#" + req.params.id);
+  });
+});
+
+app.get('/bit/delete/:id', function(req, res) {
+  return Bit.remove({
+    _id: req.params.id
+  }, function(err, bit) {
+    return res.redirect('/');
+  });
+});
+
+app.get('/view/:id', function(req, res) {
+  return Bit.findOne({
+    _id: req.params.id
+  }, function(error, bit) {
+    return res.render('view.jade', {
+      bit: bit
+    });
+  });
+});
+
+// == Article ==
 app.get('/topics', function(req, res) {
   return Bit.topics(function(error, topics) {
     if (error) {
@@ -229,92 +318,6 @@ app.get('/topic/pdf/:topicname', function(req, res) {
   });
 });
 
-app.get('/bit/:offset/:limit', function(req, res) {
-  return Bit.bits(req.params.offset, req.params.limit, marked, function(error, bits) {
-    var groups;
-    groups = _.groupBy(bits, function(bit) {
-      return moment(bit.date).format("MMM|DD");
-    });
-    return res.send({
-      error: error,
-      bits: groups
-    });
-  });
-});
-
-app.post('/bit', function(req, res) {
-  var bit, content, topic;
-  topic = req.param('topic');
-  content = req.param('content');
-  bit = new Bit({
-    content: content,
-    topics: [topic]
-  });
-  return bit.save(function(error, bit) {
-    bit.content = marked(content);
-    return async.each([topic], function(topic, cb) {
-      var actitivity;
-      actitivity = new Activity({
-        topic: topic,
-        action: 'Add',
-        detail: 'Added bit: ' + util.shorten_text(content, 10),
-        bitId: bit._id
-      });
-      return actitivity.save(function(error, act) {
-        return cb();
-      });
-    }, function(error) {
-      if (error) {
-        return res.send({
-          error: error
-        });
-      } else {
-        return res.send(bit);
-      }
-    });
-  });
-});
-
-app.get('/edit/:id', function(req, res) {
-  return Bit.findOne({
-    _id: req.params.id
-  }, function(error, bit) {
-    return res.render('edit.jade', {
-      bit: bit
-    });
-  });
-});
-
-app.post('/edit/:id', function(req, res) {
-  var parsed;
-  parsed = util.parse_bit(req.body.content);
-  return Bit.update({
-    _id: req.params.id
-  }, {
-    content: parsed.content,
-    topics: parsed.topics
-  }, function(err, bit) {
-    return res.redirect("/#" + req.params.id);
-  });
-});
-
-app.get('/delete/:id', function(req, res) {
-  return Bit.remove({
-    _id: req.params.id
-  }, function(err, bit) {
-    return res.redirect('/');
-  });
-});
-
-app.get('/view/:id', function(req, res) {
-  return Bit.findOne({
-    _id: req.params.id
-  }, function(error, bit) {
-    return res.render('view.jade', {
-      bit: bit
-    });
-  });
-});
 
 app.post('/upload', function(req, res) {
   var fileExt, scaledUrl, url;
