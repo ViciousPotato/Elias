@@ -202,6 +202,14 @@ app.get('/bit/edit/:id', function(req, res) {
   });
 });
 
+app.get('/bit/get/:id', function(req, res) {
+  return Bit.findOne({
+    _id: req.params.id
+  }, function(error, bit) {
+    return res.send({error: error, bit: bit});
+  });
+});
+
 app.post('/bit/edit/:id', function(req, res) {
   var parsed = util.parse_bit(req.body.content);
   return Bit.update({

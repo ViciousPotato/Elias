@@ -42,6 +42,9 @@ body
         .bit-cancel
           a(href="#") Cancel
       textarea.bit-editor
+        {{#if bit}}
+        | {{{bit.content}}}
+        {{/if}}
 
   script#article-editor-template(type="text/x-handlebars-template")
     .article-content-edit

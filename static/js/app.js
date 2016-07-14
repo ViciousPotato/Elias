@@ -31,7 +31,7 @@ function initTemplates() {
   articleTemplate       = Handlebars.compile($('#article-template').html());
   bitListTemplate       = Handlebars.compile($('#bit-list-template').html());
   articleListTemplate   = Handlebars.compile($('#article-list-template').html());
-  bitTemplate           = Handlebars.compile($('#bit-template').html())
+  bitTemplate           = Handlebars.compile($('#bit-template').html());
   articleEditorTemplate = Handlebars.compile($('#article-editor-template').html());
   bitEditorTemplate     = Handlebars.compile($('#bit-editor-template').html());
 }
@@ -131,7 +131,15 @@ function listBits() {
           .style("opacity", 0);
         });
       });
-      $("div.bit-content").dotdotdot();
+
+    d3.selectAll(".article-content .bit-toolbar-edit")
+      .on("click", function() {
+        var parent = $(this).parents('.bit')[0];
+        var id = d3.select(parent).datum()['_id'];
+        editBit(id);
+      });
+
+    $("div.bit-content").dotdotdot();
   });
 
   if ($('.article-right').width() > 0) {
@@ -214,13 +222,30 @@ function addBit() {
   fadeOutBitFadeInEditor($('.article-content'), editorTmpl);
 }
 
+function editBit(id) {
+  $.get('/bit/get/'+id, function(data) {
+    if (data.error) {
+      return error(data.error);
+    }
+    var editorTmpl = bitEditorTemplate({
+      bit: data.bit
+    });
+    fadeOutBitFadeInEditor($('.article-content'), editorTmpl);
+  });
+}
+
 $(document).ready(function() {
   initTemplates();
   blurBackground();
 
   var router = Router({
-    '/newbit': addBit,
-    '/'      : listBits
+    '/newbit'  : addBit,
+    '/'        : listBits,
+    '/editbit' : {
+      '/:id': {
+        on: function(id) { editBit(id);  }
+      }
+    }
   });
   router.init();
 
