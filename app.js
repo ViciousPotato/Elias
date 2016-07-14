@@ -203,8 +203,7 @@ app.get('/bit/edit/:id', function(req, res) {
 });
 
 app.post('/bit/edit/:id', function(req, res) {
-  var parsed;
-  parsed = util.parse_bit(req.body.content);
+  var parsed = util.parse_bit(req.body.content);
   return Bit.update({
     _id: req.params.id
   }, {
@@ -219,7 +218,8 @@ app.get('/bit/delete/:id', function(req, res) {
   return Bit.remove({
     _id: req.params.id
   }, function(err, bit) {
-    return res.redirect('/');
+      console.log(err, bit);
+      return res.send({error: err});
   });
 });
 
