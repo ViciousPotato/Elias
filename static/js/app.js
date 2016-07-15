@@ -50,18 +50,33 @@ function loadArticle(title) {
     if (res.error) {
       return error(res.error);
     }
-    currentArticle = res;
 
-    var article = articleTemplate(res);
-    $(".article-content-view").html(article);
+    fadeOutChildren(".article-content", function() {
+      currentArticle = res;
 
-    if ($('.article-content').hasClass('flipped')) {
-      // If it's in edit mode. Flip into view mode.
-      $('.article-content').toggleClass('flipped');
+      var article = articleTemplate(res);
+      $(".article-content-view").html(article);
+
+      if ($('.article-content').hasClass('flipped')) {
+        // If it's in edit mode. Flip into view mode.
+        $('.article-content').toggleClass('flipped');
+      }
+
+      var bitList = bitListTemplate({bits: res.bits});
+      $(".article-right").html($(bitList));
+    });
+  });
+}
+
+function listArticles() {
+  $.get('/article/metas', function(res) {
+    if (res.error) { return error(res.error.message); }
+    for (var articleMeta in res.metas) {
+      // Do the listing of left.
     }
+  });
+  $.get('/article/latest', function(res) {
 
-    var bitList = bitListTemplate({bits: res.bits});
-    $(".article-right").html($(bitList));
   });
 }
 
@@ -107,9 +122,14 @@ function listBits() {
       .append("div")
       .attr("class", "bit")
       .html(function(d) {
+        var displayDate = 
+            (d.lastModified == d.date)
+          ? "Created " + moment(d.date).fromNow()
+          : "Updated " + moment(d.lastModified).fromNow();
+
         return bitTemplate({
           content: d.content,
-          date: moment(d.date).fromNow(),
+          date: displayDate,
           id: d._id
         });
       });
@@ -135,8 +155,8 @@ function listBits() {
     d3.selectAll(".article-content .bit-toolbar-edit")
       .on("click", function() {
         var parent = $(this).parents('.bit')[0];
-        var id = d3.select(parent).datum()['_id'];
-        editBit(id);
+        var bit = d3.select(parent).datum();
+        editBit(bit);
       });
 
     $("div.bit-content").dotdotdot();
@@ -147,27 +167,55 @@ function listBits() {
   }
 }
 
-function saveBit() {
-  // Save bit. Bit mode.
+// Save bit. 
+// @id: null -> create new bit.
+//      val  -> update existing bit.
+function saveBit(id) {
   var bitContent = $('.bit-editor').val();
-  var bitTopic = ''; // By default bit should have no topic
-  $.post('/bit', {content: bitContent, topic: bitTopic}, function(res) {
-
+  id = id || null;
+  $.post('/bit', {content: bitContent, id: id}, function(res) {
+    if (res.error) {
+      return error(res.error.message);
+    }
+    redirect('bits');
   });
-  // TODO: What if save error and no article is defined now.  
 }
 
-// Append inElems to parent, and fadeout parent's existing elems.
-function fadeOutBitFadeInEditor(parent, editorTmpl) {
+function fadeOutChildren(parentSelector, callback) {
+  var parent = $(parentSelector);
+  var removeClassName = "removing" + Math.random().toString().replace(".", "");
+
+  // Assign unique class names to children for d3 to remove.
+  parent.children().each(function(i, c) { $(c).addClass(removeClassName) });
+  // Then perform the animation
+  d3.selectAll("." + removeClassName)
+    .transition()
+    .delay(function(d, i) { return i * Math.random() * 50; })
+    .duration(Math.random() * 200)
+    .on("end", function(current, index, all) {
+      if (index == all.length-1) {
+        // Only start to remove things when animations are done.
+        // Or it will cause flickering animation.
+        parent.empty();
+        callback || callback();
+      }
+
+    })
+    .style("opacity", 0);
+}
+
+function fadeOutBitFadeInEditor(editorTmpl, handlers) {
+  var parent = $('.article-content');
   var fadeInEditor = function() {
     // Append DOM element
     var editor = $(editorTmpl);
     parent.append(editor);
 
     // Register event listeners to editor
-    $(".bit-save a").bind("click", saveBit);
+    // Last anonymous fun is to clean jquery parameters.
+    $(".bit-save a").bind("click", handlers && handlers.save || function() { saveBit(); });
 
-    // Fade in
+    // Fade in editor, .article-content-edit is appened by editorTmpl
     d3.select(".article-content-edit")
       .transition()
       .duration(200)
@@ -216,22 +264,16 @@ function fadeOutBitFadeInEditor(parent, editorTmpl) {
 }
 
 function addBit() {
-  currentArticle = null;
   // Fade out current view, fade in editor
   var editorTmpl = bitEditorTemplate();
-  fadeOutBitFadeInEditor($('.article-content'), editorTmpl);
+  fadeOutBitFadeInEditor(editorTmpl);
 }
 
-function editBit(id) {
-  $.get('/bit/get/'+id, function(data) {
-    if (data.error) {
-      return error(data.error);
-    }
-    var editorTmpl = bitEditorTemplate({
-      bit: data.bit
-    });
-    fadeOutBitFadeInEditor($('.article-content'), editorTmpl);
-  });
+function editBit(bit) {
+  var editorTmpl = bitEditorTemplate({bit: bit});
+  fadeOutBitFadeInEditor(editorTmpl, {save: function() {
+    saveBit(bit._id);
+  }});
 }
 
 $(document).ready(function() {
@@ -241,11 +283,14 @@ $(document).ready(function() {
   var router = Router({
     '/newbit'  : addBit,
     '/'        : listBits,
+    '/bits'    : listBits
+    /*
     '/editbit' : {
       '/:id': {
         on: function(id) { editBit(id);  }
       }
     }
+    */
   });
   router.init();
 
@@ -320,6 +365,7 @@ $(document).ready(function() {
   $('.toolbar-list-doc a').bind('click', function() {
     if ($('.article-list').width() == 0) {
       slideInArticleList();
+      fadeOutChildren(".article-content");
     } else {
       slideOutArticleList();
     }

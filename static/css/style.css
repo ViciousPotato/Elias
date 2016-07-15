@@ -46,7 +46,6 @@ body {
 }
 
 /* Left and toolbar */
-
 .article-left {
   display: table-cell;
   width: 100px;
@@ -81,13 +80,24 @@ body {
   line-height: 20px;
   font-size: 15px;
   margin-bottom: 5px;
-  width: 250px;
+  width: 200px;
 }
 
 .article-list .topic-list a {
   display: block;
   width: 100%;
   color: black;
+}
+
+a.craft-new-article {
+  text-align: center;
+  display: block;
+  background-color: #27ae60;
+  width: 100%;
+  line-height: 26px;
+  color: white !important;
+  font-weight: bold;
+  font-size: 11px;
 }
 
 .article-list .topic-list a:hover {
@@ -433,6 +443,7 @@ body {
   margin-top: 25px;
   margin-bottom: 10px;
   color: #D8D8D8;
+  font-size: 0.8em;
 }
 
 .article-content .bit .bit-toolbar {
@@ -456,7 +467,6 @@ body {
 .article-content .bit .bit-toolbar a img:hover {
   opacity: 0.8;
 }
-
 
 .article-content .bit .bit-toolbar a.bit-toolbar-delete {
   /* background: url(/img/bit-delete.png) no-repeat; */

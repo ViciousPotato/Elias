@@ -37,15 +37,11 @@ app.use(express.bodyParser({
   keepExtensions: true,
   uploadDir: './static/uploads'
 }));
-
 app.use(express.cookieParser('secret'));
-
 app.use(express.session({
   secret: 'secret'
 }));
-
 app.use(express["static"](__dirname + '/static'));
-
 app.use(morgan('combined', {
   stream: accessLogStream
 }));
@@ -53,9 +49,7 @@ app.use(morgan('combined', {
 app.use(favicon(__dirname + "/static/img/favicon.ico"));
 
 app.set('views', 'views/');
-
 app.set('view engine', 'jade');
-
 app.set('view options', {
   layout: true
 });
@@ -145,7 +139,6 @@ app.get('/bit/pdf/:id', function(req, res) {
   });
 });
 
-
 app.get('/bit/paging/:offset/:limit', function(req, res) {
   return Bit.bits(req.params.offset, req.params.limit, marked, function(error, bits) {
     var groups;
@@ -160,34 +153,34 @@ app.get('/bit/paging/:offset/:limit', function(req, res) {
 });
 
 app.post('/bit', function(req, res) {
-  var bit, content, topic;
-  topic = req.param('topic');
-  content = req.param('content');
-  bit = new Bit({
-    content: content,
-    topics: [topic]
+  var content = req.param('content');
+  var id = req.param('id');
+
+  if (id) {
+    // edit save mode
+    return Bit.update({
+      _id: id
+    }, {
+      content: content,
+      lastModified: Date.now()
+    }, function(err, bit) {
+      return res.send({
+        error: err,
+        bit: bit
+      });
+    });
+  }
+
+  // Create new bit
+  var bit = new Bit({
+    content: content
   });
+
   return bit.save(function(error, bit) {
     bit.content = marked(content);
-    return async.each([topic], function(topic, cb) {
-      var actitivity;
-      actitivity = new Activity({
-        topic: topic,
-        action: 'Add',
-        detail: 'Added bit: ' + util.shorten_text(content, 10),
-        bitId: bit._id
-      });
-      return actitivity.save(function(error, act) {
-        return cb();
-      });
-    }, function(error) {
-      if (error) {
-        return res.send({
-          error: error
-        });
-      } else {
-        return res.send(bit);
-      }
+    return res.send({
+      error: error,
+      bit: bit
     });
   });
 });
@@ -252,6 +245,12 @@ app.get('/topics', function(req, res) {
     return res.send({
       topics: topics
     });
+  });
+});
+
+app.get('/article/latest', function(req, res) {
+  Article.latest(function(error, article) {
+    return res.send({error: error, article: article});
   });
 });
 

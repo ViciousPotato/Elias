@@ -16,8 +16,12 @@
 
   bitSchema = new mongoose.Schema({
     content: String,
-    topics: [String],
-    date: {
+    topics: [String], /* ???? */
+    date: { /* Creation date */
+      type: Date,
+      "default": Date.now
+    },
+    lastModified: {
       type: Date,
       "default": Date.now
     }
