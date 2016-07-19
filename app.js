@@ -254,23 +254,48 @@ app.get('/article/latest', function(req, res) {
   });
 });
 
-app.get('/article/:topicname', function(req, res) {
-  var topic_name;
-  topic_name = req.params.topicname;
-  return Article.get(topic_name, function(error, article) {
-    if (error) {
-      return res.send({
-        'error': error
-      });
-    }
-    return res.send(article);
+app.get('/article/metas', function(req, res) {
+  Article.find(
+    {},
+    {title: 1, created: 1, lastModified: 1, _od: 1},
+    function(error, articles) {
+      return res.send({error: error, metas: articles});
+    });
+});
+
+app.get('/article/title/:title', function(req, res) {
+  var title = req.params.title;
+  return Article.get(title, function(error, article) {
+    return res.send({
+      error: error,
+      article: article
+    });
   });
 });
 
+// Create Article
+app.post('/article', function(req, res) {
+  var title = req.param('title');
+  var content = req.param('content');
+
+  var article = new Article({
+    title: title,
+    content: content
+  });
+
+  return article.save(function(error, article) {
+    return res.send({
+      error: error,
+      article: article
+    });
+  })
+});
+
+// Update article
 app.post('/article/:id', function(req, res) {
   var id = req.params.id;
   var content = req.param('content');
-  var topic = req.param('topic');
+  var title = req.param('title');
   var old_topic = req.param('oldTopic');
   var update_article = function() {
     return Article.update({

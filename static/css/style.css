@@ -319,6 +319,7 @@ a.craft-new-article {
 .article-right .bit-list {
   position: relative;
   margin-top: 32px;
+  padding-left: 25px;
 }
 
 .article-right .bit-list::before {

@@ -4,14 +4,15 @@ var mongoose = require('mongoose')
   , util = require('../util');
 
 var articleSchema = new mongoose.Schema({
-  topic: String,
+  title: String,
   content: String,
-  bits: [],
+  bitsMapping: [], // [{start: index, end: index, bit: bitID}, ]
+  // TODO: how mongo can store whole bit here and sync the modification without using bitID?
   created: {
     type: Date,
     "default": Date.now
   },
-  updated: {
+  lastModified: {
     type: Date,
     "default": Date.now
   }
@@ -23,12 +24,13 @@ articleSchema.statics.latest = function(cb) {
 
 articleSchema.statics.createIfNotExists = function(name, content, cb) {
   var article = new Article({
-    topic: name,
+    title: name,
     content: content
   });
   return article.save(cb);
 };
 
+/*
 articleSchema.statics.get = function(topic, cb) {
   return Bit.bitsInTopic(topic, function(error, bits) {
     if (error) {
@@ -60,17 +62,17 @@ articleSchema.statics.get = function(topic, cb) {
     });
   });
 };
+*/
 
-articleSchema.statics.topics = function(callback) {
+articleSchema.statics.titles = function(callback) {
   return Article.find({}, function(error, articles) {
-    var topics;
     if (error) {
       return callback(error, null);
     }
-    topics = _.map(articles, function(article) {
-      return [article.topic, article.updated];
+    var titles = _.map(articles, function(article) {
+      return [article.title, article.lastModified];
     });
-    return callback(null, topics);
+    return callback(null, titles);
   });
 };
 

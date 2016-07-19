@@ -14,9 +14,9 @@ body
         .span.toolbar-add-bit
           a(href="#/newbit")
         .span.toolbar-list-doc
-          a(href="#")
+          a(href="#/articles")
         .span.toolbar-list-bit
-          a(href="#")
+          a(href="#/bits")
     .article-list
     .article-content
       .article-content-view
@@ -67,22 +67,23 @@ body
           a(href="#") Save
         .article-cancel
           a(href="#") Cancel
-      textarea.article-editor
+      textarea.article-editor // (ondrop="dropToEditor(event)", ondragover="allowDrop(event)")
 
   script#article-list-template(type="text/x-handlebars-template")
     ul
       li
-        a.craft-new-article(href="#") Craft New Article
-      {{#topics}}
+        a.craft-new-article(href="javascript: craftArticle();") Craft New Article
+      {{#metas}}
       li
         .topic-list
-          a(href="#") {{this.[0]}}
-          span.topic-update-time {{articleDate this.[1]}}
-      {{/topics}}
+          a(href="javascript:loadArticle({{this._id}})") {{this.title}}
+          span.topic-update-time {{articleDate this.lastModified}}
+      {{/metas}}
 
   script#article-template(type="text/x-handlebars-template")
+    
     .article-title
-      {{topic}}
+      {{title}}
     .article-view-toolbar
       a.article-view-toolbar-edit(href="#")
     .article-status
@@ -107,34 +108,9 @@ body
             {{getMonth this.date}}
           .bit-date-day
             {{getDay this.date}}
-        .bit-summary
+        .bit-summary(draggable="true", ondragstart="dragBit(event)")
           {{this.content}}
       {{/bits}}
-
-  script#editor-template(type="text/x-handlebars-template")
-    .article-edit-toolbar
-      ul.article-editor-button
-        li
-          a(href="#") h1
-        li
-          a(href="#") h2
-        li
-          a(href="#") img
-        li
-          a(href="#") url
-        li
-          a(href="#")
-    .article-editor-function-button
-      .article-save
-        a(href="#") Save
-      .article-cancel
-        a(href="#") Cancel
-    textarea{{#if editorid}}{{editorid}}{{else}}#article-editor{{/if}}
-    {{#if isbit}}
-    .bit-topic
-      span Topic
-      input#editor-bit-topic(name="topic")
-    {{/if}}
 
   script#bit-template(type="text/x-handlebars-template")
     .bit-content
