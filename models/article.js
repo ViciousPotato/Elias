@@ -19,7 +19,7 @@ var articleSchema = new mongoose.Schema({
 });
 
 articleSchema.statics.latest = function(cb) {
-  this.find().limit(1).sort({$natural: -1}).exec(cb);
+  this.findOne().sort({$natural: -1}).exec(cb);
 };
 
 articleSchema.statics.createIfNotExists = function(name, content, cb) {

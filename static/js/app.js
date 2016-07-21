@@ -55,15 +55,20 @@ function clearSides() {
   }
 }
 
-function loadArticle(title) {
-  $.get('/article/' + title, function(res) {
+function loadArticle(id) {
+  $.get('/article/' + id, function(res) {
     if (res.error) {
       return error(res.error);
     }
 
+    // slideOut(".article-list");
     fadeOutChildren(".article-content", function() {
-      currentArticle = res;
+      $('.article-content').html(articleTemplate(res.article));
+      $('.article-content .article-view-toolbar-edit').on('click', function() {
+        editArticle(res.article);
+      });
 
+    /*
       var article = articleTemplate(res);
       $(".article-content-view").html(article);
 
@@ -74,6 +79,7 @@ function loadArticle(title) {
 
       var bitList = bitListTemplate({bits: res.bits});
       $(".article-right").html($(bitList));
+      */
     });
   });
 }
@@ -117,8 +123,8 @@ function listArticles() {
     // Show article
     // TODO: and related bits
     // TODO: if no content, show create guide.
-    if (res.article && res.article.length > 0) {
-      $('.article-content').html(articleTemplate(res.article));
+    if (res.article) {
+      loadArticle(res.article._id);
     } else {
       $('.article-content').html('');
     }
@@ -132,7 +138,7 @@ function showArticle(id) {
 }
 
 function craftArticle() {
-  d3.select(".article-list").transition().duration(200).style("width", "0px").style("opacity", 0);
+  slideOut(".article-list");
   $(".article-content").html(articleEditorTemplate());
   $(".article-content .article-save").on("click", function() {
     // TODO: disable editor while saving
@@ -150,6 +156,21 @@ function craftArticle() {
     }
     // Fill the right
     $('.article-right').html(bitListTemplate({bits: res.bits}));
+  });
+}
+
+function editArticle(article) {
+  $(".article-content").html(articleEditorTemplate({article: article}));
+  $(".article-content .article-save").on("click", function() {
+    // TODO: disable editor while saving
+    $.post('/article/'+article._id
+          , {title: $("#editor-bit-topic").val(), content: $(".article-editor").val()}
+          , function(res) {
+          if (res.error) {
+            return error(error);
+          }
+          redirect("#articles");
+        });
   });
 }
 
@@ -235,6 +256,10 @@ function saveBit(id) {
     }
     redirect('bits');
   });
+}
+
+function slideOut(sel) {
+  d3.select(sel).transition().duration(150).style("width", "0px").style("opacity", 0);
 }
 
 function fadeOutChildren(parentSelector, callback) {
@@ -338,7 +363,7 @@ $(document).ready(function() {
 
   var router = Router({
     '/newbit'  : addBit,
-    '/'        : listBits,
+    //'/'        : listBits,
     '/bits'    : listBits,
     '/articles': listArticles,
     /*
@@ -349,7 +374,7 @@ $(document).ready(function() {
     }
     */
   });
-  router.init('/');
+  router.init('/bits');
 
   // Edit article
   $('.article-content').on('click', '.article-view-toolbar-edit', function() {

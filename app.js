@@ -263,6 +263,14 @@ app.get('/article/metas', function(req, res) {
     });
 });
 
+app.get('/article/:id', function(req, res) {
+  var id = req.params.id;
+
+  return Article.findOne({_id: id}, function(error, article) {
+     return res.send({error: error, article: article})
+  })
+});
+
 app.get('/article/title/:title', function(req, res) {
   var title = req.params.title;
   return Article.get(title, function(error, article) {
@@ -296,45 +304,16 @@ app.post('/article/:id', function(req, res) {
   var id = req.params.id;
   var content = req.param('content');
   var title = req.param('title');
-  var old_topic = req.param('oldTopic');
-  var update_article = function() {
-    return Article.update({
-      _id: id
-    }, {
-      content: content,
-      topic: topic
-    }, {
-      upsert: true
-    }, function(error, dbmsg) {
-      if (error) {
-        return res.send({
-          'error': error
-        });
-      } else {
-        return res.send({
-          'status': 'ok'
-        });
-      }
-    });
-  };
-  if (content) {
-    if (topic && old_topic) {
-      return Bit.changeTopicName(old_topic, topic, function(error) {
-        if (error) {
-          return res.send({
-            error: error
-          });
-        }
-        return update_article();
+  return Article.update(
+    { _id: id },
+    { content: content, title: title },
+    { upsert: true },
+    function(error, article) {
+      return res.send({
+        error: error,
+        article: article
       });
-    } else {
-      return update_article();
-    }
-  } else {
-    return res.send({
-      'status': 'ok although I don\'t know why you post empty content'
     });
-  }
 });
 
 app.get('/topic/pdf/:topicname', function(req, res) {
