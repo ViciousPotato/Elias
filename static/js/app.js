@@ -156,6 +156,7 @@ function craftArticle() {
     }
     // Fill the right
     $('.article-right').html(bitListTemplate({bits: res.bits}));
+    $('.article-right .bit-list-entry .bit-summary').dotdotdot();
   });
 }
 

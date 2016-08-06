@@ -403,6 +403,7 @@ a.craft-new-article {
   background-color: #EEE;
   margin-left: 10px;
   box-shadow: 1px 2px 4px #F0F0F0;
+  max-height: 150px;
 }
 
 .article-right .bit-summary::before {
