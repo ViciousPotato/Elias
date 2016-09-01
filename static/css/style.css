@@ -102,9 +102,19 @@ a.craft-new-article {
   margin-bottom: 20px;
 }
 
+.article-list .topic-list a {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
 .article-list .topic-list a:hover {
   background-color: #666;
   color: white;
+}
+
+.article-list .topic-list a.current-article {
+  font-weight: bold;
+  border-bottom: 2px solid #666;
 }
 
 .article-list .topic-update-time {

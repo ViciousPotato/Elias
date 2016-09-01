@@ -64,9 +64,14 @@ function loadArticle(id) {
     // slideOut(".article-list");
     fadeOutChildren(".article-content", function() {
       $('.article-content').html(articleTemplate(res.article));
+      $('.article-content').css('opacity', 0);
+      d3.select('.article-content').transition().style("opacity", 1).duration(500);
       $('.article-content .article-view-toolbar-edit').on('click', function() {
         editArticle(res.article);
       });
+
+      $('.article-list a').removeClass("current-article");
+      $('.article-list .topic_' + id).addClass("current-article");
 
     /*
       var article = articleTemplate(res);
@@ -149,6 +154,7 @@ function craftArticle() {
       redirect("#articles");
     });
   });
+
   // Crafting article means new, so load all bits at right for selection.
   $.get('/bits', function(res) {
     if (res.error) {
@@ -161,17 +167,24 @@ function craftArticle() {
 }
 
 function editArticle(article) {
-  $(".article-content").html(articleEditorTemplate({article: article}));
-  $(".article-content .article-save").on("click", function() {
-    // TODO: disable editor while saving
-    $.post('/article/'+article._id
-          , {title: $("#editor-bit-topic").val(), content: $(".article-editor").val()}
-          , function(res) {
-          if (res.error) {
-            return error(error);
-          }
-          redirect("#articles");
-        });
+  d3.select(".article-content").transition().style("opacity", 0).duration(200).on("end", function() {
+    $(".article-content").html(articleEditorTemplate({article: article}));
+    d3.select(".article-content").transition().style("opacity", 1).duration(200);
+    $(".article-content .article-save").on("click", function() {
+      // TODO: disable editor while saving
+      $.post('/article/'+article._id
+            , {title: $("#editor-bit-topic").val(), content: $(".article-editor").val()}
+            , function(res) {
+            if (res.error) {
+              return error(error);
+            }
+            redirect("#articles");
+          });
+    });
+
+    $(".article-content .article-cancel").on("click", function() {
+      loadArticle(article._id);
+    });
   });
 }
 

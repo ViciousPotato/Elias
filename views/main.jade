@@ -70,7 +70,7 @@ body
           a(href="#") Save
         .article-cancel
           a(href="#") Cancel
-      textarea.article-editor // (ondrop="dropToEditor(event)", ondragover="allowDrop(event)")
+      textarea.article-editor
         | {{{article.content}}}
 
   script#article-list-template(type="text/x-handlebars-template")
@@ -80,7 +80,7 @@ body
       {{#metas}}
       li
         .topic-list
-          a(href="javascript:loadArticle('{{this._id}}')") {{this.title}}
+          a(href="javascript:loadArticle('{{this._id}}')", class="topic_{{this._id}}") {{this.title}}
           span.topic-update-time {{articleDate this.lastModified}}
       {{/metas}}
 
