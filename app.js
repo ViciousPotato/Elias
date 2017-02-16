@@ -357,4 +357,4 @@ app.get('/upload/delete/:file', function(req, res) {
   return res.send('oh shoot');
 });
 
-app.listen(process.env.VCAP_APP_PORT || 8080);
+app.listen(process.env.VCAP_APP_PORT || 8080, '0.0.0.0');
