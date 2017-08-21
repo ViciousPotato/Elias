@@ -7,6 +7,7 @@ head
     try{Typekit.load({ async: true });}catch(e){}
 
 body
+  .loading
   .blur-wrapper
     img#blur-img(src="/img/blur-bg.jpg")
     canvas#blur-canvas

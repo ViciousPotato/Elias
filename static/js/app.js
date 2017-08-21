@@ -262,9 +262,12 @@ function listBits() {
 // @id: null -> create new bit.
 //      val  -> update existing bit.
 function saveBit(id) {
+  $('.loading').show();
   var bitContent = $('.bit-editor').val();
   id = id || null;
   $.post('/bit', {content: bitContent, id: id}, function(res) {
+    $('.loading').hide();
+
     if (res.error) {
       return error(res.error.message);
     }
@@ -372,6 +375,8 @@ function editBit(bit) {
 }
 
 $(document).ready(function() {
+  $('.loading').hide();
+
   initTemplates();
   blurBackground();
 
